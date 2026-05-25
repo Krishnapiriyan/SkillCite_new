@@ -1,3 +1,13 @@
+import env from '../config/env.js';
+
+const getPublicApiOrigin = () => {
+  if (env.PUBLIC_API_URL) {
+    return env.PUBLIC_API_URL.replace(/\/$/, '');
+  }
+  const port = env.PORT || 3001;
+  return `http://localhost:${port}`;
+};
+
 const rewritePrivateR2Urls = (obj) => {
   if (!obj) return obj;
 
@@ -8,7 +18,7 @@ const rewritePrivateR2Urls = (obj) => {
   if (typeof obj === 'string') {
     if (obj.includes('r2.cloudflarestorage.com')) {
       const filename = obj.split('/').pop();
-      return `http://localhost:3001/mock-uploads/${filename}`;
+      return `${getPublicApiOrigin()}/mock-uploads/${filename}`;
     }
     return obj;
   }

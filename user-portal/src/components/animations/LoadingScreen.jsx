@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import useCms from '../../hooks/useCms';
+import { getMockUploadUrl } from '../../utils/apiBase.js';
 
-const welcomeVideo = "http://localhost:3001/mock-uploads/4eb6e8b7-5496-4bc6-903b-71956706dffd.mp4";
+const welcomeVideo = getMockUploadUrl('4eb6e8b7-5496-4bc6-903b-71956706dffd.mp4');
 
 export default function LoadingScreen({ onComplete, onReveal }) {
   const { getCms } = useCms();
@@ -93,6 +94,11 @@ export default function LoadingScreen({ onComplete, onReveal }) {
     }
   };
 
+  const handleVideoError = () => {
+    console.warn('Intro video failed to load, skipping loader.');
+    triggerExit();
+  };
+
   const brandName = "SkillCite".split("");
 
   // Liquid Morphing Path definitions (Y coordinate ranges 0 to 100 matching viewBox)
@@ -151,6 +157,7 @@ export default function LoadingScreen({ onComplete, onReveal }) {
               playsInline
               crossOrigin="anonymous"
               onEnded={handleVideoEnded}
+              onError={handleVideoError}
               onTimeUpdate={handleTimeUpdate}
               className="w-full h-full object-cover select-none pointer-events-none z-10"
             />

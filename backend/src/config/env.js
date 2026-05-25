@@ -25,7 +25,9 @@ const envSchema = z.object({
   
   PORT: z.string().or(z.number()).transform((val) => typeof val === 'string' ? parseInt(val, 10) : val).default(3001),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  CORS_ORIGINS: z.string().default('http://localhost:5173,http://localhost:5174')
+  CORS_ORIGINS: z.string().default('http://localhost:5173,http://localhost:5174'),
+  /** Public backend URL (no trailing slash), used for mock-uploads and R2 proxy links in API responses */
+  PUBLIC_API_URL: z.string().url().optional()
 });
 
 const parsed = envSchema.safeParse(process.env);

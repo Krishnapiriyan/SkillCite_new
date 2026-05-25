@@ -44,6 +44,18 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'SkillCite API is running',
+    docs: 'Use /api/* endpoints (e.g. GET /api/cms)',
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, status: 'ok' });
+});
+
 // Serve local uploaded files or dynamically stream from R2 bucket in authenticated mode (Proxy)
 app.get('/mock-uploads/:filename', async (req, res, next) => {
   try {
