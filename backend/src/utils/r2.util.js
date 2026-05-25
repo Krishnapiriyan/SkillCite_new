@@ -42,19 +42,19 @@ export const uploadToR2 = async (buffer, originalName, mimeType) => {
 
     console.log(`[R2 MOCK UPLOAD] Saved ${originalName} → ${url}`);
 
-    // If it was a private gateway, we still upload it to R2 in the background for database persistence
+    // Backup to R2 in background — do not block the HTTP response (large videos were timing out)
     if (isR2Configured && r2Client && isPrivateGateway) {
-      try {
-        await r2Client.send(new PutObjectCommand({
-          Bucket: env.R2_BUCKET_NAME,
-          Key: key,
-          Body: buffer,
-          ContentType: mimeType,
-        }));
-        console.log(`[R2 BACKUP SUCCESS] Stored a secure backup of ${originalName} in private R2 bucket`);
-      } catch (err) {
-        console.error(`[R2 BACKUP ERROR] Failed to back up ${originalName} to R2:`, err.message);
-      }
+      r2Client
+        .send(
+          new PutObjectCommand({
+            Bucket: env.R2_BUCKET_NAME,
+            Key: key,
+            Body: buffer,
+            ContentType: mimeType,
+          })
+        )
+        .then(() => console.log(`[R2 BACKUP SUCCESS] ${originalName}`))
+        .catch((err) => console.error(`[R2 BACKUP ERROR] ${originalName}:`, err.message));
     }
 
     return {

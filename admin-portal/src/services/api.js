@@ -128,13 +128,22 @@ export const updateCmsContentApi = async (key, value) => {
   return res.data;
 };
 
-export const uploadCmsFileApi = async (file) => {
+/** Large hero/loading videos need a longer timeout than default API calls */
+export const uploadCmsFileApi = async (file, onProgress) => {
   const formData = new FormData();
   formData.append('file', file);
   const res = await api.post('/admin/cms/upload', formData, {
+    timeout: 600000, // 10 minutes — 30s default is too short for video uploads
     headers: {
       'Content-Type': 'multipart/form-data',
     },
+    onUploadProgress: onProgress
+      ? (event) => {
+          if (event.total) {
+            onProgress(Math.round((event.loaded * 100) / event.total));
+          }
+        }
+      : undefined,
   });
   return res.data;
 };

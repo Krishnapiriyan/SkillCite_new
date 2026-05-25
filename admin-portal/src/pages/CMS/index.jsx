@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getCmsContentApi, updateCmsContentApi, uploadCmsFileApi } from '../../services/api';
 import { Settings, Save, RefreshCw } from 'lucide-react';
 import { resolveMediaUrl } from '../../utils/mediaUrl.js';
+import { validateVideoFile, formatUploadError } from '../../utils/uploadError.js';
 
 import AdminLayout from '../../components/layout/AdminLayout';
 
@@ -22,14 +23,24 @@ export default function CmsIndex() {
   const [activeTab, setActiveTab] = useState('home');
   const [uploadingVideo, setUploadingVideo] = useState(false);
   const [uploadingLoadingVideo, setUploadingLoadingVideo] = useState(false);
+  const [heroUploadProgress, setHeroUploadProgress] = useState(0);
+  const [loadingUploadProgress, setLoadingUploadProgress] = useState(0);
 
   const handleLoadingVideoUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    e.target.value = '';
+
+    const validationError = validateVideoFile(file);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
 
     setUploadingLoadingVideo(true);
+    setLoadingUploadProgress(0);
     try {
-      const res = await uploadCmsFileApi(file);
+      const res = await uploadCmsFileApi(file, setLoadingUploadProgress);
       if (res.success && res.data?.url) {
         const publicUrl = resolveMediaUrl(res.data.url);
         handleChange('home.loading.videoUrl', publicUrl);
@@ -40,19 +51,28 @@ export default function CmsIndex() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.message || 'Failed to upload loading screen video');
+      alert(formatUploadError(err, file));
     } finally {
       setUploadingLoadingVideo(false);
+      setLoadingUploadProgress(0);
     }
   };
 
   const handleVideoUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    e.target.value = '';
+
+    const validationError = validateVideoFile(file);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
 
     setUploadingVideo(true);
+    setHeroUploadProgress(0);
     try {
-      const res = await uploadCmsFileApi(file);
+      const res = await uploadCmsFileApi(file, setHeroUploadProgress);
       if (res.success && res.data?.url) {
         const publicUrl = resolveMediaUrl(res.data.url);
         handleChange('home.hero.videoUrl', publicUrl);
@@ -63,9 +83,10 @@ export default function CmsIndex() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.message || 'Failed to upload video');
+      alert(formatUploadError(err, file));
     } finally {
       setUploadingVideo(false);
+      setHeroUploadProgress(0);
     }
   };
 
@@ -294,7 +315,7 @@ export default function CmsIndex() {
                       {uploadingVideo ? (
                         <>
                           <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                          Uploading...
+                          Uploading{heroUploadProgress > 0 ? ` ${heroUploadProgress}%` : '...'}
                         </>
                       ) : (
                         'Upload Video File'
@@ -303,8 +324,16 @@ export default function CmsIndex() {
                   </div>
                 </div>
                 <p className="text-[10px] text-muted font-medium">
-                  Supports .mp4, .webm, .mov up to 20MB. Uploading automatically saves the link to your configurations.
+                  Supports .mp4, .webm, .mov up to 100MB. For reliable uploads, use videos under 25MB (720p, H.264).
                 </p>
+                {uploadingVideo && heroUploadProgress > 0 && (
+                  <div className="w-full max-w-sm h-1.5 rounded-full bg-border overflow-hidden">
+                    <div
+                      className="h-full bg-accent transition-all duration-300"
+                      style={{ width: `${heroUploadProgress}%` }}
+                    />
+                  </div>
+                )}
 
                 {/* Video Playback Preview */}
                 {cms['home.hero.videoUrl'] && (
@@ -374,7 +403,7 @@ export default function CmsIndex() {
                       {uploadingLoadingVideo ? (
                         <>
                           <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                          Uploading...
+                          Uploading{loadingUploadProgress > 0 ? ` ${loadingUploadProgress}%` : '...'}
                         </>
                       ) : (
                         'Upload Video File'
@@ -383,8 +412,16 @@ export default function CmsIndex() {
                   </div>
                 </div>
                 <p className="text-[10px] text-muted font-medium">
-                  Supports .mp4, .webm, .mov up to 20MB. Uploading automatically saves the link to your configurations.
+                  Supports .mp4, .webm, .mov up to 100MB. For reliable uploads, use videos under 25MB (720p, H.264).
                 </p>
+                {uploadingLoadingVideo && loadingUploadProgress > 0 && (
+                  <div className="w-full max-w-sm h-1.5 rounded-full bg-border overflow-hidden">
+                    <div
+                      className="h-full bg-accent transition-all duration-300"
+                      style={{ width: `${loadingUploadProgress}%` }}
+                    />
+                  </div>
+                )}
 
                 {/* Loading Video Playback Preview */}
                 {cms['home.loading.videoUrl'] && (

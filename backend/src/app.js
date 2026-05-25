@@ -124,7 +124,13 @@ app.post('/api/admin/cms/upload', verifyAdminToken, upload.single('file'), uploa
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error('Unhandled Server Error:', err);
-  const status = err.statusCode || 500;
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    return res.status(413).json({
+      success: false,
+      error: 'File too large. Maximum upload size is 100MB.',
+    });
+  }
+  const status = err.statusCode || err.status || 500;
   res.status(status).json({
     success: false,
     error: err.message || 'Internal Server Error',
