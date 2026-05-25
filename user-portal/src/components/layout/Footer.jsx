@@ -57,7 +57,7 @@ export default function Footer() {
             <li className="hover:text-accent transition-colors cursor-pointer">Engineering Recruitment</li>
             <li className="hover:text-accent transition-colors cursor-pointer">Accounting Recruitment</li>
             <li className="hover:text-accent transition-colors cursor-pointer">Administration Recruitment</li>
-            {/* <li className="hover:text-accent transition-colors cursor-pointer">Project Management</li> */}
+            <li className="hover:text-accent transition-colors cursor-pointer">Operations Recruitment</li>
           </ul>
         </div>
 
