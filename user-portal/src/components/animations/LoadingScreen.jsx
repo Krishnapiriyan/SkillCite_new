@@ -5,12 +5,23 @@ import { getMockUploadUrl, resolveMediaUrl } from '../../utils/apiBase.js';
 
 const welcomeVideo = getMockUploadUrl('4eb6e8b7-5496-4bc6-903b-71956706dffd.mp4');
 
+const floatingSkills = [
+  { name: "BBuild Careers", x: "12%", y: "25%", color: "from-blue-400 to-indigo-500", delay: 0.1, threshold: 10 },
+  { name: "Hire Top Talent", x: "82%", y: "30%", color: "from-indigo-400 to-purple-500", delay: 0.25, threshold: 25 },
+  { name: "Access Our Services", x: "65%", y: "66%", color: "from-blue-500 to-cyan-400", delay: 0.4, threshold: 40 },
+  // { name: "Systems Arch", x: "80%", y: "65%", color: "from-violet-400 to-fuchsia-500", delay: 0.15, threshold: 55 },
+  // { name: "FPGA / Verilog", x: "25%", y: "15%", color: "from-cyan-500 to-blue-600", delay: 0.3, threshold: 70 },
+  // { name: "Robotics / ROS", x: "72%", y: "18%", color: "from-indigo-500 to-cyan-500", delay: 0.2, threshold: 85 },
+];
+
+const taglineWords = "Connecting Elite Engineering Talent".split(" ");
+
 export default function LoadingScreen({ onComplete, onReveal }) {
   const { getCms } = useCms();
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [stage, setStage] = useState('video'); // 'loading' | 'video' | 'exit'
+  const [stage, setStage] = useState('loading'); // 'loading' | 'video' | 'exit'
   const [videoProgress, setVideoProgress] = useState(0);
 
   const videoRef = useRef(null);
@@ -207,42 +218,134 @@ export default function LoadingScreen({ onComplete, onReveal }) {
                 initial={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95, filter: "blur(12px)" }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="relative z-40 flex flex-col items-center gap-8 select-none pointer-events-none"
+                className="relative z-40 flex flex-col items-center gap-8 select-none pointer-events-none w-full h-full justify-center"
               >
-                {/* Glowing Bouncing Brand Letters */}
-                <div className="relative flex items-center justify-center gap-1 sm:gap-1.5 px-4 py-2">
-                  {brandName.map((char, index) => (
-                    <motion.span
-                      key={index}
-                      className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
-                      style={{ transformOrigin: 'center center' }}
-                      animate={isCompleted ? {
-                        y: 0,
-                        scale: 1.35,
-                        opacity: 0,
-                        filter: "blur(8px)",
-                        transition: { duration: 0.4, ease: "easeOut" }
-                      } : {
-                        y: [0, -16, 0],
-                      }}
-                      transition={isCompleted ? {} : {
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        duration: 1.2,
-                        delay: index * 0.08,
-                        ease: [0.25, 0.46, 0.45, 0.94]
-                      }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                  
-                  {/* Radial background pulse glow */}
-                  <div className="absolute inset-0 w-64 h-24 rounded-full bg-blue-500/10 blur-2xl animate-pulse -z-10" />
+                {/* Floating Skill Particles */}
+                {floatingSkills.map((skill, idx) => {
+                  const isVisible = progress >= skill.threshold;
+                  return (
+                    <AnimatePresence key={idx}>
+                      {isVisible && (
+                        <motion.div
+                          initial={{ scale: 0, opacity: 0, y: 15 }}
+                          animate={{ 
+                            scale: 1, 
+                            opacity: 0.85, 
+                            y: 0,
+                            transition: { 
+                              type: "spring", 
+                              stiffness: 120, 
+                              damping: 10,
+                              delay: skill.delay 
+                            }
+                          }}
+                          exit={{ 
+                            scale: 0.8, 
+                            opacity: 0, 
+                            y: -10,
+                            transition: { duration: 0.3 }
+                          }}
+                          className="absolute z-20 hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#090E1A]/40 backdrop-blur-md border border-white/10 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                          style={{ left: skill.x, top: skill.y }}
+                        >
+                          <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${skill.color} animate-pulse`} />
+                          <span className="text-[10px] font-bold tracking-wider uppercase text-white/70 font-mono">
+                            {skill.name}
+                          </span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  );
+                })}
+
+                {/* Glowing Bouncing Brand Letters & Tagline */}
+                <div className="flex flex-col items-center gap-1">
+                  <div className="relative flex items-center justify-center gap-1 sm:gap-1.5 px-4 py-2">
+                    {brandName.map((char, index) => (
+                      <motion.span
+                        key={index}
+                        className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
+                        style={{ transformOrigin: 'center center' }}
+                        initial={{ scale: 0, opacity: 0, y: 30 }}
+                        animate={isCompleted ? {
+                          y: 0,
+                          scale: 1.35,
+                          opacity: 0,
+                          filter: "blur(8px)",
+                          transition: { duration: 0.4, ease: "easeOut" }
+                        } : {
+                          scale: 1,
+                          opacity: 1,
+                          y: [0, -16, 0],
+                          transition: {
+                            y: {
+                              repeat: Infinity,
+                              repeatType: "loop",
+                              duration: 1.2,
+                              delay: index * 0.08,
+                              ease: [0.25, 0.46, 0.45, 0.94]
+                            },
+                            scale: {
+                              type: "spring",
+                              stiffness: 150,
+                              damping: 10,
+                              delay: index * 0.05
+                            },
+                            opacity: {
+                              duration: 0.4,
+                              delay: index * 0.05
+                            }
+                          }
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    
+                    {/* Radial background pulse glow */}
+                    <div className="absolute inset-0 w-64 h-24 rounded-full bg-blue-500/10 blur-2xl animate-pulse -z-10" />
+                  </div>
+
+                  {/* Staggered Tagline Pop */}
+                  <motion.div 
+                    className="flex flex-wrap justify-center gap-x-2 text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-white/40 font-sans mt-3 max-w-md text-center leading-relaxed px-4"
+                    variants={{
+                      animate: {
+                        transition: {
+                          staggerChildren: 0.1,
+                          delayChildren: 0.35
+                        }
+                      }
+                    }}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    {taglineWords.map((word, wordIdx) => (
+                      <motion.span
+                        key={wordIdx}
+                        className="inline-block"
+                        variants={{
+                          initial: { scale: 0.4, opacity: 0, y: 15 },
+                          animate: { 
+                            scale: 1, 
+                            opacity: 1, 
+                            y: 0,
+                            transition: {
+                              type: "spring",
+                              stiffness: 160,
+                              damping: 12
+                            }
+                          }
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.div>
                 </div>
 
                 {/* Digital Percentage Counter */}
-                <div className="flex flex-col items-center gap-2 mt-2">
+                <div className="flex flex-col items-center gap-2 mt-4">
                   <div className="flex items-baseline font-mono text-3xl font-extrabold text-blue-500/90 tracking-tighter">
                     {String(progress).padStart(3, '0')}
                     <span className="text-[10px] text-blue-400/60 font-semibold uppercase tracking-wider ml-1">%</span>
