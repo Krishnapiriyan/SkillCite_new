@@ -7,6 +7,7 @@ import TextReveal from '../../components/animations/TextReveal';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import ParticleCanvas from '../../components/animations/ParticleCanvas';
 import GravitationalWarpGrid from '../../components/animations/GravitationalWarpGrid';
+import FloatingBlueOrbs from '../../components/animations/FloatingBlueOrbs';
 import MagneticElement from '../../components/animations/MagneticElement';
 import Button from '../../components/ui/Button';
 
@@ -78,10 +79,11 @@ export default function HeroSection() {
         />
       )}
 
-      {/* Dynamic Backgrounds */}
-      <ParticleCanvas />
+      {/* Dynamic Backgrounds — enhanced density for hero */}
+      <ParticleCanvas intensity="high" />
       <GravitationalWarpGrid />
-      
+      <FloatingBlueOrbs />
+
       {/* 4% Grain Overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.035]"
@@ -91,8 +93,21 @@ export default function HeroSection() {
       />
 
       {/* Morphing Blur Shapes */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-blue-400/20 blur-[100px] animate-pulse pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] rounded-full bg-blue-300/20 blur-[120px] animate-pulse [animation-duration:8s] pointer-events-none" />
+      <motion.div
+        className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-blue-400/25 blur-[110px] pointer-events-none"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[480px] h-[480px] rounded-full bg-cyan-400/20 blur-[130px] pointer-events-none"
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.15, 0.3, 0.15] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-indigo-400/15 blur-[90px] pointer-events-none"
+        animate={{ x: [0, 40, -30, 0], y: [0, -25, 35, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
         
@@ -162,6 +177,8 @@ export default function HeroSection() {
             <motion.div
               initial="initial"
               whileHover="hover"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               className="relative w-[280px] sm:w-[350px] h-[350px] sm:h-[450px] flex items-center justify-center cursor-pointer group"
             >
               {/* Central Glowing Backlight Orb */}

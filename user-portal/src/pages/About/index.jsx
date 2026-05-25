@@ -3,6 +3,7 @@ import ScrollReveal from '../../components/animations/ScrollReveal';
 import PageSEO from '../../components/ui/PageSEO';
 import Card3D from '../../components/animations/Card3D';
 import { Award, ShieldCheck, Heart } from 'lucide-react';
+import officePresentation from '../../assets/office_presentation.jpg';
 
 export default function About() {
   const { getCms } = useCms();
@@ -42,9 +43,9 @@ export default function About() {
               <ScrollReveal delay={0.3}>
                 <div className="relative p-2.5 bg-white/45 backdrop-blur-xl rounded-[2.5rem] border border-white/60 shadow-2xl shadow-blue-500/10 overflow-hidden transform hover:scale-[1.015] hover:-rotate-0.5 transition-all duration-500">
                   <img 
-                    src="/src/assets/about_team.png" 
-                    alt="SkillCite Structural Engineering Consultants"
-                    className="w-full h-[280px] object-cover rounded-[2rem] filter brightness-[0.98] contrast-[1.01]" 
+                    src={officePresentation}
+                    alt="SkillCite team — engineering recruitment and consultancy"
+                    className="w-full h-[280px] sm:h-[320px] object-cover object-center rounded-[2rem]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-transparent mix-blend-overlay rounded-[2rem] pointer-events-none" />
                 </div>

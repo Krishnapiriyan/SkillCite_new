@@ -13,11 +13,13 @@ export default function GravitationalWarpGrid() {
 
     let rafId;
     let gridPoints = [];
-    const cellSize = 50; // Distance between grid lines
-    const repulsionRadius = 160;
-    const repulsionForce = 45; // Intensity of the bend
-    const springDampening = 0.88; // Friction
-    const springForce = 0.04; // Spring pulling back to original position
+    let time = 0;
+    const cellSize = 42;
+    const repulsionRadius = 200;
+    const repulsionForce = 55;
+    const springDampening = 0.86;
+    const springForce = 0.045;
+    const ambientDrift = 3.5;
 
     const resize = () => {
       canvas.width = canvas.parentElement.offsetWidth;
@@ -70,12 +72,18 @@ export default function GravitationalWarpGrid() {
 
     const drawGrid = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      time += 0.012;
 
-      // 1. Calculate physics updates for all grid nodes
       const mx = mouse.current.x;
       const my = mouse.current.y;
 
-      gridPoints.forEach(p => {
+      gridPoints.forEach((p) => {
+        // Continuous ambient wave so grid and blue nodes always move
+        const waveX = Math.sin(time + p.col * 0.35 + p.row * 0.2) * ambientDrift;
+        const waveY = Math.cos(time * 0.9 + p.row * 0.4) * ambientDrift;
+        p.vx += waveX * 0.02;
+        p.vy += waveY * 0.02;
+
         if (active.current) {
           const dx = p.x - mx;
           const dy = p.y - my;
@@ -131,7 +139,7 @@ export default function GravitationalWarpGrid() {
             ctx.quadraticCurveTo(prevP.x, prevP.y, xc, yc);
           }
         }
-        ctx.strokeStyle = 'rgba(37, 99, 235, 0.055)';
+        ctx.strokeStyle = 'rgba(59, 130, 246, 0.09)';
         ctx.stroke();
       }
 
@@ -152,22 +160,31 @@ export default function GravitationalWarpGrid() {
             ctx.quadraticCurveTo(prevP.x, prevP.y, xc, yc);
           }
         }
-        ctx.strokeStyle = 'rgba(37, 99, 235, 0.055)';
+        ctx.strokeStyle = 'rgba(59, 130, 246, 0.09)';
         ctx.stroke();
       }
 
-      // 3. Render tiny glowing node points at intersections
-      gridPoints.forEach(p => {
+      // Glowing blue grid intersection points (always visible, brighter near cursor)
+      gridPoints.forEach((p) => {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.sqrt(dx * dx + dy * dy);
+        const nearCursor = dist < repulsionRadius * 0.85;
+        const baseAlpha = 0.18 + Math.sin(time * 2 + p.col * 0.5) * 0.06;
+        const alpha = nearCursor
+          ? baseAlpha + (1 - dist / (repulsionRadius * 0.85)) * 0.55
+          : baseAlpha;
+        const radius = nearCursor ? 2.2 : 1.4;
 
-        // Highlight nodes closer to cursor
-        if (dist < repulsionRadius * 0.7) {
-          const alpha = (1 - dist / (repulsionRadius * 0.7)) * 0.35;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
+        ctx.fill();
+
+        if (nearCursor || (p.col + p.row) % 3 === 0) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(37, 99, 235, ${alpha})`;
+          ctx.arc(p.x, p.y, radius * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(96, 165, 250, ${alpha * 0.2})`;
           ctx.fill();
         }
       });
