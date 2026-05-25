@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import fs from 'fs';
 import env from '../config/env.js';
+import { getPublicApiOrigin } from './publicUrl.util.js';
 
 const MOCK_DIR = path.resolve('public/mock-uploads');
 
@@ -37,10 +38,9 @@ export const uploadToR2 = async (buffer, originalName, mimeType) => {
     const localPath = path.join(MOCK_DIR, path.basename(key));
     fs.writeFileSync(localPath, buffer);
 
-    const port = env.PORT || 3001;
-    const url = `http://localhost:${port}/mock-uploads/${path.basename(key)}`;
+    const url = `${getPublicApiOrigin()}/mock-uploads/${path.basename(key)}`;
 
-    console.log(`[R2 MOCK UPLOAD] Saved ${originalName} to local public/mock-uploads: ${url}`);
+    console.log(`[R2 MOCK UPLOAD] Saved ${originalName} → ${url}`);
 
     // If it was a private gateway, we still upload it to R2 in the background for database persistence
     if (isR2Configured && r2Client && isPrivateGateway) {

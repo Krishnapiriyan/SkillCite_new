@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import useCms from '../../hooks/useCms';
-import { getMockUploadUrl } from '../../utils/apiBase.js';
+import { getMockUploadUrl, resolveMediaUrl } from '../../utils/apiBase.js';
 
 const welcomeVideo = getMockUploadUrl('4eb6e8b7-5496-4bc6-903b-71956706dffd.mp4');
 
@@ -14,7 +14,7 @@ export default function LoadingScreen({ onComplete, onReveal }) {
   const [videoProgress, setVideoProgress] = useState(0);
 
   const videoRef = useRef(null);
-  const currentVideoSrc = getCms('home.loading.videoUrl') || welcomeVideo;
+  const currentVideoSrc = resolveMediaUrl(getCms('home.loading.videoUrl')) || welcomeVideo;
 
   // 1. Digital Percentage Counter + stage transitions
   useEffect(() => {
@@ -155,7 +155,6 @@ export default function LoadingScreen({ onComplete, onReveal }) {
               autoPlay
               muted
               playsInline
-              crossOrigin="anonymous"
               onEnded={handleVideoEnded}
               onError={handleVideoError}
               onTimeUpdate={handleTimeUpdate}

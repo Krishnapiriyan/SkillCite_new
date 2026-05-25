@@ -48,6 +48,10 @@ Visiting Railway in the browser is **not** the user-facing app — the Vercel UR
 
 Optional: `R2_*`, `BREVO_*`, `GROQ_API_KEY` (same as local `.env`).
 
+**Video uploads:** If `R2_PUBLIC_URL` is set to `*.r2.cloudflarestorage.com`, that is the **private** API endpoint — not a public CDN. The backend will store files and serve them via `https://<railway>/mock-uploads/<file>`. Set `PUBLIC_API_URL` to your Railway URL so CMS video links work on Vercel.
+
+For permanent file storage across Railway redeploys, configure a real public R2 URL (`https://pub-xxxx.r2.dev`) in `R2_PUBLIC_URL`.
+
 After saving variables, **Redeploy** the Railway service.
 
 Verify:

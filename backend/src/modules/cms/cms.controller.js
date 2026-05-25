@@ -38,7 +38,10 @@ export const uploadCmsFile = async (req, res) => {
     }
 
     const result = await uploadToR2(req.file.buffer, req.file.originalname, req.file.mimetype);
-    return successResponse(res, 200, 'CMS file uploaded successfully', { url: result.url });
+    return successResponse(res, 200, 'CMS file uploaded successfully', {
+      url: result.url,
+      key: result.key,
+    });
   } catch (error) {
     return errorResponse(res, error);
   }

@@ -1,8 +1,19 @@
 import { useEffect, useState } from 'react';
 import { getCmsContentApi, updateCmsContentApi, uploadCmsFileApi } from '../../services/api';
 import { Settings, Save, RefreshCw } from 'lucide-react';
+import { resolveMediaUrl } from '../../utils/mediaUrl.js';
 
 import AdminLayout from '../../components/layout/AdminLayout';
+
+const normalizeCmsData = (data) => {
+  const out = { ...data };
+  for (const key of Object.keys(out)) {
+    if (key.endsWith('videoUrl') || key.endsWith('Url')) {
+      out[key] = resolveMediaUrl(out[key]);
+    }
+  }
+  return out;
+};
 
 export default function CmsIndex() {
   const [cms, setCms] = useState({});
@@ -20,8 +31,9 @@ export default function CmsIndex() {
     try {
       const res = await uploadCmsFileApi(file);
       if (res.success && res.data?.url) {
-        handleChange('home.loading.videoUrl', res.data.url);
-        await updateCmsContentApi('home.loading.videoUrl', res.data.url);
+        const publicUrl = resolveMediaUrl(res.data.url);
+        handleChange('home.loading.videoUrl', publicUrl);
+        await updateCmsContentApi('home.loading.videoUrl', publicUrl);
         alert('Loading screen video uploaded and saved successfully!');
       } else {
         throw new Error(res.error || 'Upload failed');
@@ -42,8 +54,9 @@ export default function CmsIndex() {
     try {
       const res = await uploadCmsFileApi(file);
       if (res.success && res.data?.url) {
-        handleChange('home.hero.videoUrl', res.data.url);
-        await updateCmsContentApi('home.hero.videoUrl', res.data.url);
+        const publicUrl = resolveMediaUrl(res.data.url);
+        handleChange('home.hero.videoUrl', publicUrl);
+        await updateCmsContentApi('home.hero.videoUrl', publicUrl);
         alert('Background video uploaded and saved successfully!');
       } else {
         throw new Error(res.error || 'Upload failed');
@@ -61,7 +74,7 @@ export default function CmsIndex() {
     try {
       const res = await getCmsContentApi();
       if (res.success && res.data) {
-        setCms(res.data);
+        setCms(normalizeCmsData(res.data));
       }
     } catch (err) {
       console.error(err);
@@ -297,16 +310,15 @@ export default function CmsIndex() {
                 {cms['home.hero.videoUrl'] && (
                   <div className="mt-3 rounded-2xl overflow-hidden border border-border bg-bg-page p-2.5 max-w-sm shadow-sm">
                     <video
-                      src={cms['home.hero.videoUrl']}
+                      src={resolveMediaUrl(cms['home.hero.videoUrl'])}
                       className="w-full h-[160px] object-cover rounded-xl"
                       controls
                       muted
                       playsInline
-                      crossOrigin="anonymous"
                     />
                     <div className="flex justify-between items-center mt-3 px-1">
                       <span className="text-[10px] text-muted truncate max-w-[200px] font-mono">
-                        {cms['home.hero.videoUrl']}
+                        {resolveMediaUrl(cms['home.hero.videoUrl'])}
                       </span>
                       <button
                         onClick={async () => {
@@ -378,16 +390,15 @@ export default function CmsIndex() {
                 {cms['home.loading.videoUrl'] && (
                   <div className="mt-3 rounded-2xl overflow-hidden border border-border bg-bg-page p-2.5 max-w-sm shadow-sm">
                     <video
-                      src={cms['home.loading.videoUrl']}
+                      src={resolveMediaUrl(cms['home.loading.videoUrl'])}
                       className="w-full h-[160px] object-cover rounded-xl"
                       controls
                       muted
                       playsInline
-                      crossOrigin="anonymous"
                     />
                     <div className="flex justify-between items-center mt-3 px-1">
                       <span className="text-[10px] text-muted truncate max-w-[200px] font-mono">
-                        {cms['home.loading.videoUrl']}
+                        {resolveMediaUrl(cms['home.loading.videoUrl'])}
                       </span>
                       <button
                         onClick={async () => {

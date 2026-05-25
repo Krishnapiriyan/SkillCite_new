@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useCms from '../../hooks/useCms';
+import { resolveMediaUrl } from '../../utils/apiBase.js';
 import TextReveal from '../../components/animations/TextReveal';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import ParticleCanvas from '../../components/animations/ParticleCanvas';
@@ -49,6 +50,7 @@ const cardAdminVariants = (isMobile) => ({
 
 export default function HeroSection() {
   const { getCms } = useCms();
+  const heroVideoUrl = resolveMediaUrl(getCms('home.hero.videoUrl'));
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -64,15 +66,14 @@ export default function HeroSection() {
     <section className="relative min-h-[90vh] sm:min-h-screen w-full flex items-center bg-bg-page overflow-hidden pt-24 pb-12 select-none">
       
       {/* Dynamic Background Video */}
-      {getCms('home.hero.videoUrl') && (
+      {heroVideoUrl && (
         <video
-          key={getCms('home.hero.videoUrl')}
-          src={getCms('home.hero.videoUrl')}
+          key={heroVideoUrl}
+          src={heroVideoUrl}
           autoPlay
           loop
           muted
           playsInline
-          crossOrigin="anonymous"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-[0.5] transition-opacity duration-1000"
         />
       )}

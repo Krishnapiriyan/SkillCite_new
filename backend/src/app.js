@@ -79,7 +79,7 @@ app.get('/mock-uploads/:filename', async (req, res, next) => {
       if (response.ContentLength) {
         res.setHeader('Content-Length', response.ContentLength);
       }
-      res.setHeader('Cache-Control', 'public, max-age=31536000');
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 
       return response.Body.pipe(res);
     }
