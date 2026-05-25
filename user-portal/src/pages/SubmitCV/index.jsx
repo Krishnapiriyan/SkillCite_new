@@ -200,7 +200,8 @@ export default function SubmitCV() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     variant="filled" 
-                    className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 transform hover:-translate-y-0.5"
+                    className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-white bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
+
                     onClick={() => document.getElementById('submit-cv-form').scrollIntoView({ behavior: 'smooth' })}
                   >
                     Submit CV Today <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
@@ -235,7 +236,7 @@ export default function SubmitCV() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <span className="text-[13px] font-bold text-accent tracking-widest uppercase mb-4 block text-left">The Process</span>
+                <span className="text-[13px] font-bold text-purple-700 tracking-widest uppercase mb-4 block text-left">The Process</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 tracking-tight font-display text-left">Your Journey to Placement</h2>
                 <div className="space-y-8 text-left">
                   {[
@@ -246,7 +247,7 @@ export default function SubmitCV() {
                     { step: '05', title: 'Final Outcome', desc: 'Selected candidates are confirmed through SkillCite and placement is completed.' }
                   ].map((item) => (
                     <div key={item.step} className="flex group">
-                      <div className="text-2xl font-black text-accent/20 group-hover:text-accent transition-colors mr-6 mt-1">{item.step}</div>
+                      <div className="text-2xl font-black text-purple-700/20 group-hover:text-purple-700 transition-colors mr-6 mt-1">{item.step}</div>
                       <div>
                         <h4 className="text-[17px] font-bold text-primary mb-2 font-display">{item.title}</h4>
                         <p className="text-[14px] text-muted leading-relaxed font-semibold">{item.desc}</p>
@@ -260,7 +261,7 @@ export default function SubmitCV() {
                   SkillCite follows a structured workflow where jobs are verified by the team and candidates are matched based on approved roles.              
                 </p>
                 <div className="bg-bg-page border border-border rounded-3xl p-10 shadow-2xl relative overflow-hidden text-left">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-accent-light/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-purple-800/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
                   <h3 className="text-xl font-bold text-primary mb-6 font-display">Expertise Sectors</h3>
                   <div className="grid grid-cols-1 gap-4">
                     {[
@@ -268,8 +269,8 @@ export default function SubmitCV() {
                       { icon: <Briefcase className="w-5 h-5" />, title: 'Administration', roles: 'Project Admin, Office Management, Operations' },
                       { icon: <Calculator className="w-5 h-5" />, title: 'Accounting & Finance', roles: 'Project Accountants, Bookkeepers, Auditors' },
                     ].map((sector, i) => (
-                      <div key={i} className="p-5 rounded-2xl bg-surface border border-border flex items-start group hover:border-accent/50 transition-colors">
-                        <div className="w-10 h-10 rounded-xl bg-bg-page flex items-center justify-center text-muted group-hover:text-accent transition-colors shrink-0">
+                      <div key={i} className="p-5 rounded-2xl bg-surface border border-border flex items-start group hover:border-purple-700/50 transition-colors">
+                        <div className="w-10 h-10 rounded-xl bg-bg-page flex items-center justify-center text-muted group-hover:text-purple-700 transition-colors shrink-0">
                           {sector.icon}
                         </div>
                         <div className="ml-4">
@@ -289,7 +290,7 @@ export default function SubmitCV() {
         <section id="submit-cv-form" className="py-24 bg-bg-page scroll-mt-20" style={{ backgroundColor: 'rgb(182 229 252 / 64%)' }}>
           <div className="max-w-3xl mx-auto px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Join Our <span className="text-accent">Talent</span> Network</h2>
+              <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Join Our <span className="text-purple-700">Talent</span> Network</h2>
               <p className="text-sm text-muted font-semibold max-w-md mx-auto">
                 We reject automated candidate-matching scripts. Submit your resume, and a real expert senior recruiter will review your profile manually.
               </p>
@@ -368,7 +369,7 @@ export default function SubmitCV() {
                         onClick={() => setValue('specialty', div.value, { shouldValidate: true })}
                         className={`p-4.5 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 flex flex-col items-center justify-center text-center gap-1
                           ${isSelected 
-                            ? 'border-accent bg-accent-light/35 shadow-sm scale-[0.99]' 
+                            ? 'border-purple-700 bg-purple-700/35 shadow-sm scale-[0.99]' 
                             : 'border-border bg-surface hover:bg-bg-page'}`}
                       >
                         <span className="font-bold text-sm text-primary">{div.label}</span>
@@ -411,12 +412,12 @@ export default function SubmitCV() {
                           key={opt.value}
                           className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer select-none transition-all duration-150
                             ${isChecked 
-                              ? 'border-accent bg-accent-light/10' 
+                              ? 'border-purple-700 bg-purple-700/10' 
                               : 'border-border bg-surface hover:bg-bg-page/50'}`}
                         >
                           <input 
                             type="checkbox"
-                            className="w-4.5 h-4.5 rounded border-border text-accent focus:ring-accent outline-none cursor-pointer"
+                            className="w-4.5 h-4.5 rounded border-border text-purple-700 focus:ring-purple-700 outline-none cursor-pointer"
                             checked={isChecked}
                             onChange={(e) => handleGoalCheckbox(opt.value, e.target.checked)}
                           />
@@ -450,7 +451,7 @@ export default function SubmitCV() {
                           onClick={() => setValue('reasonableAdjustments', val, { shouldValidate: true })}
                           className={`px-6 py-2.5 rounded-xl text-sm font-bold border transition-all duration-200
                             ${isSelected 
-                              ? 'bg-accent text-white border-accent shadow-md shadow-accent/10' 
+                              ? 'bg-purple-700 text-white border-purple-700 shadow-md shadow-purple-700/10' 
                               : 'bg-surface text-muted border-border hover:bg-bg-page'}`}
                         >
                           {val}
@@ -471,7 +472,7 @@ export default function SubmitCV() {
                     <textarea
                       placeholder="Specify requirements, e.g. wheelchair access, sign-language interpreter, screen reader compatibility..."
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-accent resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-purple-700 resize-none"
                       {...register('reasonableAdjustmentsDetails', {
                         required: watch('reasonableAdjustments') === 'Yes' ? 'Details are required when adjustments are requested' : false
                       })}
@@ -535,7 +536,7 @@ export default function SubmitCV() {
                   type="submit"
                   variant="filled"
                   disabled={loading}
-                  className="px-10 py-3.5 font-bold shadow-lg shadow-accent/15 tracking-wider hover:shadow-xl hover:shadow-accent/25 duration-300 hover:scale-[1.01]"
+                  className="px-10 py-3.5 font-bold shadow-lg shadow-accent/15 tracking-wider hover:shadow-xl hover:shadow-accent/25 duration-300 hover:scale-[1.01] bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
                 >
                   {loading ? 'Uploading Application...' : 'Submit CV Application'}
                 </Button>

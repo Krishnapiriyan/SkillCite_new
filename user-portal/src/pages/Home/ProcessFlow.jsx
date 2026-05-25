@@ -15,7 +15,7 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <section className="w-full py-20 bg-surface border-y border-border select-none overflow-hidden" style={{ backgroundColor: 'rgba(165, 186, 232, 0.78)' }}>
+    <section className="w-full py-20 bg-surface border-y border-border select-none overflow-hidden" style={{ backgroundColor: 'rgb(189 198 206 / 75%)' }}>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -46,7 +46,7 @@ export default function ProcessFlow() {
               stroke="rgba(37, 99, 235, 0.3)"
               strokeWidth="2"
               strokeDasharray="4 4"
-              className="stroke-accent/40"
+              className="stroke-purple-800/40"
             />
           </svg>
 
@@ -63,8 +63,8 @@ export default function ProcessFlow() {
               >
                 {/* Number bubble */}
                 <motion.div
-                  whileHover={{ scale: 1.1, backgroundColor: '#2563EB', color: '#FFFFFF' }}
-                  className="w-12 h-12 rounded-full border-2 border-accent bg-surface text-accent text-sm font-bold flex items-center justify-center shadow-md transition-all duration-300 mb-6"
+                  whileHover={{ scale: 1.1, backgroundColor: 'purple', color: 'white' }}
+                  className="w-12 h-12 rounded-full border-2 border-purple-800 bg-surface text-purple-800 text-sm font-bold flex items-center justify-center shadow-md transition-all duration-300 mb-6"
                 >
                   {step.num}
                 </motion.div>

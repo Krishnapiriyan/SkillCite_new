@@ -31,7 +31,7 @@ export default function ChatMessage({ message }) {
               <Link
                 key={index}
                 to={part}
-                className="inline-flex items-center px-2 py-0.5 mx-1 rounded-md bg-accent-light text-accent border border-blue-200 font-bold hover:bg-accent hover:text-white transition-all text-[11px] sm:text-xs select-none"
+                className="inline-flex items-center px-2 py-0.5 mx-1 rounded-md bg-purple-950 text-white border border-purple-950 font-bold hover:bg-purple-700 hover:text-white transition-all text-[11px] sm:text-xs select-none"
               >
                 {linkLabel}
               </Link>
@@ -52,7 +52,7 @@ export default function ChatMessage({ message }) {
       <div 
         className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs sm:text-sm leading-relaxed shadow-sm
           ${isUser 
-            ? 'bg-accent text-white rounded-br-none' 
+            ? 'bg-purple-950 text-white rounded-br-none' 
             : 'bg-white text-primary border border-border rounded-bl-none'
           }`}
       >

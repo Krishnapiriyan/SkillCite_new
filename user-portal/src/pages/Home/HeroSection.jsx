@@ -149,7 +149,7 @@ export default function HeroSection() {
             <MagneticElement strength={0.25} range={50} className="w-full sm:w-auto">
               <Link to="/request-talent" className="w-full sm:w-auto">
                 <Button variant="filled" 
-                       className="!text-white !bg-purple-950 !border-slate-300 hover:!bg-blue-700 hover:!text-white hover:!border-cyan-600">
+                       className="!text-white !bg-purple-950 !border-slate-300 hover:!bg-purple-700 hover:!text-white hover:!border-cyan-600">
                   Request Talent
                 </Button>
               </Link>

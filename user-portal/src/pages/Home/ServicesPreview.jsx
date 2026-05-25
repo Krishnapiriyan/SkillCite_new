@@ -163,7 +163,7 @@ export default function ServicesPreview() {
   ];
 
   return (
-    <section className="w-full py-28 bg-bg-page overflow-hidden select-none border-b border-border" style={{ backgroundColor: 'rgb(165 234 178 / 12%)' }}>
+    <section className="w-full py-28 bg-bg-page overflow-hidden select-none border-b border-border" style={{ backgroundColor: 'rgb(195, 196, 185)' }}>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -193,7 +193,7 @@ export default function ServicesPreview() {
             
             {/* Text Column (Slides in from Left) */}
             <ScrollReveal direction="left" className="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1" delay={0.1}>
-              <span className="text-accent text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
+              <span className="text-purple-600 text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
                 CANDIDATES & RECRUITMENT
               </span>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-primary mb-5 font-display tracking-tight leading-tight">
@@ -211,7 +211,7 @@ export default function ServicesPreview() {
                   'Structured candidate review and shortlisting process'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                     <span className="text-sm text-primary font-bold">{item}</span>
                   </div>
                 ))}
@@ -221,7 +221,7 @@ export default function ServicesPreview() {
               <div>
                 <Link
                   to="/submit-your-cv"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-accent text-white font-bold text-sm shadow-lg shadow-accent/25 hover:shadow-accent/40 hover:-translate-y-0.5 hover:bg-blue-700 transition-all duration-300 w-full sm:w-auto justify-center group"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-purple-950 text-white font-bold text-sm shadow-lg shadow-purple-600/25 hover:shadow-purple-600/40 hover:-translate-y-0.5 hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto justify-center group"
                 >
                   Submit Your CV
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -235,7 +235,7 @@ export default function ServicesPreview() {
               <div className="hover:-translate-y-3.5 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer">
                 <Card3D className="group relative" maxTilt={6}>
                   {/* Floating Glowing Orb (Best Premium Combination) */}
-                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-600/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
                   
                   {/* Premium Framed Slideshow */}
                   <div className="p-3 bg-white/40 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2.5rem] overflow-hidden">
@@ -277,7 +277,7 @@ export default function ServicesPreview() {
 
             {/* Text Column (Slides in from Right) */}
             <ScrollReveal direction="right" className="lg:col-span-6 flex flex-col justify-center" delay={0.1}>
-              <span className="text-accent text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
+              <span className="text-purple-600 text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
                 EMPLOYERS & HIRING
               </span>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-primary mb-5 font-display tracking-tight leading-tight">
@@ -295,7 +295,7 @@ export default function ServicesPreview() {
                   'Candidate shortlisting and communication support'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                     <span className="text-sm text-primary font-bold">{item}</span>
                   </div>
                 ))}
@@ -305,7 +305,7 @@ export default function ServicesPreview() {
               <div>
                 <Link
                   to="/request-talent"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/10 hover:shadow-primary/20 hover:-translate-y-0.5 hover:bg-slate-800 transition-all duration-300 w-full sm:w-auto justify-center group"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gray-600 text-white font-bold text-sm shadow-lg shadow-primary/10 hover:shadow-primary/20 hover:-translate-y-0.5 hover:bg-slate-800 transition-all duration-300 w-full sm:w-auto justify-center group"
                 >
                   Hire Talent
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -319,7 +319,7 @@ export default function ServicesPreview() {
             
             {/* Text Column (Slides in from Left) */}
             <ScrollReveal direction="left" className="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1" delay={0.1}>
-              <span className="text-accent text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
+              <span className="text-purple-600 text-[11px] font-bold uppercase tracking-[0.15em] mb-4 inline-block">
                 OUR ENGINEERING SERVICES
               </span>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-primary mb-5 font-display tracking-tight leading-tight">
@@ -337,7 +337,7 @@ export default function ServicesPreview() {
                   'Engineering calculations'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                     <span className="text-sm text-primary font-bold">{item}</span>
                   </div>
                 ))}
@@ -347,7 +347,7 @@ export default function ServicesPreview() {
               <div>
                 <Link
                   to="/engineering-services"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-accent text-white font-bold text-sm shadow-lg shadow-accent/25 hover:shadow-accent/40 hover:-translate-y-0.5 hover:bg-blue-700 transition-all duration-300 w-full sm:w-auto justify-center group"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-purple-950 text-white font-bold text-sm shadow-lg shadow-purple-600/25 hover:shadow-purple-600/40 hover:-translate-y-0.5 hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto justify-center group"
                 >
                   Request Technical Services
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -361,7 +361,7 @@ export default function ServicesPreview() {
               <div className="hover:-translate-y-3.5 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer">
                 <Card3D className="group relative" maxTilt={6}>
                   {/* Floating Glowing Orb (Best Premium Combination) */}
-                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-600/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
                   
                   {/* Premium Framed Slideshow */}
                   <div className="p-3 bg-white/40 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2.5rem] overflow-hidden">

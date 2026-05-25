@@ -23,14 +23,15 @@ export default function CtaBanner() {
 
         <ScrollReveal delay={0.2} className="flex flex-wrap gap-4 justify-center">
           <Link to="/request-talent">
-            <Button variant="filled">
+            <Button variant="filled"
+                    className="!text-white !bg-purple-950 !border-slate-300 hover:!bg-purple-700 hover:!text-white hover:!border-cyan-600">
               Request Talent
             </Button>
           </Link>
           <Link to="/submit-your-cv">
             <Button
               variant="outlined"
-              className="!text-slate-800 !bg-white !border-slate-300 hover:!bg-cyan-600 hover:!text-white hover:!border-cyan-600">
+              className="!text-slate-800 !bg-white !border-slate-300 hover:!bg-gray-600 hover:!text-white hover:!border-cyan-600">
               Join the Network
             </Button>
           </Link>

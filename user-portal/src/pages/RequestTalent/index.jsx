@@ -192,7 +192,7 @@ export default function RequestTalent() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     variant="filled" 
-                    className="px-10 py-3.5 w-full sm:w-auto font-bold shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 duration-300 transform hover:-translate-y-0.5"
+                    className="px-10 py-3.5 w-full sm:w-auto font-bold shadow-lg shadow-purple-700/20 hover:shadow-xl hover:shadow-purple-700/30 duration-300 transform hover:-translate-y-0.5 bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
                     onClick={() => document.getElementById('request-talent-form').scrollIntoView({ behavior: 'smooth' })}
                   >
                     Hire Talent <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
@@ -227,7 +227,7 @@ export default function RequestTalent() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <span className="text-[13px] font-bold text-accent tracking-widest uppercase mb-4 block text-left">Methodology</span>
+                <span className="text-[13px] font-bold text-purple-700 tracking-widest uppercase mb-4 block text-left">Methodology</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 tracking-tight font-display text-left">Our Recruitment Process</h2>
                 <div className="space-y-8 text-left">
                   {[
@@ -237,7 +237,7 @@ export default function RequestTalent() {
                     { step: '04', title: 'Shortlist Delivered', desc: 'A shortlist of qualified candidates is provided to the employer for final consideration.' }
                   ].map((item) => (
                     <div key={item.step} className="flex group">
-                      <div className="text-2xl font-black text-accent/20 group-hover:text-accent transition-colors mr-6 mt-1">{item.step}</div>
+                      <div className="text-2xl font-black text-purple-700/20 group-hover:text-purple-700 transition-colors mr-6 mt-1">{item.step}</div>
                       <div>
                         <h4 className="text-[17px] font-bold text-primary mb-2 font-display">{item.title}</h4>
                         <p className="text-[14px] text-muted leading-relaxed font-semibold">{item.desc}</p>
@@ -248,7 +248,7 @@ export default function RequestTalent() {
               </div>
               
               <div className="relative group hidden lg:block text-left">
-                <div className="absolute -inset-4 bg-accent-light/10 blur-3xl rounded-full opacity-50"></div>
+                <div className="absolute -inset-4 bg-purple-700/10 blur-3xl rounded-full opacity-50"></div>
                 <div className="relative rounded-3xl overflow-hidden border border-border shadow-2xl p-8 bg-surface/50">
                   <h3 className="text-xl font-bold text-primary mb-6 font-display">Why Partner With Us?</h3>
                   <div className="space-y-6">
@@ -260,7 +260,7 @@ export default function RequestTalent() {
                       'End-to-end recruitment coordination from sourcing to placement'
                     ].map((feat, i) => (
                       <div key={i} className="flex items-start">
-                        <CheckCircle2 className="w-5 h-5 text-accent mr-3 mt-0.5 shrink-0" />
+                        <CheckCircle2 className="w-5 h-5 text-purple-700 mr-3 mt-0.5 shrink-0" />
                         <span className="text-[14px] text-muted font-semibold">{feat}</span>
                       </div>
                     ))}
@@ -276,7 +276,7 @@ export default function RequestTalent() {
           <div className="max-w-2xl mx-auto px-6">
             
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Request <span className="text-accent">Talent.</span></h2>
+              <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Request <span className="text-purple-700">Talent.</span></h2>
               <p className="text-sm text-muted font-semibold max-w-md mx-auto">
                 Tell us about your engineering, accounting, or administrative needs. A recruiter will contact you personally in 24 hours.
               </p>
@@ -389,7 +389,7 @@ export default function RequestTalent() {
                               onClick={() => setValue('engagementNeed', need, { shouldValidate: true })}
                               className={`py-3.5 px-4.5 rounded-xl border text-sm font-bold text-center transition-all duration-200
                                 ${isSelected 
-                                  ? 'bg-accent text-white border-accent shadow-md shadow-accent/15' 
+                                  ? 'bg-purple-700 text-white border-purple-700 shadow-md shadow-purple-700/15' 
                                   : 'bg-surface text-muted border-border hover:bg-bg-page'}`}
                             >
                               {need}
@@ -416,7 +416,7 @@ export default function RequestTalent() {
                               onClick={() => setValue('specialty', div.value, { shouldValidate: true })}
                               className={`p-4 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 flex flex-col gap-1
                                 ${isSelected 
-                                  ? 'border-accent bg-accent-light/35 shadow-sm' 
+                                  ? 'border-purple-700 bg-purple-700/35 shadow-sm' 
                                   : 'border-border bg-surface hover:bg-bg-page'}`}
                             >
                               <span className="font-bold text-sm text-primary">{div.label}</span>
@@ -469,7 +469,7 @@ export default function RequestTalent() {
                                 onClick={() => setValue('experienceLevel', level, { shouldValidate: true })}
                                 className={`px-4.5 py-2 rounded-full text-xs font-bold capitalize select-none transition-all
                                   ${isSelected 
-                                    ? 'bg-accent text-white shadow-sm' 
+                                    ? 'bg-purple-700 text-white shadow-sm' 
                                     : 'bg-bg-page text-muted border border-border hover:bg-border/30'}`}
                               >
                                 {level}
@@ -553,6 +553,7 @@ export default function RequestTalent() {
                     variant="filled" 
                     onClick={handleNext}
                     icon={<ArrowRight className="w-4 h-4" />}
+                    className="px-10 font-bold shadow-lg shadow-purple-700/15 bg-purple-950 hover:bg-purple-700 hover:text-white hover:border-cyan-600" 
                   >
                     Next Step
                   </Button>
@@ -561,7 +562,8 @@ export default function RequestTalent() {
                     type="submit" 
                     variant="filled" 
                     disabled={loading}
-                    className="px-10 font-bold shadow-lg shadow-accent/15"
+                    className="px-10 font-bold shadow-lg shadow-purple-700/15"
+                    bgColor="bg-purple-950"
                   >
                     {loading ? 'Submitting Specification...' : 'Request Recruitment Call'}
                   </Button>

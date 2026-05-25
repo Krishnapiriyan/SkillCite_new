@@ -41,7 +41,7 @@ export default function SpecialtyDivisions() {
   ];
 
   return (
-    <section className="w-full py-24 bg-surface border-b border-border select-none overflow-hidden"       style={{ backgroundColor: 'rgb(153 186 180 / 70%)' }}>
+    <section className="w-full py-24 bg-surface border-b border-border select-none overflow-hidden"       style={{ backgroundColor: 'rgb(200 197 167)' }}>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -64,7 +64,7 @@ export default function SpecialtyDivisions() {
         </div>
 
         {/* Divisions Visual Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" style={{ backgroundColor: 'rgb(195 196 185)' }}>
           {divisions.map((div, idx) => (
             <ScrollReveal 
               key={idx} 
@@ -80,7 +80,7 @@ export default function SpecialtyDivisions() {
                 {/* Floating Glowing Orb (Best Premium Combination) */}
                 <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-gradient-to-tr from-accent/25 to-blue-400/5 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
 
-                <div className="flex flex-col h-full justify-between">
+                <div className="flex flex-col h-full justify-between" >
                   <div>
                     {/* Small Animated Image Panel */}
                     <div className="relative w-full h-32 overflow-hidden rounded-2xl mb-5 bg-slate-900 border border-border shadow-inner">

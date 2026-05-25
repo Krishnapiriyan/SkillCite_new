@@ -132,7 +132,7 @@ export default function EngineeringServices() {
             <div className="lg:col-span-7 text-left flex flex-col gap-4">
               <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-primary tracking-tight leading-tight">
                 Engineering & <br className="hidden sm:inline" />
-                <span className="text-accent">Services</span>
+                <span className="text-purple-800">Services</span>
               </h1>
               <p className="text-sm sm:text-base text-muted font-semibold leading-relaxed max-w-xl">
                 Request professional AutoCAD drawings, quantity estimation take-offs, or structural computations. Fully stampable and executed offline by licensed engineering experts.
@@ -162,10 +162,10 @@ export default function EngineeringServices() {
                   onClick={() => setValue('serviceType', srv.key, { shouldValidate: true })}
                   className={`p-6 rounded-3xl border-2 cursor-pointer select-none transition-all duration-300 flex flex-col items-start gap-4 shadow-sm hover:shadow-md
                     ${isSelected 
-                      ? 'border-accent bg-surface ring-4 ring-accent-light scale-[0.99]' 
+                      ? 'border-purple-700 bg-surface ring-4 ring-purple-700/30 scale-[0.99]' 
                       : 'border-border bg-surface'}`}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-accent-light flex items-center justify-center text-accent shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
                     {srv.icon}
                   </div>
                   <div>
@@ -183,7 +183,7 @@ export default function EngineeringServices() {
             {/* AutoCAD & Shop Drawings */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center"  >
               <div className="md:col-span-6 flex flex-col items-start order-1 md:order-1">
-                <span className="text-[11px] font-bold text-blue-600 tracking-widest uppercase mb-3 block bg-blue-50 px-2.5 py-1 rounded-full border border-blue-100">
+                <span className="text-[11px] font-bold text-purple-800 tracking-widest uppercase mb-3 block bg-purple-100 px-2.5 py-1 rounded-full border border-purple-200">
                   CAD Documentation
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-primary mb-4 tracking-tight font-display">
@@ -199,20 +199,23 @@ export default function EngineeringServices() {
                     'As-built drawings and revisions'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start text-muted text-sm font-semibold">
-                      <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center mr-3 mt-0.5 border border-blue-100 shrink-0 text-blue-600">
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                      <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center mr-3 mt-0.5 border border-purple-200 shrink-0 text-purple-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-700"></span>
                       </div>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <Button variant="outlined" onClick={() => scrollToForm('autocad')} className="px-6 py-2.5">
+                <Button variant="outlined" onClick={() => scrollToForm('autocad')} 
+                        className="px-6 py-2.5" bgColor="bg-purple-950"
+                        className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-black bg-purple-950 border-purple-950 hover:bg-purple-900 hover:text-white hover:border-cyan-600"
+                        >
                   Request AutoCAD <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
 
               <div className="md:col-span-6 order-2 md:order-2 relative group w-full">
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-accent to-blue-400 rounded-[2rem] blur opacity-15 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-700 to-blue-400 rounded-[2rem] blur opacity-15 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
                 <div className="relative bg-surface border border-border rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl">
                   <img 
                     src={engineeringBlueprints} 
@@ -229,7 +232,7 @@ export default function EngineeringServices() {
             {/* Quantity & Cost Estimation */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
               <div className="md:col-span-6 order-2 md:order-1 relative group w-full">
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-400 to-accent rounded-[2rem] blur opacity-15 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-400 to-purple-700 rounded-[2rem] blur opacity-15 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
                 <div className="relative bg-surface border border-border rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl">
                   <img 
                     src={heroComposition} 
@@ -243,7 +246,7 @@ export default function EngineeringServices() {
               </div>
 
               <div className="md:col-span-6 flex flex-col items-start order-1 md:order-2">
-                <span className="text-[11px] font-bold text-accent tracking-widest uppercase mb-3 block bg-accent-light px-2.5 py-1 rounded-full border border-blue-100">
+                <span className="text-[11px] font-bold text-purple-800 tracking-widest uppercase mb-3 block bg-purple-100 px-2.5 py-1 rounded-full border border-purple-200">
                   Precision Estimation
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-primary mb-4 tracking-tight font-display">
@@ -259,14 +262,16 @@ export default function EngineeringServices() {
                     'Tender & bid documentation support'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start text-muted text-sm font-semibold">
-                      <div className="w-5 h-5 rounded-full bg-accent-light flex items-center justify-center mr-3 mt-0.5 border border-blue-100 shrink-0 text-accent">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                      <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center mr-3 mt-0.5 border border-purple-200 shrink-0 text-purple-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-700"></span>
                       </div>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <Button variant="outlined" onClick={() => scrollToForm('estimation')} className="px-6 py-2.5">
+                <Button variant="outlined" onClick={() => scrollToForm('estimation')} className="px-6 py-2.5" bgColor="bg-purple-950"
+                        className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-black bg-purple-950 border-purple-950 hover:bg-purple-900 hover:text-white hover:border-cyan-600"
+                        >
                   Request Estimation <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
@@ -298,7 +303,9 @@ export default function EngineeringServices() {
                     </li>
                   ))}
                 </ul>
-                <Button variant="outlined" onClick={() => scrollToForm('calculations')} className="px-6 py-2.5">
+                <Button variant="outlined" onClick={() => scrollToForm('calculations')} className="px-6 py-2.5" bgColor="bg-emerald-500"
+                         className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-black bg-purple-950 border-purple-950 hover:bg-purple-900 hover:text-white hover:border-cyan-600"
+                  >
                   Request Calculations <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
@@ -430,6 +437,7 @@ export default function EngineeringServices() {
                   variant="filled"
                   disabled={loading}
                   className="px-8 py-3"
+                  className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-white bg-purple-950 border-purple-950 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
                 >
                   {loading ? 'Logging Request...' : 'Submit Specs'}
                 </Button>

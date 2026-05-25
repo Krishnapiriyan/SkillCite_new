@@ -60,7 +60,7 @@ html.lenis {
   content: '';
   position: absolute;
   inset: -1px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa, #2563eb, #3b82f6);
+  background: linear-gradient(90deg, #993bf6, #ad60fa, #a625eb, #993bf6);
   background-size: 400% 400%;
   border-radius: inherit;
   z-index: -1;

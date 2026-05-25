@@ -57,7 +57,7 @@ export default function ChatWidget() {
             className="absolute bottom-16 right-0 w-[calc(100vw-32px)] sm:w-96 h-[500px] rounded-3xl bg-surface border border-border shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-accent text-white p-4 flex items-center justify-between">
+            <div className="bg-purple-950 text-white p-4 flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-sm font-bold font-display">SkillCite Assistant</span>
                 <span className="text-[10px] opacity-75">Online • AI</span>
@@ -82,9 +82,9 @@ export default function ChatWidget() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start items-center gap-1.5 p-3 rounded-2xl border border-border bg-white text-muted max-w-[85%] rounded-bl-none shadow-sm"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-bounce [animation-delay:-0.3s]"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-bounce [animation-delay:-0.15s]"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-bounce"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-950 animate-bounce [animation-delay:-0.3s]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-950 animate-bounce [animation-delay:-0.15s]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-950 animate-bounce"></span>
                 </motion.div>
               )}
               
@@ -98,12 +98,12 @@ export default function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me anything..."
-                className="flex-1 px-4 py-2.5 bg-bg-page border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent text-primary"
+                className="flex-1 px-4 py-2.5 bg-bg-page border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-purple-950 text-primary"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || loading}
-                className="w-10 h-10 rounded-xl bg-accent text-white hover:bg-blue-700 active:scale-95 transition-all flex items-center justify-center disabled:opacity-50 disabled:pointer-events-none"
+                className="w-10 h-10 rounded-xl bg-purple-950 text-white hover:bg-slate-600 active:scale-95 transition-all flex items-center justify-center disabled:opacity-50 disabled:pointer-events-none"
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -117,7 +117,7 @@ export default function ChatWidget() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-accent text-white flex items-center justify-center shadow-xl hover:bg-blue-700 transition-colors focus:outline-none"
+        className="w-14 h-14 rounded-full bg-purple-950 text-white flex items-center justify-center shadow-xl hover:bg-slate-600 transition-colors focus:outline-none"
         data-cursor="expand"
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
