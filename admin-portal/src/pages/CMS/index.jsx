@@ -22,41 +22,7 @@ export default function CmsIndex() {
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
   const [uploadingVideo, setUploadingVideo] = useState(false);
-  const [uploadingLoadingVideo, setUploadingLoadingVideo] = useState(false);
   const [heroUploadProgress, setHeroUploadProgress] = useState(0);
-  const [loadingUploadProgress, setLoadingUploadProgress] = useState(0);
-
-  const handleLoadingVideoUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    e.target.value = '';
-
-    const validationError = validateVideoFile(file);
-    if (validationError) {
-      alert(validationError);
-      return;
-    }
-
-    setUploadingLoadingVideo(true);
-    setLoadingUploadProgress(0);
-    try {
-      const res = await uploadCmsFileApi(file, setLoadingUploadProgress);
-      if (res.success && res.data?.url) {
-        const publicUrl = resolveMediaUrl(res.data.url);
-        handleChange('home.loading.videoUrl', publicUrl);
-        await updateCmsContentApi('home.loading.videoUrl', publicUrl);
-        alert('Loading screen video uploaded and saved successfully!');
-      } else {
-        throw new Error(res.error || 'Upload failed');
-      }
-    } catch (err) {
-      console.error(err);
-      alert(formatUploadError(err, file));
-    } finally {
-      setUploadingLoadingVideo(false);
-      setLoadingUploadProgress(0);
-    }
-  };
 
   const handleVideoUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -363,96 +329,8 @@ export default function CmsIndex() {
                 )}
               </div>
 
-              {/* Loading Screen Video Section */}
-              <div className="flex flex-col gap-2 border-t border-border/60 pt-6 mt-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-primary/80 uppercase tracking-wide">
-                    Loading Screen Background Video URL (`home.loading.videoUrl`)
-                  </label>
-                  <button
-                    onClick={() => handleSave('home.loading.videoUrl')}
-                    disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
-                  >
-                    <Save className="w-3.5 h-3.5" /> Save
-                  </button>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                  <input
-                    type="text"
-                    value={cms['home.loading.videoUrl'] || ''}
-                    onChange={(e) => handleChange('home.loading.videoUrl', e.target.value)}
-                    className="flex-1 px-4 py-3 rounded-xl border border-border bg-surface text-sm text-primary outline-none focus:ring-4 focus:ring-accent-light focus:border-accent"
-                    placeholder="Enter loading video URL or upload file..."
-                  />
-                  <div className="relative">
-                    <input
-                      type="file"
-                      id="loading-video-upload"
-                      accept="video/mp4,video/webm,video/quicktime"
-                      onChange={handleLoadingVideoUpload}
-                      disabled={uploadingLoadingVideo}
-                      className="hidden"
-                    />
-                    <label
-                      htmlFor="loading-video-upload"
-                      className={`px-5 py-3 rounded-xl border border-dashed border-accent/40 bg-accent-light/50 hover:bg-accent-light text-accent text-xs font-bold tracking-wide uppercase transition-all cursor-pointer flex items-center gap-2 justify-center shrink-0
-                        ${uploadingLoadingVideo ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    >
-                      {uploadingLoadingVideo ? (
-                        <>
-                          <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                          Uploading{loadingUploadProgress > 0 ? ` ${loadingUploadProgress}%` : '...'}
-                        </>
-                      ) : (
-                        'Upload Video File'
-                      )}
-                    </label>
-                  </div>
-                </div>
-                <p className="text-[10px] text-muted font-medium">
-                  Supports .mp4, .webm, .mov up to 100MB. For reliable uploads, use videos under 25MB (720p, H.264).
-                </p>
-                {uploadingLoadingVideo && loadingUploadProgress > 0 && (
-                  <div className="w-full max-w-sm h-1.5 rounded-full bg-border overflow-hidden">
-                    <div
-                      className="h-full bg-accent transition-all duration-300"
-                      style={{ width: `${loadingUploadProgress}%` }}
-                    />
-                  </div>
-                )}
-
-                {/* Loading Video Playback Preview */}
-                {cms['home.loading.videoUrl'] && (
-                  <div className="mt-3 rounded-2xl overflow-hidden border border-border bg-bg-page p-2.5 max-w-sm shadow-sm">
-                    <video
-                      src={resolveMediaUrl(cms['home.loading.videoUrl'])}
-                      className="w-full h-[160px] object-cover rounded-xl"
-                      controls
-                      muted
-                      playsInline
-                    />
-                    <div className="flex justify-between items-center mt-3 px-1">
-                      <span className="text-[10px] text-muted truncate max-w-[200px] font-mono">
-                        {resolveMediaUrl(cms['home.loading.videoUrl'])}
-                      </span>
-                      <button
-                        onClick={async () => {
-                          handleChange('home.loading.videoUrl', '');
-                          await updateCmsContentApi('home.loading.videoUrl', '');
-                        }}
-                        className="text-[10px] text-red-500 hover:underline font-bold uppercase tracking-wide"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-
               {/* Horizontal Marquee Statline */}
-              <div className="flex flex-col gap-2 border-t border-border/60 pt-6 mt-2">
+              {/* <div className="flex flex-col gap-2 border-t border-border/60 pt-6 mt-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold text-primary/80 uppercase tracking-wide">
                     Horizontal Marquee Stats Bar (`home.marquee.stats`)
@@ -471,7 +349,7 @@ export default function CmsIndex() {
                   onChange={(e) => handleChange('home.marquee.stats', e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-border bg-surface text-sm text-primary outline-none focus:ring-4 focus:ring-accent-light focus:border-accent"
                 />
-              </div>
+              </div> */}
 
             </div>
           )}

@@ -1,31 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
-import useCms from '../../hooks/useCms';
-import { getMockUploadUrl, resolveMediaUrl } from '../../utils/apiBase.js';
-
-const welcomeVideo = getMockUploadUrl('4eb6e8b7-5496-4bc6-903b-71956706dffd.mp4');
+import { useState, useEffect } from 'react';
 
 const floatingSkills = [
-  { name: "BBuild Careers", x: "12%", y: "25%", color: "from-blue-400 to-indigo-500", delay: 0.1, threshold: 10 },
+  { name: "Build Careers", x: "12%", y: "25%", color: "from-blue-400 to-indigo-500", delay: 0.1, threshold: 10 },
   { name: "Hire Top Talent", x: "82%", y: "30%", color: "from-indigo-400 to-purple-500", delay: 0.25, threshold: 25 },
   { name: "Access Our Services", x: "65%", y: "66%", color: "from-blue-500 to-cyan-400", delay: 0.4, threshold: 40 },
-  // { name: "Systems Arch", x: "80%", y: "65%", color: "from-violet-400 to-fuchsia-500", delay: 0.15, threshold: 55 },
-  // { name: "FPGA / Verilog", x: "25%", y: "15%", color: "from-cyan-500 to-blue-600", delay: 0.3, threshold: 70 },
-  // { name: "Robotics / ROS", x: "72%", y: "18%", color: "from-indigo-500 to-cyan-500", delay: 0.2, threshold: 85 },
 ];
 
-const taglineWords = "Connecting Elite Engineering Talent".split(" ");
+const taglineWords = "Your trusted recruitment partner".split(" ");
 
 export default function LoadingScreen({ onComplete, onReveal }) {
-  const { getCms } = useCms();
   const [progress, setProgress] = useState(0);
   const [show, setShow] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [stage, setStage] = useState('loading'); // 'loading' | 'video' | 'exit'
-  const [videoProgress, setVideoProgress] = useState(0);
-
-  const videoRef = useRef(null);
-  const currentVideoSrc = resolveMediaUrl(getCms('home.loading.videoUrl')) || welcomeVideo;
+  const [stage, setStage] = useState('loading'); // 'loading' | 'exit'
 
   // 1. Digital Percentage Counter + stage transitions
   useEffect(() => {
@@ -43,9 +31,9 @@ export default function LoadingScreen({ onComplete, onReveal }) {
         clearInterval(timer);
         setIsCompleted(true);
         
-        // Elegant pause at 100%, then fade out the progress counter overlays
+        // Elegant pause at 100%, then initiate the curtain wipe exit
         setTimeout(() => {
-          setStage('video');
+          triggerExit();
         }, 500);
       }
     }, intervalTime);
@@ -53,34 +41,11 @@ export default function LoadingScreen({ onComplete, onReveal }) {
     return () => clearInterval(timer);
   }, []);
 
-  // 2. Play video when loaded and whenever source changes
-  useEffect(() => {
-    if (videoRef.current) {
-      try {
-        videoRef.current.load();
-        videoRef.current.play().catch(err => {
-          console.log("Video playback auto-play was blocked or failed:", err);
-        });
-      } catch (e) {
-        console.warn("Failed to load video element source:", e);
-      }
-    }
-  }, [currentVideoSrc]);
-
-  // 3. Safety Fallback: ensure site mounts if video has issues or gets stuck
-  useEffect(() => {
-    const fallbackTimer = setTimeout(() => {
-      console.warn("Video loader safety fallback triggered.");
-      triggerExit();
-    }, 15000); // 15s max safety limit
-    return () => clearTimeout(fallbackTimer);
-  }, []);
-
   const triggerExit = () => {
     setStage('exit');
     if (onReveal) onReveal(); // Reveal home screen immediately so it's loaded underneath the morphing curtain
     
-    // Let the video fade and blur out for 200ms before initiating the curtain wipe
+    // Let the loader elements fade and blur out for 200ms before initiating the curtain wipe
     setTimeout(() => {
       setShow(false);
       // Wait for the liquid path exit transition to complete (750ms + buffer)
@@ -88,26 +53,6 @@ export default function LoadingScreen({ onComplete, onReveal }) {
         if (onComplete) onComplete();
       }, 850);
     }, 200);
-  };
-
-  const handleVideoEnded = () => {
-    triggerExit();
-  };
-
-  const handleSkip = () => {
-    triggerExit();
-  };
-
-  const handleTimeUpdate = (e) => {
-    const video = e.currentTarget;
-    if (video.duration) {
-      setVideoProgress((video.currentTime / video.duration) * 100);
-    }
-  };
-
-  const handleVideoError = () => {
-    console.warn('Intro video failed to load, skipping loader.');
-    triggerExit();
   };
 
   const brandName = "SkillCite".split("");
@@ -137,78 +82,6 @@ export default function LoadingScreen({ onComplete, onReveal }) {
               style={{ animationDuration: '8s' }} 
             />
           </div>
-
-          {/* Cinematic Background Video - Plays from the start */}
-          <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: stage === 'exit' ? 0 : 1 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute inset-0 z-10 flex items-center justify-center bg-black overflow-hidden pointer-events-auto"
-          >
-            {/* Cinematic Vignette Overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_30%,rgba(0,0,0,0.85)_100%)] pointer-events-none z-30" />
-
-            {/* Brand Intro overlay tag */}
-            <div className="absolute top-8 left-8 z-30 select-none pointer-events-none">
-              <motion.span
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-[10px] sm:text-xs font-bold tracking-[0.4em] uppercase text-white/40 font-display"
-              >
-                SkillCite / Intro
-              </motion.span>
-            </div>
-
-            <video
-              ref={videoRef}
-              src={currentVideoSrc}
-              autoPlay
-              muted
-              playsInline
-              onEnded={handleVideoEnded}
-              onError={handleVideoError}
-              onTimeUpdate={handleTimeUpdate}
-              className="w-full h-full object-cover select-none pointer-events-none z-10"
-            />
-
-            {/* Elegant Skip Button with Playback Progress Ring */}
-            {stage === 'video' && (
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                onClick={handleSkip}
-                className="absolute bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-medium tracking-wide transition-all group pointer-events-auto shadow-2xl"
-              >
-                <span className="text-xs uppercase tracking-widest font-semibold text-white/80 group-hover:text-white transition-colors">
-                  Skip Intro
-                </span>
-                <div className="relative w-6 h-6 flex items-center justify-center">
-                  <svg className="w-6 h-6 transform -rotate-90">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="9"
-                      className="stroke-white/10 fill-none"
-                      strokeWidth="2"
-                    />
-                    <motion.circle
-                      cx="12"
-                      cy="12"
-                      r="9"
-                      className="stroke-blue-500 fill-none"
-                      strokeWidth="2"
-                      strokeDasharray={2 * Math.PI * 9}
-                      animate={{ strokeDashoffset: 2 * Math.PI * 9 * (1 - videoProgress / 100) }}
-                      transition={{ ease: "linear", duration: 0.05 }}
-                    />
-                  </svg>
-                  <span className="absolute text-[8px] text-blue-400 group-hover:scale-110 transition-transform">▶</span>
-                </div>
-              </motion.button>
-            )}
-          </motion.div>
 
           {/* Overlay Digital Loading Counter (Stage 1) */}
           <AnimatePresence>

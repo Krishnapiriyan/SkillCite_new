@@ -122,8 +122,8 @@ export default function HeroSection() {
               </>
             ) : (
               <>
-                <TextReveal text={getCms('home.hero.title', 'Engineering Talent.')} className="text-gray-800" />
-                <TextReveal text={getCms('home.hero.title2', 'Recruitment')} className="text-purple-800" />
+                <TextReveal text={getCms('home.hero.title', 'Engineering Talent.')} className="text-gray-600" />
+                <TextReveal text={getCms('home.hero.title2', 'Recruitment')} className="text-purple-950" />
               </>
             )}
           </h1>
@@ -148,7 +148,8 @@ export default function HeroSection() {
           <ScrollReveal delay={0.6} className="flex flex-wrap gap-4 w-full sm:w-auto">
             <MagneticElement strength={0.25} range={50} className="w-full sm:w-auto">
               <Link to="/request-talent" className="w-full sm:w-auto">
-                <Button variant="filled" className="w-full sm:w-auto">
+                <Button variant="filled" 
+                       className="!text-white !bg-purple-950 !border-slate-300 hover:!bg-blue-700 hover:!text-white hover:!border-cyan-600">
                   Request Talent
                 </Button>
               </Link>
@@ -162,7 +163,7 @@ export default function HeroSection() {
               <Link to="/submit-your-cv">
                 <Button
                   variant="outlined"
-                  className="!text-slate-800 !bg-white !border-slate-300 hover:!bg-blue-700 hover:!text-white hover:!border-cyan-600">
+                  className="!text-black !bg-white !border-slate-300 hover:!bg-gray-600 hover:!text-white hover:!border-cyan-600">
                   Join the Network
                 </Button>
               </Link>
