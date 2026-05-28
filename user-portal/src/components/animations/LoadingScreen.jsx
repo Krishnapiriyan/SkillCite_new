@@ -2,9 +2,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const floatingSkills = [
-  { name: "Build Careers", x: "12%", y: "25%", color: "from-blue-400 to-indigo-500", delay: 0.1, threshold: 10 },
+  { name: "Build Careers", x: "12%", y: "25%", color: "from-purple-400 to-indigo-500", delay: 0.1, threshold: 10 },
   { name: "Hire Top Talent", x: "82%", y: "30%", color: "from-indigo-400 to-purple-500", delay: 0.25, threshold: 25 },
-  { name: "Access Our Services", x: "65%", y: "66%", color: "from-blue-500 to-cyan-400", delay: 0.4, threshold: 40 },
+  { name: "Access Our Services", x: "65%", y: "66%", color: "from-purple-500 to-cyan-400", delay: 0.4, threshold: 40 },
 ];
 
 const taglineWords = "Your trusted recruitment partner".split(" ");
@@ -137,7 +137,7 @@ export default function LoadingScreen({ onComplete, onReveal }) {
                     {brandName.map((char, index) => (
                       <motion.span
                         key={index}
-                        className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
+                        className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600   bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
                         style={{ transformOrigin: 'center center' }}
                         initial={{ scale: 0, opacity: 0, y: 30 }}
                         animate={isCompleted ? {
@@ -176,7 +176,7 @@ export default function LoadingScreen({ onComplete, onReveal }) {
                     ))}
                     
                     {/* Radial background pulse glow */}
-                    <div className="absolute inset-0 w-64 h-24 rounded-full bg-blue-500/10 blur-2xl animate-pulse -z-10" />
+                    <div className="absolute inset-0 w-64 h-24 rounded-full bg-purple-500/10 blur-2xl animate-pulse -z-10" />
                   </div>
 
                   {/* Staggered Tagline Pop */}
@@ -219,15 +219,15 @@ export default function LoadingScreen({ onComplete, onReveal }) {
 
                 {/* Digital Percentage Counter */}
                 <div className="flex flex-col items-center gap-2 mt-4">
-                  <div className="flex items-baseline font-mono text-3xl font-extrabold text-blue-500/90 tracking-tighter">
+                  <div className="flex items-baseline font-mono text-3xl font-extrabold text-purple-500/90 tracking-tighter">
                     {String(progress).padStart(3, '0')}
-                    <span className="text-[10px] text-blue-400/60 font-semibold uppercase tracking-wider ml-1">%</span>
+                    <span className="text-[10px] text-purple-400/60 font-semibold uppercase tracking-wider ml-1">%</span>
                   </div>
                   
                   {/* Liquid progress line */}
-                  <div className="w-36 h-[2px] bg-blue-950/40 rounded-full overflow-hidden relative border border-white/5">
+                  <div className="w-36 h-[2px] bg-purple-950/40 rounded-full overflow-hidden relative border border-white/5">
                     <motion.div 
-                      className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 to-blue-600 shadow-md shadow-blue-500/30"
+                      className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-400 to-purple-600 shadow-md shadow-purple-500/30"
                       style={{ width: `${progress}%` }}
                       transition={{ ease: 'easeOut', duration: 0.1 }}
                     />

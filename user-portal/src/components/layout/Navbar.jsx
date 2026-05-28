@@ -138,18 +138,18 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative px-4 py-2 rounded-full transition-colors duration-300 hover:text-accent ${isActive(link.to) ? 'text-accent' : 'text-primary/70'}`}
+              className={`relative px-4 py-2 rounded-full transition-colors duration-300 hover:text-purple-800 ${isActive(link.to) ? 'text-purple-800' : 'text-primary/70'}`}
             >
               {isActive(link.to) && (
                 <motion.span
                   layoutId="desktop-nav-active"
-                  className="absolute inset-0 rounded-full bg-accent-light border border-accent/10"
+                  className="absolute inset-0 rounded-full bg-purple-100 border border-purple-300"
                   transition={{ type: 'spring', stiffness: 430, damping: 34 }}
                 />
               )}
               <span className="mask-link relative z-10">
                 <span className="mask-link-text">{link.label}</span>
-                <span className="mask-link-clone text-accent">{link.label}</span>
+                <span className="mask-link-clone text-purple-800">{link.label}</span>
               </span>
             </Link>
           ))}
@@ -159,19 +159,19 @@ export default function Navbar() {
             <button
               onClick={() => setDropdownOpen((open) => !open)}
               onFocus={() => setDropdownOpen(true)}
-              className={`relative flex items-center gap-1 px-4 py-2 rounded-full transition-colors duration-300 hover:text-accent focus:outline-none ${servicesActive || dropdownOpen ? 'text-accent' : 'text-primary/70'}`}
+              className={`relative flex items-center gap-1 px-4 py-2 rounded-full transition-colors duration-300 hover:text-purple-800 focus:outline-none ${servicesActive || dropdownOpen ? 'text-purple-800' : 'text-primary/70'}`}
               aria-expanded={dropdownOpen}
               aria-haspopup="menu"
             >
               {(servicesActive || dropdownOpen) && (
                 <motion.span
-                  className="absolute inset-0 rounded-full bg-accent-light border border-accent/10"
+                  className="absolute inset-0 rounded-full bg-purple-100 border border-purple-300"
                   transition={{ type: 'spring', stiffness: 430, damping: 34 }}
                 />
               )}
               <span className="mask-link relative z-10 flex items-center gap-1">
                 <span className="mask-link-text">Services</span>
-                <span className="mask-link-clone text-accent">Services</span>
+                <span className="mask-link-clone text-purple-800">Services</span>
               </span>
               <ChevronDown className={`relative z-10 w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -216,8 +216,8 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.04, duration: 0.2 }}
                       >
-                        <Link to={item.to} role="menuitem" className="group flex items-center gap-3 p-2.5 rounded-xl hover:bg-accent-light transition-colors text-primary">
-                          <div className="w-9 h-9 rounded-lg bg-accent-light flex items-center justify-center text-accent transition-transform duration-300 group-hover:scale-105">
+                        <Link to={item.to} role="menuitem" className="group flex items-center gap-3 p-2.5 rounded-xl hover:bg-purple-100 transition-colors text-primary">
+                          <div className="w-9 h-9 rounded-lg bg-purple-100 flex items-center justify-center text-purple-800 transition-transform duration-300 group-hover:scale-105">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div className="flex flex-col">
@@ -237,18 +237,18 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative px-4 py-2 rounded-full transition-colors duration-300 hover:text-accent ${isActive(link.to) ? 'text-accent' : 'text-primary/70'}`}
+              className={`relative px-4 py-2 rounded-full transition-colors duration-300 hover:text-purple-800 ${isActive(link.to) ? 'text-purple-800' : 'text-primary/70'}`}
             >
               {isActive(link.to) && (
                 <motion.span
                   layoutId="desktop-nav-active"
-                  className="absolute inset-0 rounded-full bg-accent-light border border-accent/10"
+                  className="absolute inset-0 rounded-full bg-purple-100 border border-purple-300"
                   transition={{ type: 'spring', stiffness: 430, damping: 34 }}
                 />
               )}
               <span className="mask-link relative z-10">
                 <span className="mask-link-text">{link.label}</span>
-                <span className="mask-link-clone text-accent">{link.label}</span>
+                <span className="mask-link-clone text-purple-800">{link.label}</span>
               </span>
             </Link>
           ))}
@@ -257,7 +257,9 @@ export default function Navbar() {
         {/* Desktop CTA Action
         <div className="hidden md:block">
           <Link to="/request-talent">
-            <Button variant="filled">Request Engineers</Button>
+            <Button variant="filled" bg="violet-900">
+              Request Engineers
+            </Button>
           </Link>
         </div> */}
 
@@ -302,22 +304,24 @@ export default function Navbar() {
                 >
                   <Link
                     to={link.to}
-                    className={`flex items-center justify-between text-base font-semibold px-3 py-3 rounded-xl border border-transparent transition-colors ${isActive(link.to) ? 'text-accent bg-accent-light border-accent/10' : 'text-primary hover:bg-accent-light/70'}`}
+                    className={`flex items-center justify-between text-base font-semibold px-3 py-3 rounded-xl border border-transparent transition-colors ${isActive(link.to) ? 'text-purple-800 bg-purple-100 border-purple-300' : 'text-primary hover:bg-purple-100/70'}`}
                   >
                     {link.label}
-                    {isActive(link.to) && <span className="w-1.5 h-1.5 rounded-full bg-accent" />}
+                    {isActive(link.to) && <span className="w-1.5 h-1.5 rounded-full bg-purple-800" />}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18, duration: 0.22 }}
               >
                 <Link to="/request-talent" className="mt-3 block">
-                  <Button variant="filled" className="w-full">Request Engineers</Button>
+                  <Button variant="filled" className="w-full" bg="violet-900">
+                    Request Engineers
+                  </Button>
                 </Link>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
         )}

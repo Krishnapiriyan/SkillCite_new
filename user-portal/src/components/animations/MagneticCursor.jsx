@@ -45,9 +45,9 @@ export default function MagneticCursor() {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 w-6 h-6 rounded-full border-2 border-blue-600
+      className="fixed top-0 left-0 w-6 h-6 rounded-full border-2 border-purple-600
                  pointer-events-none z-[9999] transition-[width,height] duration-200 hidden md:block
-                 [&.expanded]:w-12 [&.expanded]:h-12 [&.expanded]:border-blue-400 [&.expanded]:bg-blue-600/5"
+                 [&.expanded]:w-12 [&.expanded]:h-12 [&.expanded]:border-purple-400 [&.expanded]:bg-purple-600/5"
     />
   );
 }

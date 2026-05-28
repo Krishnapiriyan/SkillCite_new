@@ -21,7 +21,7 @@ export default function FloatingBlueOrbs() {
       {ORBS.map((orb, i) => (
         <motion.span
           key={i}
-          className="absolute rounded-full bg-blue-200 shadow-[0_0_12px_rgba(59,130,246,0.6)]"
+          className="absolute rounded-full bg-purple-200 shadow-[0_0_12px_rgba(59,130,246,0.6)]"
           style={{
             width: orb.size,
             height: orb.size,

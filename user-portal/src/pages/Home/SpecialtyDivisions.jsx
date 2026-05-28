@@ -13,28 +13,28 @@ export default function SpecialtyDivisions() {
     {
       icon: <HardHat className="w-5 h-5" />,
       title:'Engineering Recruitment',
-      desc: 'Civil, Mechanical, Electrical, Structural, Project Engineering, Drafting.',
+      desc: 'We connect skilled professionals with technical and project-driven environments that demand precision, innovation, and real-world impact. Our focus spans Civil, Structural, Mechanical, Electrical, Architectural, and Estimation roles — helping organisations build teams that deliver practical solutions and engineering excellence.',
       image: engineeringImg,
       badge: 'MEP & Civil'
     },
     {
       icon: <Receipt className="w-5 h-5" />,
       title: 'Accounting Recruitment',
-      desc: 'Bookkeepers, Payroll Officers, Accountants.',
+      desc: 'Connects finance professionals who bring accuracy, insight, and reliability to every organisation. From Accountants and Payroll Officers to Bookkeepers, our candidates strengthen financial operations, reporting, and compliance — ensuring your business runs with clarity and confidence.',
       image: accountingImg,
       badge: 'Finance'
     },
     {
       icon: <FileSpreadsheet className="w-5 h-5" />,
       title: 'Administration Recruitment',
-      desc: 'Office Managers, Executive Assistants, Receptionists.',
+      desc: 'Meet proactive individuals who keep operations running smoothly. Our talent pool includes Office Managers, Executive Assistants, Contract Administrators, and Receptionists, each selected for their communication skills, coordination ability, and commitment to professional service.',
       image: adminImg,
       badge: 'Operations'
     },
     {
       icon: <Box className="w-5 h-5" />,
       title: 'Other Divisions',
-      desc: 'Custom placements tailored to specialized project requirements.',
+      desc: 'Discover versatile professionals across a wide range of specialized roles tailored to unique business needs. We connect organizations with adaptable talent from various industries, ensuring the right expertise, professionalism, and support for every opportunity.',
       image: otherImg,
       badge: 'Custom'
     },
@@ -64,62 +64,87 @@ export default function SpecialtyDivisions() {
         </div>
 
         {/* Divisions Visual Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" style={{ backgroundColor: 'rgb(195 196 185)' }}>
-          {divisions.map((div, idx) => (
-            <ScrollReveal 
-              key={idx} 
-              delay={idx * 0.08}
-              direction={idx % 2 === 0 ? 'left' : 'right'}
-              // Elastic Spring hop on Hover
-              className="hover:-translate-y-2.5 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer"
-            >
-              <Card3D 
-                className="group relative rounded-3xl bg-bg-page border border-border p-5 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col justify-between h-[290px]"
-                maxTilt={8}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" style={{ backgroundColor: 'rgb(195 196 185)' }}>
+          {divisions.map((div, idx) => {
+            const isWide = idx === 0 || idx === 3;
+            const isEven = idx % 2 === 0;
+            
+            // Layout classes for the card wrapper
+            const flexClasses = isWide
+              ? `flex gap-4 sm:gap-6 items-center w-full h-full ${
+                  isEven 
+                    ? 'flex-col sm:flex-row' 
+                    : 'flex-col-reverse sm:flex-row-reverse'
+                }`
+              : `flex gap-4 items-center w-full h-full ${
+                  isEven 
+                    ? 'flex-col sm:flex-col' 
+                    : 'flex-col-reverse sm:flex-col'
+                }`;
+            
+            return (
+              <ScrollReveal 
+                key={idx} 
+                delay={idx * 0.08}
+                direction={idx % 2 === 0 ? 'left' : 'right'}
+                // Elastic Spring hop on Hover
+                className={`hover:-translate-y-2.5 transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] cursor-pointer h-full ${
+                  isWide ? 'col-span-1 sm:col-span-2 md:col-span-2' : 'col-span-1 sm:col-span-1 md:col-span-1'
+                }`}
               >
-                {/* Floating Glowing Orb (Best Premium Combination) */}
-                <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-gradient-to-tr from-accent/25 to-blue-400/5 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                <Card3D 
+                  className="group relative rounded-3xl bg-bg-page border border-border p-4 sm:p-5 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
+                  maxTilt={8}
+                >
+                  {/* Floating Glowing Orb (Best Premium Combination) */}
+                  <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-gradient-to-tr from-accent/25 to-blue-400/5 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
 
-                <div className="flex flex-col h-full justify-between" >
-                  <div>
-                    {/* Small Animated Image Panel */}
-                    <div className="relative w-full h-32 overflow-hidden rounded-2xl mb-5 bg-slate-900 border border-border shadow-inner">
-                      <img
-                        src={div.image}
-                        alt={div.title}
-                        className="w-full h-full object-cover filter brightness-[0.94] contrast-[1.01] transform group-hover:scale-108 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
-                      />
-                      {/* Dark overlay mask */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="flex flex-col h-full justify-between w-full" >
+                    <div className={flexClasses}>
+                      {/* Small Animated Image Panel */}
+                      <div className={
+                        isWide
+                          ? 'relative w-full sm:w-[38%] md:w-[35%] h-28 sm:h-[180px] md:h-[200px] overflow-hidden rounded-2xl bg-slate-900 border border-border shadow-inner shrink-0'
+                          : 'relative w-full h-28 sm:h-32 overflow-hidden rounded-2xl bg-slate-900 border border-border shadow-inner shrink-0'
+                      }>
+                        <img
+                          src={div.image}
+                          alt={div.title}
+                          className="w-full h-full object-cover filter brightness-[0.94] contrast-[1.01] transform group-hover:scale-108 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
+                        />
+                        {/* Dark overlay mask */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                      {/* Small visual category tag */}
-                      <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md border border-white/20 bg-black/45 backdrop-blur-[2px] text-white font-extrabold text-[8px] tracking-wider uppercase select-none">
-                        {div.badge}
+                        {/* Small visual category tag */}
+                        <div className={
+                          isWide
+                            ? 'absolute top-2 right-2 sm:top-4 sm:right-4 px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-white/20 bg-black/45 backdrop-blur-[2px] text-white font-extrabold text-[7px] sm:text-[9px] tracking-wider uppercase select-none'
+                            : 'absolute top-2 right-2 sm:top-3 sm:right-3 px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded-md border border-white/20 bg-black/45 backdrop-blur-[2px] text-white font-extrabold text-[7px] sm:text-[8px] tracking-wider uppercase select-none'
+                        }>
+                          {div.badge}
+                        </div>
+                      </div>
+
+                      {/* Text Container */}
+                      <div className="flex-1 min-w-0 text-left w-full">
+                        <h3 className={
+                          isWide
+                            ? 'text-base sm:text-xl md:text-2xl font-bold text-primary mb-1.5 sm:mb-3 tracking-tight font-display'
+                            : 'text-base sm:text-base md:text-lg font-bold text-primary mb-1 sm:mb-2 tracking-tight font-display'
+                        }>
+                          {div.title}
+                        </h3>
+
+                        <p className="text-xs sm:text-xs md:text-sm text-gray-800 leading-relaxed font-medium">
+                          {div.desc}
+                        </p>
                       </div>
                     </div>
-
-                    {/* Circular Floating Icon overlay */}
-                    {/* <div className="w-10 h-10 rounded-xl bg-accent-light text-accent flex items-center justify-center mb-4 shadow-sm border border-accent/5">
-                      {div.icon}
-                    </div> */}
-
-                    <h3 className="text-base sm:text-lg font-bold text-primary mb-2 tracking-tight font-display">
-                      {div.title}
-                    </h3>
-
-                    <p className="text-xs text-muted leading-relaxed font-semibold">
-                      {div.desc}
-                    </p>
                   </div>
-
-                  {/* Tiny subtle indicator */}
-                  {/* <div className="text-[10px] font-bold text-accent tracking-widest uppercase opacity-0 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 mt-4 flex items-center gap-1.5">
-                    Explore Division <span className="text-xs">→</span>
-                  </div> */}
-                </div>
-              </Card3D>
-            </ScrollReveal>
-          ))}
+                </Card3D>
+              </ScrollReveal>
+            );
+          })}
         </div>
 
       </div>

@@ -2,8 +2,7 @@ import useCms from '../../hooks/useCms';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import PageSEO from '../../components/ui/PageSEO';
 import Card3D from '../../components/animations/Card3D';
-import { Award, ShieldCheck, Heart } from 'lucide-react';
-import officePresentation from '../../assets/office_presentation.jpg';
+import { ShieldCheck, Lock, Target, TrendingUp } from 'lucide-react';
 
 export default function About() {
   const { getCms } = useCms();
@@ -16,101 +15,125 @@ export default function About() {
         canonical="/about"
       />
 
-      <div className="pt-20 pb-24 bg-bg-page min-h-screen select-none" style={{ backgroundColor: 'rgba(153, 186, 180, 0.7)' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          
-          {/* Header */}
-          <ScrollReveal className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-primary mb-4 tracking-tight">
-              {getCms('about.title', 'About')} <span className="text-purple-900">SkillCite</span>            </h1>
-            <p className="text-sm sm:text-base text-muted font-bold max-w-xl mx-auto uppercase tracking-wider">
-              Human Intake • Advanced Security • Technical Mastery
-            </p>
-          </ScrollReveal>
-
-          {/* New Fluid 2-Column Grid Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="min-h-screen select-none">
+        
+        {/* Section 1: Our Story */}
+        <section className="w-full pt-20 pb-28 border-b border-border/60" style={{ backgroundColor: 'rgb(200 197 167)' }}>
+          <div className="max-w-[800px] mx-auto px-6 text-center">
+            <ScrollReveal delay={0.05}>
+              <span className="text-[13px] font-bold text-purple-900 tracking-widest uppercase mb-4 block">
+                Our Story
+              </span>
+            </ScrollReveal>
             
-            {/* Left Column: Descriptions + High-End Team Image */}
-            <div className="lg:col-span-6 flex flex-col gap-8">
-              <ScrollReveal delay={0.2} className="bg-surface rounded-3xl border border-border p-8 shadow-lg">
-                <p className="text-sm sm:text-base text-primary/80 leading-relaxed font-semibold">
-                  {getCms('about.description', 'We are a premier recruitment agency and technical engineering consultancy. Rather than relying on automated matching pipelines, we believe in manual excellence. Every resume, recruitment request, and technical service spec is reviewed by a senior engineer.')}
-                </p>
-              </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-10 font-display">
+                Reliable Hiring, <br />
+                <span className="text-purple-950">Real Growth</span>
+              </h1>
+            </ScrollReveal>
 
-              {/* Floating Glassmorphic Team Image */}
-              <ScrollReveal delay={0.3}>
-                <div className="relative p-2.5 bg-white/45 backdrop-blur-xl rounded-[2.5rem] border border-white/60 shadow-2xl shadow-blue-500/10 overflow-hidden transform hover:scale-[1.015] hover:-rotate-0.5 transition-all duration-500">
-                  <img 
-                    src={officePresentation}
-                    alt="SkillCite team — engineering recruitment and consultancy"
-                    className="w-full h-[280px] sm:h-[320px] object-cover object-center rounded-[2rem]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-transparent mix-blend-overlay rounded-[2rem] pointer-events-none" />
-                </div>
-              </ScrollReveal>
-            </div>
+            <ScrollReveal delay={0.15} className="text-sm sm:text-base text-primary/95 leading-relaxed space-y-6 text-left font-semibold">
+              <p>
+                {getCms('about.story_p1', 'SkillCite was created to improve how people are matched with jobs and opportunities. Many skilled candidates were not being placed in the right roles and employers were spending too much time reviewing unsuitable job applications. The platform was designed to solve this through a structured and verified process.')}
+              </p>
+              <p>
+                {getCms('about.story_p2', 'The system uses clear role-based matching and structured evaluation of candidate profiles based on experience, qualifications, and job requirements, with controlled communication managed by the team. Candidate identity is protected during early stages and only shortlisted profiles are shared through the selection process.')}
+              </p>
+              <p>
+                {getCms('about.story_p3', 'Today, SkillCite supports employers and candidates through a reliable process for job matching and technical service requests ensuring better alignment and smoother outcomes.')}
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
 
-            {/* Right Column: Values grid with 3D Tilt Cards */}
-            <div className="lg:col-span-6 flex flex-col gap-6">
+        {/* Section 2: Our Mission */}
+        <section className="w-full py-28 border-b border-border/60" style={{ backgroundColor: 'rgb(195, 196, 185)' }}>
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            {/* Left Column: Mission Description */}
+            <ScrollReveal className="lg:col-span-6 text-left" delay={0.1}>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-6 tracking-tight font-display">
+                Our Mission
+              </h2>
+              <p className="text-base sm:text-lg text-primary/90 leading-relaxed font-semibold">
+                {getCms('about.mission', 'SkillCite aims to connect candidates with suitable job opportunities and provide structured technical services through a clear, verified, and controlled process that ensures fairness, accuracy and reliability for both employers and candidates.')}
+              </p>
+            </ScrollReveal>
+
+            {/* Right Column: Values 2x2 Grid */}
+            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              {/* Value 1 */}
-              <ScrollReveal delay={0.3} direction="left">
-                <Card3D className="p-8 rounded-3xl border border-border bg-surface shadow-md cursor-pointer">
-                  <div className="flex gap-5 items-start">
-                    <div className="w-12 h-12 rounded-2xl bg-accent-light flex items-center justify-center text-accent shrink-0">
-                      <Award className="w-6 h-6" />
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <h3 className="text-lg font-bold text-primary mb-2">Ethical Human Intake</h3>
-                      <p className="text-xs sm:text-sm text-muted leading-relaxed font-medium">
-                        We manually review every single CV. No keyword screening filters, no sorting algorithms. Only direct expert review matching genuine potential with ideal placements.
-                      </p>
-                    </div>
+              {/* Value 1: Integrity */}
+              <ScrollReveal delay={0.15} direction="left">
+                <Card3D className="p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-3xl border border-border bg-surface shadow-md cursor-pointer h-full" maxTilt={6}>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <ShieldCheck className="w-5 h-5 text-purple-900 shrink-0" />
+                    <h4 className="font-bold text-primary font-display">Integrity</h4>
                   </div>
+                  <p className="text-xs text-muted leading-relaxed font-semibold text-left">
+                    {getCms('about.value_integrity', 'All job postings and applications are reviewed through a structured approval process to ensure fairness and transparency.')}
+                  </p>
                 </Card3D>
               </ScrollReveal>
 
-              {/* Value 2 */}
-              <ScrollReveal delay={0.4} direction="right">
-                <Card3D className="p-8 rounded-3xl border border-border bg-surface shadow-md cursor-pointer">
-                  <div className="flex gap-5 items-start">
-                    <div className="w-12 h-12 rounded-2xl bg-accent-light flex items-center justify-center text-accent shrink-0">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <h3 className="text-lg font-bold text-primary mb-2">High Grade Security</h3>
-                      <p className="text-xs sm:text-sm text-muted leading-relaxed font-medium">
-                        Resumes and technical specifications are highly encrypted, safely housed in dedicated cloud spaces, and exclusively reviewed offline by authorized directors.
-                      </p>
-                    </div>
+              {/* Value 2: Accuracy */}
+              <ScrollReveal delay={0.2} direction="right">
+                <Card3D className="p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-3xl border border-border bg-surface shadow-md cursor-pointer h-full" maxTilt={6}>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Target className="w-5 h-5 text-purple-900 shrink-0" />
+                    <h4 className="font-bold text-primary font-display">Accuracy</h4>
                   </div>
+                  <p className="text-xs text-muted leading-relaxed font-semibold text-left">
+                    {getCms('about.value_accuracy', 'Candidates are matched with their selected preferences to ensure better alignment with available opportunities.')}
+                  </p>
                 </Card3D>
               </ScrollReveal>
 
-              {/* Value 3 */}
-              <ScrollReveal delay={0.5} direction="left">
-                <Card3D className="p-8 rounded-3xl border border-border bg-surface shadow-md cursor-pointer">
-                  <div className="flex gap-5 items-start">
-                    <div className="w-12 h-12 rounded-2xl bg-accent-light flex items-center justify-center text-accent shrink-0">
-                      <Heart className="w-6 h-6" />
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <h3 className="text-lg font-bold text-primary mb-2">Technical Mastery</h3>
-                      <p className="text-xs sm:text-sm text-muted leading-relaxed font-medium">
-                        Autodesk-licensed designers and expert structural estimators execute DWG drawings, computations, and calculations offline with precision accuracy.
-                      </p>
-                    </div>
+              {/* Value 3: Privacy */}
+              <ScrollReveal delay={0.25} direction="left">
+                <Card3D className="p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-3xl border border-border bg-surface shadow-md cursor-pointer h-full" maxTilt={6}>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Lock className="w-5 h-5 text-purple-900 shrink-0" />
+                    <h4 className="font-bold text-primary font-display">Privacy</h4>
                   </div>
+                  <p className="text-xs text-muted leading-relaxed font-semibold text-left">
+                    {getCms('about.value_privacy', 'Candidate information is protected and only shared with employers at the appropriate stage of the process.')}
+                  </p>
+                </Card3D>
+              </ScrollReveal>
+
+              {/* Value 4: Outcomes */}
+              <ScrollReveal delay={0.3} direction="right">
+                <Card3D className="p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg rounded-3xl border border-border bg-surface shadow-md cursor-pointer h-full" maxTilt={6}>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <TrendingUp className="w-5 h-5 text-purple-900 shrink-0" />
+                    <h4 className="font-bold text-primary font-display">Outcomes</h4>
+                  </div>
+                  <p className="text-xs text-muted leading-relaxed font-semibold text-left">
+                    {getCms('about.value_outcomes', 'Success is measured through correct job matching, verified placements and consistent service delivery.')}
+                  </p>
                 </Card3D>
               </ScrollReveal>
 
             </div>
 
           </div>
+        </section>
 
-        </div>
+        {/* Section 3: Banner */}
+        <section className="w-full py-14" style={{ backgroundColor: 'rgb(195, 196, 185)' }}>
+          <ScrollReveal delay={0.2}>
+            <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 md:gap-12 text-xs sm:text-sm font-bold text-muted uppercase tracking-widest text-center opacity-85">
+              <span>Trusted Recruitment Platform</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent/30 hidden md:inline"></span>
+              <span>Verified Employer & Candidate Process</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent/30 hidden md:inline"></span>
+              <span>Data Privacy Protection Standards</span>
+            </div>
+          </ScrollReveal>
+        </section>
+
       </div>
     </>
   );

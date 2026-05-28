@@ -179,7 +179,7 @@ export default function Contact() {
                     <textarea
                       placeholder="Describe your question or requirement details..."
                       rows={5}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-accent resize-none
+                      className={`w-full px-4 py-3 rounded-xl border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-purple-500 resize-none
                         ${errors.message ? 'border-red-500' : 'border-border'}`}
                       {...register('message')}
                     />
@@ -195,6 +195,8 @@ export default function Contact() {
                       disabled={loading}
                       className="w-full sm:w-auto"
                       icon={<Send className="w-4 h-4" />}
+                      bgColor="bg-purple-950"
+                      className="px-10 py-3.5 font-bold shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-white bg-purple-950 border-purple-950 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
                     >
                       {loading ? 'Sending Message...' : 'Send Message'}
                     </Button>

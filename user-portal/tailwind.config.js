@@ -15,8 +15,8 @@ export default {
         muted:     '#6B7280',
         hint:      '#9CA3AF',
         border:    '#E5E7EB',
-        'card-custom': 'rgb(206 130 227 / 55%)',
-        'primary-light': 'rgb(206 130 227 / 55%)',
+        'card-custom': 'rgb(170 130 145 / 51%)',
+        'primary-light': 'rgb(170 130 145 / 51%)',
       },
       fontFamily: {
         sans:     ['Inter', 'system-ui', 'sans-serif'],

@@ -141,9 +141,9 @@ export default function LiquidCursor() {
       {/* Trailing Outer Liquid Blob */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 w-8 h-8 -ml-4 -mt-4 rounded-full border border-blue-600/60
+        className={`fixed top-0 left-0 w-8 h-8 -ml-4 -mt-4 rounded-full border border-purple-600/60
                    pointer-events-none z-[9999] transition-[background-color,border-color,width,height] duration-300 hidden md:block select-none
-                   ${isHovered ? 'bg-blue-600/10 border-blue-500 w-16 h-16 -ml-8 -mt-8 scale-110' : ''}`}
+                   ${isHovered ? 'bg-purple-600/10 border-purple-500 w-16 h-16 -ml-8 -mt-8 scale-110' : ''}`}
         style={{
           // Set transform-origin to center so rotation and scaling behave organically
           transformOrigin: 'center center',
@@ -151,9 +151,9 @@ export default function LiquidCursor() {
         }}
       >
         {/* Secondary liquid droplets that merge and stretch when moving */}
-        <div className="absolute inset-1 rounded-full bg-blue-600/5 mix-blend-screen" />
+        <div className="absolute inset-1 rounded-full bg-purple-600/5 mix-blend-screen" />
         {isHovered && hoverText && (
-          <div className="absolute inset-0 flex items-center justify-center text-[8px] font-bold text-blue-600 uppercase tracking-widest animate-fade-in">
+          <div className="absolute inset-0 flex items-center justify-center text-[8px] font-bold text-purple-600 uppercase tracking-widest animate-fade-in">
             {hoverText}
           </div>
         )}
@@ -162,9 +162,9 @@ export default function LiquidCursor() {
       {/* Precision Inner Dot */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 w-2.5 h-2.5 -ml-1.25 -mt-1.25 rounded-full bg-blue-600
+        className={`fixed top-0 left-0 w-2.5 h-2.5 -ml-1.25 -mt-1.25 rounded-full bg-purple-600
                    pointer-events-none z-[10000] transition-transform duration-75 ease-out hidden md:block select-none
-                   ${isHovered ? 'scale-75 bg-blue-400' : ''}`}
+                   ${isHovered ? 'scale-75 bg-purple-400' : ''}`}
         style={{ transformOrigin: 'center center' }}
       />
     </>

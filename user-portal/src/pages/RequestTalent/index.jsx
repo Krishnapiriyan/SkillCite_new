@@ -177,7 +177,7 @@ export default function RequestTalent() {
       <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
         {/* 1. Hero Section */}
         <section className="py-24 md:py-32 bg-surface/30 border-b border-border overflow-hidden relative" style={{ backgroundColor: 'rgba(153, 186, 180, 0.7)' }}>
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-accent-light/10 blur-[120px] rounded-full -mr-64 -mt-32 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-purple-400/10 blur-[120px] rounded-full -mr-64 -mt-32 pointer-events-none"></div>
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="text-left">
@@ -203,7 +203,7 @@ export default function RequestTalent() {
               <div className="relative group w-full max-w-sm sm:max-w-md mx-auto cursor-pointer lusion-image-hover lusion-image-float mt-12 lg:mt-0">
                 <Card3D className="group relative" maxTilt={10}>
                   {/* Floating Glowing Orb (Best Premium Combination) */}
-                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-500/30 to-purple-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
                   
                   {/* Premium Framed Showcase */}
                   <div className="p-3 bg-white/40 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2.5rem] overflow-hidden">
@@ -507,7 +507,7 @@ export default function RequestTalent() {
                         maxLength={500}
                         placeholder="Describe key responsibilities, specific softwares, budget constraints, or team structures..."
                         rows={6}
-                        className={`w-full px-4 py-3 rounded-xl border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-accent resize-none border-border`}
+                        className={`w-full px-4 py-3 rounded-xl border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-purple-400 focus:border-purple-500 resize-none border-border`}
                         {...register('description')}
                       />
                     </div>
@@ -539,7 +539,9 @@ export default function RequestTalent() {
                     type="button" 
                     variant="outlined" 
                     onClick={handleBack}
-                    icon={<ArrowLeft className="w-4 h-4" />}
+                    icon={<ArrowLeft className="w-4 h-4" 
+                    className="px-10 font-bold shadow-lg shadow-purple-700/15 bg-purple-950 hover:bg-purple-700 hover:text-white hover:border-cyan-600" 
+/>}
                   >
                     Back
                   </Button>

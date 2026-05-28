@@ -32,7 +32,7 @@ export default function Footer() {
           </span>
           </Link>
           <p className="text-xs text-hint leading-relaxed max-w-xs mt-1">
-            Engineering recruitment and technical consultancy services delivered personally. We manually review every single submission to ensure perfect alignment.
+            Professional recruitment and consultancy services delivered personally. We manually review every submission to ensure the right alignment.
           </p>
           <span className="text-[10px] text-hint/55 mt-4">
             {getCms('footer.copyright', '© 2026 SkillCite. All rights reserved.')}
@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <h3 className="font-semibold text-xs tracking-wider uppercase text-hint">Services</h3>
           <ul className="flex flex-col gap-2.5 text-xs text-hint font-medium">
-            <li><Link to="/request-talent" className="hover:text-accent transition-colors">Request Engineering Talent</Link></li>
+            <li><Link to="/request-talent" className="hover:text-accent transition-colors">Request Hire Talent</Link></li>
             <li><Link to="/submit-your-cv" className="hover:text-accent transition-colors">Submit Resume / CV</Link></li>
             <li><Link to="/engineering-services" className="hover:text-accent transition-colors">Engineering & Technical Services</Link></li>
             <li><Link to="/about" className="hover:text-accent transition-colors">About Our Platform</Link></li>

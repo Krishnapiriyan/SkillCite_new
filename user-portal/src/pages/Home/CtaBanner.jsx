@@ -14,7 +14,7 @@ export default function CtaBanner() {
         
         <ScrollReveal className="flex flex-col items-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display leading-tight mb-6">
-            Ready to Build with Expert Engineers?
+            Ready to Build with Skilled Professionals?
           </h2>
           <p className="text-sm sm:text-lg text-hint max-w-xl mb-8 leading-relaxed font-medium">
             Whether you want to submit your professional resume or request custom technical engineering calculations, our team is standing by.

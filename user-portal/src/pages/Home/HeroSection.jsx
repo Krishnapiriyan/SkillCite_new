@@ -198,7 +198,7 @@ export default function HeroSection() {
                     alt="Recruitment"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-indigo-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm shadow-sm">
+                  <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm shadow-sm">
                     Recruit
                   </div>
                 </div>
@@ -217,8 +217,8 @@ export default function HeroSection() {
                     alt="Accounting"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-emerald-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm shadow-sm">
-                    Account
+                  <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm shadow-sm">
+                    services
                   </div>
                 </div>
               </motion.div>
@@ -236,7 +236,7 @@ export default function HeroSection() {
                     alt="Administration"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-blue-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm animate-pulse shadow-sm">
+                  <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm animate-pulse shadow-sm">
                     Intake
                   </div>
                 </div>
