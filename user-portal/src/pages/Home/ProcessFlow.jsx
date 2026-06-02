@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import useCms from '../../hooks/useCms';
 import ScrollReveal from '../../components/animations/ScrollReveal';
+import TopographicBackground from '../../components/animations/TopographicBackground';
 
 export default function ProcessFlow() {
   const { getCms } = useCms();
 
 
   const steps = [
-    { num: '01', title: 'Applications & Hire Talent', desc: 'Employer search for talents/ Candidates uplosd their resume.' },
+    { num: '01', title: 'Applications & Hire Talent', desc: 'Employer search for talents/ Candidates upload their resume.' },
     { num: '02', title: 'Review & Shortlisting', desc: 'Candidate applications are screened using both AI-assisted analysis and human review.' },
     { num: '03', title: 'Selection & Communication', desc: 'Shortlisted candidates are shared with employers, and our team manages all communication.' },
     { num: '04', title: 'Offer & Placement', desc: 'SkillCite efficiently matches qualified candidates with suitable opportunities.' },
@@ -15,18 +16,27 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <section className="w-full py-20 bg-surface border-y border-border select-none overflow-hidden" style={{ backgroundColor: 'rgb(189 198 206 / 75%)' }}>
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full py-20 select-none overflow-hidden relative border-y border-black/5 bg-transparent">
+      {/* Soft Sand Topographic Background */}
+      <TopographicBackground />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold font-display text-primary mb-4">
-            From <span className="text-muted">Application</span> to <span className="text-purple-900"> Placement.</span>
-          </h2>
-          <p className="text-sm sm:text-base text-muted font-medium">
+          {/* <h2 className="text-3xl sm:text-4xl font-bold font-display text-slate-900 mb-4">
+            From <span className="text-slate-600">Application</span> to <span className="text-purple-700"> Placement.</span>
+          </h2> */}
+          <ScrollReveal>
+            <h2 className="text-4xl sm:text-5xl font-extrabold font-display text-blue-950 tracking-tight mb-6 leading-tight">
+              From Application to <span className="text-shimmer-gray">Placement</span>
+            </h2>
+          </ScrollReveal>
+          <p className="text-sm sm:text-base text-slate-700 font-medium">
            A structured workflow where jobs are managed by the team and candidates are matched through a clear verification and selection process in SkillCite.
           </p>
         </div>
+
 
         {/* Timeline Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
@@ -63,19 +73,19 @@ export default function ProcessFlow() {
               >
                 {/* Number bubble */}
                 <motion.div
-                  whileHover={{ scale: 1.1, backgroundColor: 'purple', color: 'white' }}
-                  className="w-12 h-12 rounded-full border-2 border-purple-800 bg-surface text-purple-800 text-sm font-bold flex items-center justify-center shadow-md transition-all duration-300 mb-6"
+                  whileHover={{ scale: 1.1, backgroundColor: '#7e22ce', borderColor: '#7e22ce', color: '#ffffff' }}
+                  className="w-12 h-12 rounded-full border-2 border-purple-600 bg-white/80 backdrop-blur-sm text-purple-800 text-sm font-bold flex items-center justify-center shadow-md transition-all duration-300 mb-6"
                 >
                   {step.num}
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-primary mb-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-muted leading-relaxed font-medium">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                   {step.desc}
                 </p>
               </ScrollReveal>

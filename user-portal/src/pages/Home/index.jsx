@@ -25,15 +25,16 @@ export default function Home() {
         canonical="/"
         schema={schema}
       />
-      <div className="w-full flex flex-col">
+      
+      <div className="w-full flex flex-col relative z-10 bg-transparent">
         <HeroSection />
         <ProcessFlow />
         <ServicesPreview />
         <SpecialtyDivisions />
-        <StatsSection />
-        <Testimonials />
         <CtaBanner />
       </div>
     </>
   );
 }
+
+

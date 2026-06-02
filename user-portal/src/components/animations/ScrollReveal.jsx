@@ -32,7 +32,7 @@ export default function ScrollReveal({ children, delay = 0, className = '', dire
       className={className}
       initial={getInitial()}
       whileInView={getAnimate()}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: false, margin: '-100px' }}
       transition={{ duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}

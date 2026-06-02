@@ -55,12 +55,15 @@ export default function Card3D({ children, className = '', maxTilt = 8 }) {
     });
   };
 
+  const hasBg = className.split(' ').some(c => c.startsWith('bg-'));
+  const finalBg = hasBg ? '' : 'bg-primary-light';
+
   return (
     <div
       ref={cardRef}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className={`relative overflow-hidden bg-primary-light ${className}`}
+      className={`relative overflow-hidden ${finalBg} ${className}`}
       style={{
         ...style,
         transformStyle: 'preserve-3d'

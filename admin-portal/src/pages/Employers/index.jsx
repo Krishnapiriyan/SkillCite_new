@@ -85,6 +85,14 @@ export default function EmployersIndex() {
             searchField="companyName"
             searchPlaceholder="Search by company name..."
             detailRoutePrefix="/employers"
+            filterField="specialty"
+            filterPlaceholder="All Divisions"
+            filterOptions={[
+              { label: 'Engineering', value: 'engineering' },
+              { label: 'Accounting', value: 'accounting' },
+              { label: 'Administrative', value: 'administrative' },
+              { label: 'Other', value: 'other' }
+            ]}
           />
         )}
 

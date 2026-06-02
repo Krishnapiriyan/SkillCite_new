@@ -2,6 +2,7 @@ import useCms from '../../hooks/useCms';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import PageSEO from '../../components/ui/PageSEO';
 import Card3D from '../../components/animations/Card3D';
+import FocusRingsBackground from '../../components/animations/FocusRingsBackground';
 import { ShieldCheck, Lock, Target, TrendingUp } from 'lucide-react';
 
 export default function About() {
@@ -18,8 +19,9 @@ export default function About() {
       <div className="min-h-screen select-none">
         
         {/* Section 1: Our Story */}
-        <section className="w-full pt-20 pb-28 border-b border-border/60" style={{ backgroundColor: 'rgb(200 197 167)' }}>
-          <div className="max-w-[800px] mx-auto px-6 text-center">
+        <section className="w-full pt-20 pb-28 border-b border-border/60 relative overflow-hidden" style={{ backgroundColor: 'rgb(200 197 167)' }}>
+          <FocusRingsBackground />
+          <div className="max-w-[800px] mx-auto px-6 text-center relative z-10">
             <ScrollReveal delay={0.05}>
               <span className="text-[13px] font-bold text-purple-900 tracking-widest uppercase mb-4 block">
                 Our Story
@@ -48,8 +50,9 @@ export default function About() {
         </section>
 
         {/* Section 2: Our Mission */}
-        <section className="w-full py-28 border-b border-border/60" style={{ backgroundColor: 'rgb(195, 196, 185)' }}>
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <section className="w-full py-28 border-b border-border/60 relative overflow-hidden" style={{ backgroundColor: 'rgb(195, 196, 185)' }}>
+          <FocusRingsBackground />
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
             
             {/* Left Column: Mission Description */}
             <ScrollReveal className="lg:col-span-6 text-left" delay={0.1}>

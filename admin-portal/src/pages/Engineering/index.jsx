@@ -94,6 +94,14 @@ export default function EngineeringIndex() {
             searchField="fullName"
             searchPlaceholder="Search client full name..."
             detailRoutePrefix="/engineering"
+            filterField="serviceType"
+            filterPlaceholder="All Service Types"
+            filterOptions={[
+              { label: 'AutoCAD & Drafting', value: 'autocad' },
+              { label: 'Estimation & Take-offs', value: 'estimation' },
+              { label: 'Calculations & Stamping', value: 'calculations' },
+              { label: 'Consultation & Management', value: 'consultation' }
+            ]}
           />
         )}
 

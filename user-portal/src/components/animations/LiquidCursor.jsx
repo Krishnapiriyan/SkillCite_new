@@ -14,6 +14,9 @@ export default function LiquidCursor() {
   const speed = useRef(0);
   const angle = useRef(0);
   
+  // Hover scale factor tracked smoothly in JS to prevent CSS transitions from lagging transform updates
+  const hoverProgress = useRef(0);
+  
   const [isHovered, setIsHovered] = useState(false);
   const [hoverText, setHoverText] = useState('');
 
@@ -36,26 +39,33 @@ export default function LiquidCursor() {
       
       // Target angle
       const targetAngle = Math.atan2(dy, dx);
-      angle.current = lerp(angle.current, targetAngle, 0.1);
+      angle.current = lerp(angle.current, targetAngle, 0.22);
       
       // Velocity with caps
       const targetSpeed = Math.min(Math.sqrt(dx * dx + dy * dy), 120);
-      speed.current = lerp(speed.current, targetSpeed, 0.08);
+      speed.current = lerp(speed.current, targetSpeed, 0.16);
 
-      // Smooth lag trailing coordinates
-      trail.current.x = lerp(trail.current.x, mouse.current.x, 0.15);
-      trail.current.y = lerp(trail.current.y, mouse.current.y, 0.15);
+      // Smooth lag trailing coordinates - increased from 0.15 to 0.30 for a tighter, highly responsive following effect
+      trail.current.x = lerp(trail.current.x, mouse.current.x, 0.30);
+      trail.current.y = lerp(trail.current.y, mouse.current.y, 0.30);
+
+      // Interpolate hover scale smoothly in JS
+      hoverProgress.current = lerp(hoverProgress.current, isHovered ? 1 : 0, 0.16);
 
       // Update inner sharp dot
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouse.current.x}px, ${mouse.current.y}px, 0)`;
+        // Dot shrinks slightly on hover for modern styling
+        const dotScale = 1 - hoverProgress.current * 0.25;
+        dotRef.current.style.transform = `translate3d(${mouse.current.x}px, ${mouse.current.y}px, 0) scale(${dotScale})`;
       }
 
       // Update outer liquid envelope
       if (cursorRef.current) {
-        // Stretch based on velocity, shrink height slightly when stretching width
-        const scaleX = 1 + (speed.current * 0.006);
-        const scaleY = 1 - (speed.current * 0.003);
+        // Base scale expands smoothly by 50% on link hover
+        const baseScale = 1 + hoverProgress.current * 0.5;
+        // Stretch based on velocity
+        const scaleX = baseScale + (speed.current * 0.005);
+        const scaleY = baseScale - (speed.current * 0.002);
         const rotation = angle.current * (180 / Math.PI); // Convert to degrees
         
         cursorRef.current.style.transform = 
@@ -116,7 +126,7 @@ export default function LiquidCursor() {
       clearInterval(selectInterval);
       cleanups.forEach(c => c());
     };
-  }, []);
+  }, [isHovered]);
 
   return (
     <>
@@ -142,15 +152,13 @@ export default function LiquidCursor() {
       <div
         ref={cursorRef}
         className={`fixed top-0 left-0 w-8 h-8 -ml-4 -mt-4 rounded-full border border-purple-600/60
-                   pointer-events-none z-[9999] transition-[background-color,border-color,width,height] duration-300 hidden md:block select-none
-                   ${isHovered ? 'bg-purple-600/10 border-purple-500 w-16 h-16 -ml-8 -mt-8 scale-110' : ''}`}
+                   pointer-events-none z-[9999] transition-[background-color,border-color] duration-300 hidden md:block select-none
+                   ${isHovered ? 'bg-purple-600/10 border-purple-500' : ''}`}
         style={{
-          // Set transform-origin to center so rotation and scaling behave organically
           transformOrigin: 'center center',
           filter: 'url(#liquid-goo)',
         }}
       >
-        {/* Secondary liquid droplets that merge and stretch when moving */}
         <div className="absolute inset-1 rounded-full bg-purple-600/5 mix-blend-screen" />
         {isHovered && hoverText && (
           <div className="absolute inset-0 flex items-center justify-center text-[8px] font-bold text-purple-600 uppercase tracking-widest animate-fade-in">
@@ -163,8 +171,8 @@ export default function LiquidCursor() {
       <div
         ref={dotRef}
         className={`fixed top-0 left-0 w-2.5 h-2.5 -ml-1.25 -mt-1.25 rounded-full bg-purple-600
-                   pointer-events-none z-[10000] transition-transform duration-75 ease-out hidden md:block select-none
-                   ${isHovered ? 'scale-75 bg-purple-400' : ''}`}
+                   pointer-events-none z-[10000] hidden md:block select-none
+                   ${isHovered ? 'bg-purple-400' : ''}`}
         style={{ transformOrigin: 'center center' }}
       />
     </>

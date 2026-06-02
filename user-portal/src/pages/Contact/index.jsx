@@ -12,6 +12,7 @@ import Select from '../../components/ui/Select';
 import SuccessScreen from '../../components/ui/SuccessScreen';
 import Button from '../../components/ui/Button';
 import ScrollReveal from '../../components/animations/ScrollReveal';
+import FocusRingsBackground from '../../components/animations/FocusRingsBackground';
 
 
 // Validation Schema
@@ -81,16 +82,23 @@ export default function Contact() {
         canonical="/contact"
       />
 
-      <div className="pt-32 pb-24 bg-bg-page min-h-screen select-none" style={{ backgroundColor: 'rgba(153, 186, 180, 0.7)' }}>
-        <div className="max-w-5xl mx-auto px-6">
+      <div className="bg-bg-page min-h-screen text-primary select-none pt-0 relative overflow-hidden">
+        <FocusRingsBackground />
+        <div className="max-w-5xl mx-auto px-6 relative z-10 pt-32 pb-24">
           
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-3xl sm:text-4xl font-bold font-display text-primary mb-3">
+            {/* <h1 className="text-3xl sm:text-4xl font-bold font-display text-primary mb-3">
               Get In Touch Directly
-            </h1>
-            <p className="text-sm text-muted max-w-md mx-auto">
-              Have questions about candidate CV submissions or custom estimation consulting? Fill out the form, and our staff will respond within 24 hours.
+            </h1> */}
+            <ScrollReveal>
+              <h2 className="text-4xl sm:text-5xl font-extrabold font-display text-blue-950 tracking-tight mb-6 leading-tight">
+                Get In Touch <span className="text-shimmer-gray">Directly</span>
+              </h2>
+            </ScrollReveal>
+            {/* <p className="text-sm text-muted max-w-md mx-auto"> */}
+            <p className="text-sm sm:text-base text-primary/60 leading-relaxed space-y-6 text-center font-semibold">
+              Connect with us directly to explore opportunities, hire talent, and request a Engineering service. We believe in clear, open communication, ensuring you receive the support and guidance you need without delays or barriers. Reach out today and take the first step toward building meaningful connections and achieving your goals.
             </p>
           </div>
 
@@ -106,28 +114,28 @@ export default function Contact() {
                 
                 <ul className="flex flex-col gap-5 mt-4 text-xs tracking-wide">
                   <li className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-accent shrink-0" />
+                    <Phone className="w-5 h-5 text-purple-900 shrink-0" />
                     <div className="flex flex-col">
                       <span className="text-white/60 text-[9px] uppercase font-bold">Call Us</span>
                       <span className="font-semibold">{getCms('contact.phone', '+1 (555) 019-2834')}</span>
                     </div>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-accent shrink-0" />
+                    <Mail className="w-5 h-5 text-purple-900 shrink-0" />
                     <div className="flex flex-col">
                       <span className="text-white/60 text-[9px] uppercase font-bold">Email Us</span>
                       <span className="font-semibold">{getCms('contact.email', 'admin@skillcite.com')}</span>
                     </div>
                   </li>
                   <li className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-accent shrink-0" />
+                    <MapPin className="w-5 h-5 text-purple-900 shrink-0" />
                     <div className="flex flex-col">
                       <span className="text-white/60 text-[9px] uppercase font-bold">Office Hub</span>
                       <span className="font-semibold">{getCms('contact.address', '100 Pine Street, San Francisco, CA')}</span>
                     </div>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-accent shrink-0" />
+                    <Clock className="w-5 h-5 text-purple-900 shrink-0" />
                     <div className="flex flex-col">
                       <span className="text-white/60 text-[9px] uppercase font-bold">Business Hours</span>
                       <span className="font-semibold">{getCms('contact.hours', 'Monday - Friday: 9:00 AM - 6:00 PM')}</span>

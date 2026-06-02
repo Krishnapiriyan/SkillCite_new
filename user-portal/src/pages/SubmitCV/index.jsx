@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
-import { User, Mail, Phone, MapPin, Briefcase, Award, Globe, ShieldCheck, Cpu, Handshake, CircleDollarSign, HardHat, Calculator, ArrowRight } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Briefcase, Award, Globe, ShieldCheck, Cpu, Handshake, CircleDollarSign, HardHat, Calculator, ArrowRight, FileText, Layers, CheckCircle2 } from 'lucide-react';
 import { submitCandidateCvApi } from '../../services/api';
 
 import PageSEO from '../../components/ui/PageSEO';
@@ -14,7 +14,14 @@ import FileDropzone from '../../components/ui/FileDropzone';
 import SuccessScreen from '../../components/ui/SuccessScreen';
 import Button from '../../components/ui/Button';
 import Card3D from '../../components/animations/Card3D';
-import resume3 from '../../assets/resume3.jpg';
+import resume3 from '../../assets/submit_cv_01.jpg';
+import submitCv1 from '../../assets/submit_cv/1.jpg';
+import submitCv2 from '../../assets/submit_cv/2.jpg';
+import submitCv3 from '../../assets/submit_cv/3.jpg';
+import submitCv4 from '../../assets/submit_cv/4.jpg';
+import HoneycombBackground from '../../components/animations/HoneycombBackground';
+import IsometricGridBackground from '../../components/animations/IsometricGridBackground';
+import ScrollReveal from '../../components/animations/ScrollReveal';
 
 // Inline premium custom SVG branded icons
 const LinkedinIcon = (props) => (
@@ -35,7 +42,7 @@ const schema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().min(1, 'Phone number is required'),
+  phone: z.string().optional().or(z.literal('')),
   state: z.string().min(1, 'Please select your state'),
   specialty: z.enum(['engineering', 'accounting', 'administrative', 'other'], {
     errorMap: () => ({ message: 'Please select a recruitment specialty' })
@@ -178,126 +185,413 @@ export default function SubmitCV() {
     <>
       <PageSEO
         title="Submit Your Engineering Resume / CV | SkillCite"
-        description="Join our premium engineering talent network. Submit your CV for personalized matching by real human recruiters."
+        description="Join our premium talent network. Submit your CV for personalized matching by real human recruiters."
         canonical="/submit-your-cv"
       />
 
       <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
         {/* 1. Hero Section */}
-        <section className="py-24 md:py-32 bg-surface/30 border-b border-border overflow-hidden relative" style={{ backgroundColor: 'rgba(153, 186, 180, 0.7)' }}>
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-accent-light/10 blur-[120px] rounded-full -mr-64 -mt-32 pointer-events-none"></div>
+        <section className="py-24 md:py-32 bg-transparent border-b border-border overflow-hidden relative">
+          <HoneycombBackground />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="text-left">
-                {/* <span className="text-[13px] font-bold text-accent tracking-widest uppercase mb-4 block">Candidate Portal</span> */}
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary tracking-tight leading-none mb-8 font-display">
-                  Confidential <span className="text-muted">Career</span> <br />
-                  <span className="text-purple-900">Advancement.</span>
-                </h1>
-                <p className="text-[16px] text-muted mb-10 leading-relaxed max-w-[600px] font-semibold">
-                  SkillCite works exclusively with engineering, accounting and administrative professionals. We bridge the gap between high-tier talent and industry-leading organisations through a secure platform.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    variant="filled" 
-                    className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-white bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
-
-                    onClick={() => document.getElementById('submit-cv-form').scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    Submit CV Today <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
-                  </Button>
-                </div>
+                <ScrollReveal delay={0.1} direction="up">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary tracking-tight leading-none mb-8 font-display">
+                    Professional<span className="text-muted"> Career</span> <br />
+                    <span className="text-purple-900">Opportunities.</span>
+                  </h1>
+                </ScrollReveal>
+                <ScrollReveal delay={0.2} direction="up">
+                  <p className="text-[16px] text-muted mb-10 leading-relaxed max-w-[600px] font-semibold">
+                    SkillCite works exclusively with engineering, accounting and administrative professionals. We bridge the gap between high-tier talent and industry-leading organisations through a secure platform.
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal delay={0.3} direction="up">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button 
+                      variant="filled" 
+                      className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-white bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
+                      onClick={() => document.getElementById('submit-cv-form').scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      Submit CV Today <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
+                    </Button>
+                  </div>
+                </ScrollReveal>
               </div>
               
               <div className="relative group w-full max-w-sm sm:max-w-md mx-auto cursor-pointer lusion-image-hover lusion-image-float mt-12 lg:mt-0">
-                <Card3D className="group relative" maxTilt={10}>
-                  {/* Floating Glowing Orb (Best Premium Combination) */}
-                  <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
-                  
-                  {/* Premium Framed Showcase */}
-                  <div className="p-3 bg-white/40 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2.5rem] overflow-hidden">
-                    <div className="relative w-full h-[280px] sm:h-[360px] overflow-hidden rounded-[2rem]">
+                <ScrollReveal delay={0.25} direction="right">
+                  <Card3D className="group relative bg-transparent rounded-[2.5rem]" maxTilt={10}>
+                    {/* Floating Glowing Orb (Best Premium Combination) */}
+                    <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                    
+                    {/* Clean Borderless Showcase (Removed thick white frame border) */}
+                    <div className="relative w-full h-[280px] sm:h-[360px] overflow-hidden rounded-[2.5rem] shadow-2xl">
                       <img 
                         src={resume3} 
                         alt="Confidential Career Advancement" 
-                        className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]"
+                        className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2.5rem] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none rounded-[2.5rem]"></div>
                     </div>
-                  </div>
-                </Card3D>
+                  </Card3D>
+                </ScrollReveal>
               </div>
             </div>
           </div>
         </section>
 
         {/* 3. How It Works Section */}
-        <section className="py-24 bg-surface border-y border-border">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="text-[13px] font-bold text-purple-700 tracking-widest uppercase mb-4 block text-left">The Process</span>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 tracking-tight font-display text-left">Your Journey to Placement</h2>
-                <div className="space-y-8 text-left">
+        <section className="py-24 bg-transparent border-y border-border relative overflow-hidden">
+          <IsometricGridBackground />
+          <div className="max-w-5xl mx-auto px-6 relative z-10">
+            
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-28">
+              <ScrollReveal delay={0.1} direction="up">
+                <span className="text-[13px] font-bold text-purple-700 tracking-widest uppercase mb-4 block">The Process</span>
+              </ScrollReveal>
+              <ScrollReveal delay={0.15} direction="up">
+                <h2 className="text-3xl md:text-5xl font-extrabold text-purple-950 mb-6 tracking-tight font-display">Your Journey to Placement</h2>
+              </ScrollReveal>
+              <ScrollReveal delay={0.2} direction="up">
+                <p className="text-sm sm:text-base text-muted font-semibold max-w-xl mx-auto leading-relaxed">
+                  SkillCite follows a structured workflow where jobs are verified by the team and candidates are matched based on approved roles.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            {/* Central timeline connector line on desktop */}
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-52 bottom-64 w-[2px] bg-gradient-to-b from-purple-700/0 via-purple-700/15 to-purple-700/0 pointer-events-none" />
+
+            {/* Alternating Steps with Images */}
+            <div className="flex flex-col gap-25 relative">
+              
+              {/* Step 1 */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
+                {/* Timeline center node indicator */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-bg-page border-2 border-purple-700 items-center justify-center z-20 shadow-md">
+                  <div className="w-2.5 h-2.5 rounded-full bg-purple-700 animate-pulse" />
+                </div>
+
+                <div className="md:col-span-6 order-2 md:order-1 relative group w-full">
+                  <ScrollReveal delay={0.25} direction="left">
+                    <Card3D className="group relative bg-transparent rounded-[2rem]" maxTilt={6}>
+                      {/* Interactive Subtle Glow behind image card */}
+                      <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-tr from-purple-500/10 to-purple-700/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700" />
+                      
+                      <div className="relative w-full aspect-[4/3] sm:aspect-[1.5/1] md:aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl border border-border/40">
+                        <img 
+                          src={submitCv1} 
+                          alt="Submit Resume Profile Creation" 
+                          className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2rem] transform group-hover:scale-106 transition-transform duration-[1.5s]"
+                        />
+                        {/* Soft Brand Vignette overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg-page/50 via-transparent to-purple-950/5 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
+                        
+                        {/* Elite Phase Pill Badge */}
+                        {/* <div className="absolute top-4 left-4 py-1.5 px-4 bg-surface/90 backdrop-blur-md border border-border/60 text-[10px] font-black text-purple-950 uppercase tracking-widest rounded-full shadow-sm">
+                          Phase 01: Application
+                        </div> */}
+                      </div>
+                    </Card3D>
+                  </ScrollReveal>
+                </div>
+
+                <div className="md:col-span-6 flex flex-col items-start order-1 md:order-2 text-left relative pl-0 md:pl-8">
+                  {/* Clean Step Number Indicator directly over the text */}
+                  <div className="flex items-center gap-3.5 mb-3 font-display select-none">
+                    <span className="text-3xl font-black text-purple-700/40 leading-none">01</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-700/30" />
+                    {/* <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-700/10 text-purple-900 border border-purple-700/20 shadow-inner">
+                      <FileText className="w-4 h-4" />
+                    </div> */}
+                  </div>
+                  
+                  <ScrollReveal delay={0.15} direction="up">
+                    <h3 className="text-2xl font-bold text-primary mb-3 font-display relative">
+                      Profile Verification
+                    </h3>
+                  </ScrollReveal>
+                  
+                  {/* Decorative Short Line */}
+                  <div className="w-12 h-1 bg-purple-700 rounded-full mb-5" />
+                  
+                  <ScrollReveal delay={0.2} direction="up">
+                    <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
+                      Employers post their job openings, and candidates upload their resumes. SkillCite matches the right role to the right person.
+                    </p>
+                  </ScrollReveal>
+
+                  {/* High Value Highlights Grid */}
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full border-t border-border/40 pt-5">
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Resume Intake</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Skill Tagging</span>
+                    </div>
+                  </div> */}
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
+                {/* Timeline center node indicator */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-bg-page border-2 border-purple-700 items-center justify-center z-20 shadow-md">
+                  <div className="w-2.5 h-2.5 rounded-full bg-purple-700 animate-pulse" />
+                </div>
+
+                <div className="md:col-span-6 flex flex-col items-start text-left relative pr-0 md:pr-8">
+                  {/* Clean Step Number Indicator directly over the text */}
+                  <div className="flex items-center gap-3.5 mb-3 font-display select-none">
+                    <span className="text-3xl font-black text-purple-700/40 leading-none">02</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-700/30" />
+                    {/* <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-700/10 text-purple-900 border border-purple-700/20 shadow-inner">
+                      <Briefcase className="w-4 h-4" />
+                    </div> */}
+                  </div>
+
+                  <ScrollReveal delay={0.15} direction="up">
+                    <h3 className="text-2xl font-bold text-primary mb-3 font-display relative">
+                      Selection & Shortlist
+                    </h3>
+                  </ScrollReveal>
+                  
+                  {/* Decorative Short Line */}
+                  <div className="w-12 h-1 bg-purple-700 rounded-full mb-5" />
+                  
+                  <ScrollReveal delay={0.2} direction="up">
+                    <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
+                      Our recruitment specialist team reviews all uploaded CVs and shortlists suitable candidates for active placement matches.
+                    </p>
+                  </ScrollReveal>
+
+                  {/* High Value Highlights Grid */}
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full border-t border-border/40 pt-5">
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Manual Vetting</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Profile Matching</span>
+                    </div>
+                  </div> */}
+                </div>
+
+                <div className="md:col-span-6 relative group w-full">
+                  <ScrollReveal delay={0.25} direction="right">
+                    <Card3D className="group relative bg-transparent rounded-[2rem]" maxTilt={6}>
+                      {/* Interactive Glow */}
+                      <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-tr from-purple-500/10 to-purple-700/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700" />
+
+                      <div className="relative w-full aspect-[4/3] sm:aspect-[1.5/1] md:aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl border border-border/40">
+                        <img 
+                          src={submitCv2} 
+                          alt="Manual Selection and Vetting" 
+                          className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2rem] transform group-hover:scale-106 transition-transform duration-[1.5s]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg-page/50 via-transparent to-purple-950/5 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
+                        
+                        {/* Elite Phase Pill Badge */}
+                        {/* <div className="absolute top-4 left-4 py-1.5 px-4 bg-surface/90 backdrop-blur-md border border-border/60 text-[10px] font-black text-purple-950 uppercase tracking-widest rounded-full shadow-sm">
+                          Phase 02: Selection
+                        </div> */}
+                      </div>
+                    </Card3D>
+                  </ScrollReveal>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
+                {/* Timeline center node indicator */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-bg-page border-2 border-purple-700 items-center justify-center z-20 shadow-md">
+                  <div className="w-2.5 h-2.5 rounded-full bg-purple-700 animate-pulse" />
+                </div>
+
+                <div className="md:col-span-6 order-2 md:order-1 relative group w-full">
+                  <ScrollReveal delay={0.25} direction="left">
+                    <Card3D className="group relative bg-transparent rounded-[2rem]" maxTilt={6}>
+                      {/* Interactive Glow */}
+                      <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-tr from-purple-500/10 to-purple-700/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700" />
+
+                      <div className="relative w-full aspect-[4/3] sm:aspect-[1.5/1] md:aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl border border-border/40">
+                        <img 
+                          src={submitCv3} 
+                          alt="Employer Interview Review" 
+                          className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2rem] transform group-hover:scale-106 transition-transform duration-[1.5s]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg-page/50 via-transparent to-purple-950/5 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
+                        
+                        {/* Elite Phase Pill Badge */}
+                        {/* <div className="absolute top-4 left-4 py-1.5 px-4 bg-surface/90 backdrop-blur-md border border-border/60 text-[10px] font-black text-purple-950 uppercase tracking-widest rounded-full shadow-sm">
+                          Phase 03: Evaluation
+                        </div> */}
+                      </div>
+                    </Card3D>
+                  </ScrollReveal>
+                </div>
+
+                <div className="md:col-span-6 flex flex-col items-start order-1 md:order-2 text-left relative pl-0 md:pl-8">
+                  {/* Clean Step Number Indicator directly over the text */}
+                  <div className="flex items-center gap-3.5 mb-3 font-display select-none">
+                    <span className="text-3xl font-black text-purple-700/40 leading-none">03</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-700/30" />
+                    {/* <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-700/10 text-purple-900 border border-purple-700/20 shadow-inner">
+                      <Layers className="w-4 h-4" />
+                    </div> */}
+                  </div>
+
+                  <ScrollReveal delay={0.15} direction="up">
+                    <h3 className="text-2xl font-bold text-primary mb-3 font-display relative">
+                      Employer Review
+                    </h3>
+                  </ScrollReveal>
+                  
+                  {/* Decorative Short Line */}
+                  <div className="w-12 h-1 bg-purple-700 rounded-full mb-5" />
+                  
+                  <ScrollReveal delay={0.2} direction="up">
+                    <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
+                      Shortlisted candidate profiles are personally recommended and introduced to top-tier employers, coordinating direct corporate interviews.
+                    </p>
+                  </ScrollReveal>
+
+                  {/* High Value Highlights Grid */}
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full border-t border-border/40 pt-5">
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Direct Interviews</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Hiring Panels</span>
+                    </div>
+                  </div> */}
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
+                {/* Timeline center node indicator */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-bg-page border-2 border-purple-700 items-center justify-center z-20 shadow-md">
+                  <div className="w-2.5 h-2.5 rounded-full bg-purple-700 animate-pulse" />
+                </div>
+
+                <div className="md:col-span-6 flex flex-col items-start text-left relative pr-0 md:pr-8">
+                  {/* Clean Step Number Indicator directly over the text */}
+                  <div className="flex items-center gap-3.5 mb-3 font-display select-none">
+                    <span className="text-3xl font-black text-purple-700/40 leading-none">04</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-700/30" />
+                    {/* <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-purple-700/10 text-purple-900 border border-purple-700/20 shadow-inner">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div> */}
+                  </div>
+
+                  <ScrollReveal delay={0.15} direction="up">
+                    <h3 className="text-2xl font-bold text-primary mb-3 font-display relative">
+                      Final Outcome
+                    </h3>
+                  </ScrollReveal>
+                  
+                  {/* Decorative Short Line */}
+                  <div className="w-12 h-1 bg-purple-700 rounded-full mb-5" />
+                  
+                  <ScrollReveal delay={0.2} direction="up">
+                    <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
+                      Selected candidates are confirmed through SkillCite, managing placement offers and structural transition support to secure successful onboarding.
+                    </p>
+                  </ScrollReveal>
+
+                  {/* High Value Highlights Grid */}
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full border-t border-border/40 pt-5">
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Offer Management</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 mr-2 shrink-0" />
+                      <span className="text-xs text-muted font-bold">Onboarding Support</span>
+                    </div>
+                  </div> */}
+                </div>
+
+                <div className="md:col-span-6 relative group w-full">
+                  <ScrollReveal delay={0.25} direction="right">
+                    <Card3D className="group relative bg-transparent rounded-[2rem]" maxTilt={6}>
+                      {/* Interactive Glow */}
+                      <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-tr from-purple-500/10 to-purple-700/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700" />
+
+                      <div className="relative w-full aspect-[4/3] sm:aspect-[1.5/1] md:aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl border border-border/40">
+                        <img 
+                          src={submitCv4} 
+                          alt="Placement and Onboarding Outcome" 
+                          className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2rem] transform group-hover:scale-106 transition-transform duration-[1.5s]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg-page/50 via-transparent to-purple-950/5 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
+                        
+                        {/* Elite Phase Pill Badge */}
+                        {/* <div className="absolute top-4 left-4 py-1.5 px-4 bg-surface/90 backdrop-blur-md border border-border/60 text-[10px] font-black text-purple-950 uppercase tracking-widest rounded-full shadow-sm">
+                          Phase 04: Placement
+                        </div> */}
+                      </div>
+                    </Card3D>
+                  </ScrollReveal>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Placement Divisions horizontal showcase card */}
+            <ScrollReveal delay={0.2} direction="up" className="mt-32">
+              <div className="relative rounded-[2.5rem] overflow-hidden border border-border shadow-2xl p-10 bg-surface/60 max-w-4xl mx-auto backdrop-blur-sm">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-800/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                <h3 className="text-2xl font-bold text-center text-primary mb-8 font-display">Our Placement Divisions</h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                   {[
-                    { step: '01', title: 'Profile Creation', desc: 'Candidates upload their CV or resume with their preferred job roles.' },
-                    { step: '02', title: 'Job Verification', desc: 'Employers post their job openings, and candidates upload their resumes. SkillCite matches the right role to the right person.' },
-                    { step: '03', title: 'Application & Selection', desc: 'Candidates apply. The team reviews CVs and shortlists suitable candidates.' },
-                    { step: '04', title: 'Employer Review', desc: 'Shortlisted candidates are shared with employers and employers review and select suitable profiles.' },
-                    { step: '05', title: 'Final Outcome', desc: 'Selected candidates are confirmed through SkillCite and placement is completed.' }
-                  ].map((item) => (
-                    <div key={item.step} className="flex group">
-                      <div className="text-2xl font-black text-purple-700/20 group-hover:text-purple-700 transition-colors mr-6 mt-1">{item.step}</div>
+                    { icon: <HardHat className="w-5 h-5" />, title: 'Engineering Recruitment', desc: 'Civil, Structural, Mechanical & AutoCAD design roles' },
+                    { icon: <Briefcase className="w-5 h-5" />, title: 'Administration Recruitmrnt', desc: 'Project controllers, coordinators & office management' },
+                    { icon: <Calculator className="w-5 h-5" />, title: 'Accounting Recruitment', desc: 'Project accounting, CPA support & corporate auditing' },
+                    { icon: <Globe className="w-5 h-5" />, title: 'Other Recruitment', desc: 'Corporate specialists & custom non-technical placements' }
+                  ].map((div, i) => (
+                    <div key={i} className="p-5 rounded-2xl bg-bg-page/40 border border-border flex flex-col items-start gap-3 hover:border-purple-700 hover:bg-bg-page/80 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-purple-700/10 flex items-center justify-center text-purple-950 border border-purple-700/20 shadow-inner">
+                        {div.icon}
+                      </div>
                       <div>
-                        <h4 className="text-[17px] font-bold text-primary mb-2 font-display">{item.title}</h4>
-                        <p className="text-[14px] text-muted leading-relaxed font-semibold">{item.desc}</p>
+                        <h4 className="text-[14px] font-bold text-primary mb-1 font-display leading-tight">{div.title}</h4>
+                        {/* <p className="text-[11px] text-muted font-semibold leading-normal mt-1">{div.desc}</p> */}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div>
-                <p className="text-[16px] text-muted max-w-[600px] mx-auto font-semibold mb-8 text-left">
-                  SkillCite follows a structured workflow where jobs are verified by the team and candidates are matched based on approved roles.              
-                </p>
-                <div className="bg-bg-page border border-border rounded-3xl p-10 shadow-2xl relative overflow-hidden text-left">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-purple-800/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-                  <h3 className="text-xl font-bold text-primary mb-6 font-display">Expertise Sectors</h3>
-                  <div className="grid grid-cols-1 gap-4">
-                    {[
-                      { icon: <HardHat className="w-5 h-5" />, title: 'Engineering & Technical', roles: 'Civil, Structural, Mechanical, Electrical' },
-                      { icon: <Briefcase className="w-5 h-5" />, title: 'Administration', roles: 'Project Admin, Office Management, Operations' },
-                      { icon: <Calculator className="w-5 h-5" />, title: 'Accounting & Finance', roles: 'Project Accountants, Bookkeepers, Auditors' },
-                    ].map((sector, i) => (
-                      <div key={i} className="p-5 rounded-2xl bg-surface border border-border flex items-start group hover:border-purple-700/50 transition-colors">
-                        <div className="w-10 h-10 rounded-xl bg-bg-page flex items-center justify-center text-muted group-hover:text-purple-700 transition-colors shrink-0">
-                          {sector.icon}
-                        </div>
-                        <div className="ml-4">
-                          <h4 className="text-[15px] font-bold text-primary mb-1 font-display">{sector.title}</h4>
-                          <p className="text-[12px] text-muted font-semibold">{sector.roles}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            </ScrollReveal>
+
           </div>
         </section>
 
         {/* 4. Form Section */}
-        <section id="submit-cv-form" className="py-24 bg-bg-page scroll-mt-20" style={{ backgroundColor: 'rgb(182 229 252 / 64%)' }}>
+        <section id="submit-cv-form" className="py-24 bg-[#F7F5F0] scroll-mt-20 border-t border-border">
           <div className="max-w-3xl mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Join Our <span className="text-purple-700">Talent</span> Network</h2>
-              <p className="text-sm text-muted font-semibold max-w-md mx-auto">
-                We reject automated candidate-matching scripts. Submit your resume, and a real expert senior recruiter will review your profile manually.
-              </p>
-            </div>
+            <ScrollReveal delay={0.1} direction="up">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Join Our <span className="text-purple-700">Talent</span> Network</h2>
+                <p className="text-sm text-muted font-semibold max-w-md mx-auto">
+                  We reject automated candidate-matching scripts. Submit your resume, and a real expert senior recruiter will review your profile manually.
+                </p>
+              </div>
+            </ScrollReveal>
             
             {/* Form container */}
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 bg-surface rounded-3xl border border-border p-6 sm:p-10 shadow-xl text-left">
+            <ScrollReveal delay={0.2} direction="up">
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 bg-surface rounded-3xl border border-border p-6 sm:p-10 shadow-xl text-left">
             
               {/* Section A: Contact Details */}
               <div className="flex flex-col gap-6">
@@ -329,7 +623,7 @@ export default function SubmitCV() {
                     {...register('email')}
                   />
                   <Input
-                    label="Phone Number *"
+                    label="Phone Number"
                     placeholder="e.g. 0412 345 678"
                     icon={<Phone className="w-4 h-4" />}
                     error={errors.phone}
@@ -367,13 +661,13 @@ export default function SubmitCV() {
                       <div
                         key={div.value}
                         onClick={() => setValue('specialty', div.value, { shouldValidate: true })}
-                        className={`p-4.5 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 flex flex-col items-center justify-center text-center gap-1
+                        className={`p-4 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 flex flex-col items-center justify-center text-center gap-1
                           ${isSelected 
                             ? 'border-purple-700 bg-purple-700/35 shadow-sm scale-[0.99]' 
                             : 'border-border bg-surface hover:bg-bg-page'}`}
                       >
                         <span className="font-bold text-sm text-primary">{div.label}</span>
-                        <span className="text-[10px] text-muted font-medium">{div.desc}</span>
+                        {/* <span className="text-[10px] text-muted font-medium">{div.desc}</span> */}
                       </div>
                     );
                   })}
@@ -543,6 +837,7 @@ export default function SubmitCV() {
               </div>
 
             </form>
+          </ScrollReveal>
 
           </div>
         </section>

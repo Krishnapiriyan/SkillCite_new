@@ -103,6 +103,14 @@ export default function CandidatesIndex() {
             searchField="firstName"
             searchPlaceholder="Search candidate first name..."
             detailRoutePrefix="/candidates"
+            filterField="specialty"
+            filterPlaceholder="All Divisions"
+            filterOptions={[
+              { label: 'Engineering', value: 'engineering' },
+              { label: 'Accounting', value: 'accounting' },
+              { label: 'Administrative', value: 'administrative' },
+              { label: 'Other', value: 'other' }
+            ]}
           />
         )}
 

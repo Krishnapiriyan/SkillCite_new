@@ -162,3 +162,160 @@ html.lenis {
   filter: drop-shadow(0 20px 30px rgba(37, 99, 235, 0.22));
 }
 
+/* ==========================================================================
+   BlueYard Signature 3D CSS Cube & Transition Portal Styles
+   ========================================================================== */
+
+/* 3D Scene Perspective Box */
+.cube-scene {
+  perspective: 600px;
+  perspective-origin: 50% 50%;
+}
+
+/* 3D Transform Context Container */
+.cube-3d {
+  width: 96px;
+  height: 96px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube3D 16s linear infinite;
+}
+
+@keyframes rotateCube3D {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(360deg) rotateZ(90deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(720deg) rotateZ(180deg);
+  }
+}
+
+/* Individual Cube Face Styling */
+.cube-face {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  border: 1px solid rgba(200, 197, 167, 0.35); /* Elegant blueprint cream outline */
+  background: rgba(9, 11, 17, 0.25);
+  backdrop-filter: blur(1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.5s ease, background-color 0.5s ease;
+}
+
+/* Neon glow variants for different portals */
+.cube-face-neon-blue {
+  border: 1.5px solid rgba(59, 130, 246, 0.6);
+  box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.25), 0 0 10px rgba(59, 130, 246, 0.15);
+}
+
+.cube-face-neon-purple {
+  border: 1.5px solid rgba(168, 85, 247, 0.6);
+  box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.25), 0 0 10px rgba(168, 85, 247, 0.15);
+}
+
+.cube-face-neon-gold {
+  border: 1.5px solid rgba(245, 158, 11, 0.6);
+  box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.25), 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+/* 3D Face Positions using Exact Z-axis Translations (Half of 96px is 48px) */
+.cube-face-front  { transform: rotateY(0deg) translateZ(48px); }
+.cube-face-back   { transform: rotateY(180deg) translateZ(48px); }
+.cube-face-right  { transform: rotateY(90deg) translateZ(48px); }
+.cube-face-left   { transform: rotateY(-90deg) translateZ(48px); }
+.cube-face-top    { transform: rotateX(90deg) translateZ(48px); }
+.cube-face-bottom { transform: rotateX(-90deg) translateZ(48px); }
+
+/* Infinite scrolling ticker animations */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-content-left {
+  display: inline-block;
+  animation: ticker-slide-left 25s linear infinite;
+}
+
+.ticker-content-right {
+  display: inline-block;
+  animation: ticker-slide-right 25s linear infinite;
+}
+
+@keyframes ticker-slide-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ticker-slide-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Premium Cinematic Film Grain Utility */
+.film-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+
+footer {
+  min-height: 200px;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.8;
+  animation: float 12s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: #6b526e;
+  left: -100px;
+  bottom: -200px;
+}
+
+.blob-2 {
+  width: 600px;
+  height: 600px;
+  background: #755573;
+  left: 35%;
+  bottom: -250px;
+  animation-delay: -4s;
+}
+
+.blob-3 {
+  width: 450px;
+  height: 450px;
+  background: #5e3a5f;
+  right: -100px;
+  bottom: -180px;
+  animation-delay: -8s;
+}
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-40px) scale(1.08);
+  }
+}

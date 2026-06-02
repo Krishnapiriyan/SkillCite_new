@@ -9,7 +9,7 @@ export default function TextReveal({ text, className = '' }) {
           className="inline-block"
           initial={{ opacity: 0, y: '100%' }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ delay: i * 0.02, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           {char === ' ' ? '\u00A0' : char}

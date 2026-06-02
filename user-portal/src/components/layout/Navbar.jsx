@@ -119,15 +119,15 @@ export default function Navbar() {
             <span className="absolute inset-0 rounded-xl bg-cyan-100 opacity-0 blur-lg transition-all duration-500 group-hover:opacity-100" />
 
             {/* Brand text */}
-            <span className="relative bg-gradient-to-r from-slate-900 via-slate-700 to-cyan-600 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105">
+            <span className="relative bg-gradient-to-r from-slate-900 via-slate-700 to-purple-600 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105">
               SkillCite
             </span>
 
             {/* Animated underline */}
-            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-purple-500 to-gray-800-500 transition-all duration-500 ease-out group-hover:w-full" />
 
             {/* Floating accent dot */}
-            {/* <span className="absolute -right-3 top-1 h-2 w-2 rounded-full bg-cyan-500 shadow-md transition-all duration-300 group-hover:scale-125 group-hover:shadow-cyan-400/60" /> */}
+            {/* <span className="absolute -right-3 top-1 h-2 w-2 rounded-full bg-purple-500 shadow-md transition-all duration-300 group-hover:scale-125 group-hover:shadow-purple-400/60" /> */}
           </span>
         </Link>
         </div>

@@ -29,8 +29,8 @@ async function main() {
   // 2. Create Default CMS Site Content
   const cmsContent = [
     // Homepage
-    { key: 'home.hero.title', value: 'Engineering Talent. Delivered Personally.' },
-    { key: 'home.hero.subtitle', value: 'SkillCite connects premium engineering talent with leading companies. Our specialist recruitment team handles everything personally.' },
+    { key: 'home.hero.title', value: 'Specialist' },
+    { key: 'home.hero.subtitle', value: 'SkillCite connects premium talent with leading companies. Our specialist recruitment team handles everything personally.' },
     { key: 'home.marquee.stats', value: '500+ Placements • 98% Retention Rate • 24hr Quick Review • 100% Personal Touch' },
     
     // Process Flow

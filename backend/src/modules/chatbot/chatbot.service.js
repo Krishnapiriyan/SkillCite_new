@@ -52,7 +52,7 @@ export const processChat = async (messages) => {
     let response = "Welcome to SkillCite. If you're an employer looking for talent, please visit our /request-talent page, or if you're a candidate, head to /submit-your-cv to get started.";
 
     if (lastUserMessage.includes('employer') || lastUserMessage.includes('hire') || lastUserMessage.includes('recru')) {
-      response = "If you are looking to hire premium engineering talent, please visit our /request-talent page! Our specialist recruitment team will personally review your specifications and contact you within 24 hours.";
+      response = "If you are looking to hire premium talent, please visit our /request-talent page! Our specialist recruitment team will personally review your specifications and contact you within 24 hours.";
     } else if (lastUserMessage.includes('candidate') || lastUserMessage.includes('cv') || lastUserMessage.includes('job') || lastUserMessage.includes('resume')) {
       response = "Are you a candidate? Head to /submit-your-cv to get started by uploading your resume. Our in-house technical team will contact you directly once matching opportunities are identified.";
     } else if (lastUserMessage.includes('service') || lastUserMessage.includes('autocad') || lastUserMessage.includes('draft') || lastUserMessage.includes('estimat')) {

@@ -7,9 +7,13 @@ export default function DataTable({
   data = [], 
   searchPlaceholder = 'Search records...',
   searchField = 'name',
-  detailRoutePrefix = ''
+  detailRoutePrefix = '',
+  filterField = '',
+  filterOptions = [],
+  filterPlaceholder = 'All'
 }) {
   const [filterText, setFilterText] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('all');
   const [sortField, setSortField] = useState(null);
   const [sortAsc, setSortAsc] = useState(true);
   const navigate = useNavigate();
@@ -23,8 +27,16 @@ export default function DataTable({
     }
   };
 
-  // Local realtime search filter
+  // Local realtime search and dropdown filter
   const filteredData = data.filter((item) => {
+    // 1. Dropdown filter check
+    if (filterField && selectedFilter !== 'all') {
+      const fieldVal = item[filterField];
+      if (!fieldVal || fieldVal.toString().toLowerCase() !== selectedFilter.toLowerCase()) {
+        return false;
+      }
+    }
+    // 2. Search text check
     const val = item[searchField];
     if (!val) return false;
     return val.toString().toLowerCase().includes(filterText.toLowerCase());
@@ -47,16 +59,37 @@ export default function DataTable({
   return (
     <div className="w-full flex flex-col gap-4 select-none">
       
-      {/* Realtime Search Bar */}
-      <div className="relative w-full max-w-sm">
-        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-hint pointer-events-none" />
-        <input
-          type="text"
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          placeholder={searchPlaceholder}
-          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-surface text-sm text-primary placeholder-hint outline-none focus:ring-4 focus:ring-accent-light focus:border-accent"
-        />
+      {/* Controls Row */}
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between w-full">
+        {/* Realtime Search Bar */}
+        <div className="relative w-full max-w-sm">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-hint pointer-events-none" />
+          <input
+            type="text"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            placeholder={searchPlaceholder}
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-surface text-sm text-primary placeholder-hint outline-none focus:ring-4 focus:ring-accent-light focus:border-accent"
+          />
+        </div>
+
+        {/* Dropdown Filter */}
+        {filterField && (
+          <div className="w-full sm:w-auto min-w-[200px]">
+            <select
+              value={selectedFilter}
+              onChange={(e) => setSelectedFilter(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl border border-border bg-surface text-sm text-primary font-bold outline-none cursor-pointer focus:ring-4 focus:ring-accent-light focus:border-accent transition-all"
+            >
+              <option value="all">{filterPlaceholder || 'All'}</option>
+              {filterOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* Styled Grid Table Container */}

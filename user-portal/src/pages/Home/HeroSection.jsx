@@ -140,7 +140,7 @@ export default function HeroSection() {
             <p className="text-sm sm:text-lg text-slate-700 font-bold mb-8 leading-relaxed">
               {getCms(
                 'home.hero.subtitle',
-                'SkillCite connects premium engineering talent with leading companies. Our specialist recruitment team handles everything personally.'
+                'SkillCite connects premium talent with leading companies. Our specialist recruitment team handles everything personally.'
               )}
             </p>
           </ScrollReveal>
