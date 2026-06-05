@@ -124,10 +124,10 @@ export default function SubmitCV() {
   };
 
   const divisions = [
-    { value: 'engineering', label: 'Engineering Recruitment', desc: 'Civil, Mech, AutoCAD drawing placements' },
-    { value: 'accounting', label: 'Accounting Recruitment', desc: 'Bookkeepers, auditors and corporate accountants' },
-    { value: 'administrative', label: 'Administration Recruitment', desc: 'Office managers, HR admins and coordinators' },
-    { value: 'other', label: 'Other Placements', desc: 'Custom non-technical specialized matching' },
+    { value: 'engineering', label: 'Engineering', desc: 'Civil, Mech, AutoCAD drawing placements' },
+    { value: 'accounting', label: 'Accounting', desc: 'Bookkeepers, auditors and corporate accountants' },
+    { value: 'administrative', label: 'Administration', desc: 'Office managers, HR admins and coordinators' },
+    { value: 'other', label: 'Other', desc: 'Custom non-technical specialized matching' },
   ];
 
   const states = [
@@ -555,10 +555,10 @@ export default function SubmitCV() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                   {[
-                    { icon: <HardHat className="w-5 h-5" />, title: 'Engineering Recruitment', desc: 'Civil, Structural, Mechanical & AutoCAD design roles' },
-                    { icon: <Briefcase className="w-5 h-5" />, title: 'Administration Recruitmrnt', desc: 'Project controllers, coordinators & office management' },
-                    { icon: <Calculator className="w-5 h-5" />, title: 'Accounting Recruitment', desc: 'Project accounting, CPA support & corporate auditing' },
-                    { icon: <Globe className="w-5 h-5" />, title: 'Other Recruitment', desc: 'Corporate specialists & custom non-technical placements' }
+                    { icon: <HardHat className="w-5 h-5" />, title: 'Engineering', desc: 'Civil, Structural, Mechanical & AutoCAD design roles' },
+                    { icon: <Briefcase className="w-5 h-5" />, title: 'Administration', desc: 'Project controllers, coordinators & office management' },
+                    { icon: <Calculator className="w-5 h-5" />, title: 'Accounting', desc: 'Project accounting, CPA support & corporate auditing' },
+                    { icon: <Globe className="w-5 h-5" />, title: 'Other', desc: 'Corporate specialists & custom non-technical placements' }
                   ].map((div, i) => (
                     <div key={i} className="p-5 rounded-2xl bg-bg-page/40 border border-border flex flex-col items-start gap-3 hover:border-purple-700 hover:bg-bg-page/80 transition-all duration-300">
                       <div className="w-10 h-10 rounded-xl bg-purple-700/10 flex items-center justify-center text-purple-950 border border-purple-700/20 shadow-inner">
@@ -652,7 +652,7 @@ export default function SubmitCV() {
               {/* Section B: Recruitment Specialty */}
               <div className="flex flex-col gap-4 mt-4">
                 <h2 className="text-lg font-bold text-primary border-b border-border/60 pb-2">
-                  Section B: Recruitment Specialty *
+                  Section B: Specialized Field *
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {divisions.map((div) => {
@@ -832,7 +832,7 @@ export default function SubmitCV() {
                   disabled={loading}
                   className="px-10 py-3.5 font-bold shadow-lg shadow-accent/15 tracking-wider hover:shadow-xl hover:shadow-accent/25 duration-300 hover:scale-[1.01] bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
                 >
-                  {loading ? 'Uploading Application...' : 'Submit CV Application'}
+                  {loading ? 'Uploading Application...' : 'Submit Application'}
                 </Button>
               </div>
 

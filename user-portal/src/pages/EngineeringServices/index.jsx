@@ -127,7 +127,7 @@ export default function EngineeringServices() {
 
       <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
         {/* 1. Hero Section */}
-        <section className="pt-32 pb-24 bg-transparent border-b border-border overflow-hidden relative">
+        <section className="pt-24 pb-32 bg-transparent border-b border-border overflow-hidden relative">
           <HoneycombBackground />
           <div className="max-w-5xl mx-auto px-6 relative z-10">
             
@@ -158,16 +158,17 @@ export default function EngineeringServices() {
                 <ScrollReveal delay={0.25} direction="right">
                   <Card3D className="group relative bg-transparent rounded-[2.5rem]" maxTilt={10}>
                     {/* Floating Glowing Orb (Best Premium Combination) */}
-                    <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-500/30 to-purple-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                    <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
                     
                     {/* Clean Borderless Showcase */}
-                    <div className="relative bg-surface rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl">
+                    <div className="relative w-full h-[280px] sm:h-[360px] overflow-hidden rounded-[2.5rem] shadow-2xl">
                       <img 
                         src={engineeringserviceBlueprints} 
                         alt="SkillCite CAD drawings & calculations blueprints mockup"
-                        className="w-full h-[240px] sm:h-[300px] object-cover rounded-[2.5rem] transform transition duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2.5rem] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]"
                         // className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]" 
                       />
+                      {/* <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none rounded-[2.5rem]"></div> */}
                       <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none rounded-[2.5rem]"></div>
                     </div>
                   </Card3D>
@@ -224,7 +225,7 @@ export default function EngineeringServices() {
                     <Button variant="outlined" onClick={() => scrollToForm('autocad')} 
                             className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-black bg-purple-950 border-purple-950 hover:bg-purple-900 hover:text-white hover:border-cyan-600"
                             >
-                      Request AutoCAD <ArrowRight className="ml-2 w-4 h-4" />
+                      Request Design <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </ScrollReveal>
                 </div>
@@ -426,9 +427,9 @@ export default function EngineeringServices() {
                       label="Requested Service Type *"
                       placeholder="Select service"
                       options={[
-                        { value: 'autocad', label: 'AutoCAD & Shop Drawings' },
-                        { value: 'estimation', label: 'Quantity Estimation' },
-                        { value: 'calculations', label: 'Structural Calculations' },
+                        { value: 'autocad', label: 'Precision 2D Drafting & 3D Visualization' },
+                        { value: 'estimation', label: 'Quantity & Cost Estimation' },
+                        { value: 'calculations', label: 'Calculations & Verifications' },
                         { value: 'consultation', label: 'Engineering Consultation' },
                       ]}
                       error={errors.serviceType}
