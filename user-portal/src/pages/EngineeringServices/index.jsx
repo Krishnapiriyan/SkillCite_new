@@ -17,10 +17,10 @@ import HoneycombBackground from '../../components/animations/HoneycombBackground
 import IsometricGridBackground from '../../components/animations/IsometricGridBackground';
 import ScrollReveal from '../../components/animations/ScrollReveal';
 
-import engineeringBlueprints from '../../assets/engineering_blueprints.png';
-import engineeringserviceBlueprints from '../../assets/Civil-Engineering-service.jpg';
-import heroComposition from '../../assets/hero_composition.png';
-import aboutTeam from '../../assets/about_team.png';
+import engineeringBlueprints from '../../assets/engineering_blueprints.webp';
+import engineeringserviceBlueprints from '../../assets/Civil-Engineering-service.webp';
+import heroComposition from '../../assets/hero_composition.webp';
+import aboutTeam from '../../assets/about_team.webp';
 
 // Validation Schema
 const schema = z.object({

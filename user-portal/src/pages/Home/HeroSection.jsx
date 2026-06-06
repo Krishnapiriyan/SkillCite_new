@@ -11,9 +11,9 @@ import FloatingBlueOrbs from '../../components/animations/FloatingBlueOrbs';
 import MagneticElement from '../../components/animations/MagneticElement';
 import Button from '../../components/ui/Button';
 
-import adminImg from '../../assets/admin_1.jpg';
-import accountingImg from '../../assets/accounting_1.jpg';
-import recruitmentImg from '../../assets/hiring2.jpg';
+import adminImg from '../../assets/admin_1.webp';
+import accountingImg from '../../assets/accounting_1.webp';
+import recruitmentImg from '../../assets/hiring2.webp';
 
 // Premium responsive spring-loaded skate and tumble Framer Motion card variants
 const cardRecruitmentVariants = (isMobile) => ({

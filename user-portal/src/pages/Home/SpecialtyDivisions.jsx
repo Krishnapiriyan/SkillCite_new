@@ -8,10 +8,10 @@ import {
 import ScrollReveal from '../../components/animations/ScrollReveal';
 import HoneycombBackground from '../../components/animations/HoneycombBackground';
 
-import engineeringImg from '../../assets/engineering_1.jpg';
-import accountingImg  from '../../assets/accounting_calc.jpg';
-import adminImg       from '../../assets/admin_1.jpg';
-import otherImg       from '../../assets/hiring1.jpg';
+import engineeringImg from '../../assets/engineering_1.webp';
+import accountingImg  from '../../assets/accounting_calc.webp';
+import adminImg       from '../../assets/admin_1.webp';
+import otherImg       from '../../assets/hiring1.webp';
 
 const divisions = [
   {

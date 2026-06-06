@@ -8,17 +8,17 @@ import Button from '../../components/ui/Button';
 import IsometricGridBackground from '../../components/animations/IsometricGridBackground';
 
 // Import newly added high-resolution visual assets
-import resume1 from '../../assets/resume1.jpeg';
-import resume2 from '../../assets/resume2.jpg';
-import resume4 from '../../assets/resume4.jpg';
+import resume1 from '../../assets/resume1.webp';
+import resume2 from '../../assets/resume2.webp';
+import resume4 from '../../assets/resume4.webp';
 
-import hiring1 from '../../assets/hiring1.jpg';
-import hiring4 from '../../assets/hiring4.jpg';
-import hiring3 from '../../assets/hiring3.jpg';
+import hiring1 from '../../assets/hiring1.webp';
+import hiring4 from '../../assets/hiring4.webp';
+import hiring3 from '../../assets/hiring3.webp';
 
-import autoCad from '../../assets/engineering_blueprints.png';
-import estimation from '../../assets/accounting_calc.jpg';
-import cadDesigner from '../../assets/cad_designer.jpg';
+import autoCad from '../../assets/engineering_blueprints.webp';
+import estimation from '../../assets/accounting_calc.webp';
+import cadDesigner from '../../assets/cad_designer.webp';
 
 // Premium Auto-playing 3D Parallax & Drag-to-Swipe Image Slideshow
 function ImageSlideshow({ images = [], alt = '', badgeText = '', captions = [] }) {
