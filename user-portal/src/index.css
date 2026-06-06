@@ -39,6 +39,12 @@ html.lenis {
   pointer-events: none;
 }
 
+/* GPU promotion for animated canvas layers */
+canvas {
+  will-change: transform;
+  contain: strict;
+}
+
 /* Modern styling helpers */
 .glass {
   background: rgba(255, 255, 255, 0.7);
