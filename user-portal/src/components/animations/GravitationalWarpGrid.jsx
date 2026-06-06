@@ -14,6 +14,16 @@ export default function GravitationalWarpGrid() {
     let rafId;
     let gridPoints = [];
     let time = 0;
+    let isVisible = false;
+    let isScrolling = false;
+    let scrollTimer;
+
+    const handleScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { isScrolling = false; }, 120);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     const cellSize = 42;
     const repulsionRadius = 200;
     const repulsionForce = 55;
@@ -70,7 +80,24 @@ export default function GravitationalWarpGrid() {
     // Call once to initialize size
     resize();
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !rafId) rafId = requestAnimationFrame(drawGrid);
+      },
+      { threshold: 0.01 }
+    );
+    visibilityObserver.observe(canvas);
+
+    const repulsionRadiusSq = repulsionRadius * repulsionRadius;
+    const nearCursorRadiusSq = (repulsionRadius * 0.85) * (repulsionRadius * 0.85);
+
     const drawGrid = () => {
+      if (isScrolling) {
+        rafId = isVisible ? requestAnimationFrame(drawGrid) : null;
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       time += 0.012;
 
@@ -87,15 +114,15 @@ export default function GravitationalWarpGrid() {
         if (active.current) {
           const dx = p.x - mx;
           const dy = p.y - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < repulsionRadius) {
-            // Push force falls off with distance
+          if (distSq < repulsionRadiusSq) {
+            const dist = Math.sqrt(distSq);
             const force = (repulsionRadius - dist) / repulsionRadius;
             const angle = Math.atan2(dy, dx);
             const targetX = Math.cos(angle) * force * repulsionForce;
             const targetY = Math.sin(angle) * force * repulsionForce;
-            
+
             p.vx += targetX;
             p.vy += targetY;
           }
@@ -168,11 +195,11 @@ export default function GravitationalWarpGrid() {
       gridPoints.forEach((p) => {
         const dx = p.x - mx;
         const dy = p.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const nearCursor = dist < repulsionRadius * 0.85;
+        const distSq = dx * dx + dy * dy;
+        const nearCursor = distSq < nearCursorRadiusSq;
         const baseAlpha = 0.18 + Math.sin(time * 2 + p.col * 0.5) * 0.06;
         const alpha = nearCursor
-          ? baseAlpha + (1 - dist / (repulsionRadius * 0.85)) * 0.55
+          ? baseAlpha + (1 - Math.sqrt(distSq) / (repulsionRadius * 0.85)) * 0.55
           : baseAlpha;
         const radius = nearCursor ? 2.2 : 1.4;
 
@@ -189,18 +216,19 @@ export default function GravitationalWarpGrid() {
         }
       });
 
-      rafId = requestAnimationFrame(drawGrid);
+      rafId = isVisible ? requestAnimationFrame(drawGrid) : null;
     };
-
-    rafId = requestAnimationFrame(drawGrid);
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
       if (canvas && canvas.parentElement) {
         canvas.parentElement.removeEventListener('mousemove', onMouseMove);
         canvas.parentElement.removeEventListener('mouseleave', onMouseLeave);
       }
       cancelAnimationFrame(rafId);
+      visibilityObserver.disconnect();
     };
   }, []);
 

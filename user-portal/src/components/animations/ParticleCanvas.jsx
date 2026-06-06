@@ -12,7 +12,7 @@ const PRESETS = {
     canvasOpacity: 'opacity-40',
   },
   high: {
-    particleCount: 160,
+    particleCount: 90,
     speed: 0.85,
     maxRadius: 3.5,
     minRadius: 1.2,
@@ -36,13 +36,23 @@ export default function ParticleCanvas({ intensity = 'normal' }) {
 
     let animationFrameId;
     let particles = [];
+    let isVisible = false;
+    let isScrolling = false;
+    let scrollTimer;
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
 
+    const handleScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { isScrolling = false; }, 120);
+    };
+
     window.addEventListener('resize', resize);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     resize();
 
     class Particle {
@@ -90,15 +100,23 @@ export default function ParticleCanvas({ intensity = 'normal' }) {
       particles.push(new Particle());
     }
 
+    const linkDistSq = cfg.linkDistance * cfg.linkDistance;
+
     const animate = () => {
+      if (isScrolling) {
+        animationFrameId = isVisible ? requestAnimationFrame(animate) : null;
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < cfg.linkDistance) {
+          const distSq = dx * dx + dy * dy;
+          if (distSq < linkDistSq) {
+            const dist = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -114,14 +132,26 @@ export default function ParticleCanvas({ intensity = 'normal' }) {
         p.draw();
       });
 
-      animationFrameId = requestAnimationFrame(animate);
+      animationFrameId = isVisible ? requestAnimationFrame(animate) : null;
     };
 
-    animate();
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animationFrameId) {
+          animationFrameId = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.01 }
+    );
+    visibilityObserver.observe(canvas);
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
       cancelAnimationFrame(animationFrameId);
+      visibilityObserver.disconnect();
     };
   }, [intensity]);
 

@@ -12,7 +12,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 // Initializing Lenis smooth scroll with GSAP ticker bindings
-const lenis = new Lenis({ lerp: 0.08, smoothWheel: true })
+const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, duration: 1.2 })
 lenis.on('scroll', ScrollTrigger.update)
 gsap.ticker.add((time) => lenis.raf(time * 1000))
 gsap.ticker.lagSmoothing(0)

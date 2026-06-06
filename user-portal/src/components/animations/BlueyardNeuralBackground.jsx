@@ -50,6 +50,16 @@ export default function BlueyardNeuralBackground({ theme = "aqua" }) {
     let rafId;
     let time = 0;
     let particles = [];
+    let isVisible = false;
+    let isScrolling = false;
+    let scrollTimer;
+
+    const handleScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { isScrolling = false; }, 120);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Responsive sizing inside parent container
     const resize = () => {
@@ -130,9 +140,23 @@ export default function BlueyardNeuralBackground({ theme = "aqua" }) {
 
     resize();
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
+      },
+      { threshold: 0.01 }
+    );
+    visibilityObserver.observe(canvas);
+
     // Render loop
     const draw = () => {
       time += 0.006;
+
+      if (isScrolling) {
+        rafId = isVisible ? requestAnimationFrame(draw) : null;
+        return;
+      }
 
       // Lerp mouse coordinates
       mouse.current.x = lerp(mouse.current.x, mouse.current.targetX, 0.06);
@@ -272,9 +296,10 @@ export default function BlueyardNeuralBackground({ theme = "aqua" }) {
 
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < 72) {
+          if (distSq < 72 * 72) {
+            const dist = Math.sqrt(distSq);
             const alpha = (72 - dist) / 72 * 0.12 * (1 - p1.z / 500);
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
@@ -329,18 +354,19 @@ export default function BlueyardNeuralBackground({ theme = "aqua" }) {
       ctx.fillStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.08)`;
       ctx.fill();
 
-      rafId = requestAnimationFrame(draw);
+      rafId = isVisible ? requestAnimationFrame(draw) : null;
     };
-
-    rafId = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
       if (canvas.parentElement) {
         canvas.parentElement.removeEventListener('mousemove', handleMouseMove);
         canvas.parentElement.removeEventListener('mouseleave', handleMouseLeave);
       }
       cancelAnimationFrame(rafId);
+      visibilityObserver.disconnect();
     };
   }, [theme]);
 

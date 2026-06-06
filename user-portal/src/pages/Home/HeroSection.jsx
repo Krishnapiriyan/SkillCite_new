@@ -53,6 +53,7 @@ export default function HeroSection() {
   const { getCms } = useCms();
   const heroVideoUrl = resolveMediaUrl(getCms('home.hero.videoUrl'));
   const [isMobile, setIsMobile] = useState(false);
+  const [orbsReady, setOrbsReady] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,6 +62,11 @@ export default function HeroSection() {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const id = setTimeout(() => setOrbsReady(true), 300);
+    return () => clearTimeout(id);
   }, []);
 
   return (
@@ -82,7 +88,7 @@ export default function HeroSection() {
       {/* Dynamic Backgrounds — enhanced density for hero */}
       <ParticleCanvas intensity="high" />
       <GravitationalWarpGrid />
-      <FloatingBlueOrbs />
+      {orbsReady && <FloatingBlueOrbs />}
 
       {/* 4% Grain Overlay */}
       <div 
@@ -97,16 +103,19 @@ export default function HeroSection() {
         className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-blue-400/25 blur-[110px] pointer-events-none"
         animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ willChange: 'transform, opacity' }}
       />
       <motion.div
         className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[480px] h-[480px] rounded-full bg-cyan-400/20 blur-[130px] pointer-events-none"
         animate={{ scale: [1.1, 1, 1.1], opacity: [0.15, 0.3, 0.15] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ willChange: 'transform, opacity' }}
       />
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-indigo-400/15 blur-[90px] pointer-events-none"
         animate={{ x: [0, 40, -30, 0], y: [0, -25, 35, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ willChange: 'transform' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
@@ -180,6 +189,7 @@ export default function HeroSection() {
               whileHover="hover"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ willChange: 'transform' }}
               className="relative w-[280px] sm:w-[350px] h-[350px] sm:h-[450px] flex items-center justify-center cursor-pointer group"
             >
               {/* Central Glowing Backlight Orb */}

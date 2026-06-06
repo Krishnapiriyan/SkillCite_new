@@ -3,21 +3,22 @@ import { useEffect, useRef, useState } from 'react';
 export default function LiquidCursor() {
   const cursorRef = useRef(null);
   const dotRef = useRef(null);
-  
+
   // Real-time mouse coordinates
   const mouse = useRef({ x: 0, y: 0 });
   // Lerped/Spring coordinates for trailing outer liquid circle
   const trail = useRef({ x: 0, y: 0 });
-  
+
   // Speed and angle calculation variables
   const lastMouse = useRef({ x: 0, y: 0 });
   const speed = useRef(0);
   const angle = useRef(0);
-  
+
   // Hover scale factor tracked smoothly in JS to prevent CSS transitions from lagging transform updates
   const hoverProgress = useRef(0);
-  
+
   const [isHovered, setIsHovered] = useState(false);
+  const isHoveredRef = useRef(false);
   const [hoverText, setHoverText] = useState('');
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function LiquidCursor() {
       trail.current.y = lerp(trail.current.y, mouse.current.y, 0.30);
 
       // Interpolate hover scale smoothly in JS
-      hoverProgress.current = lerp(hoverProgress.current, isHovered ? 1 : 0, 0.16);
+      hoverProgress.current = lerp(hoverProgress.current, isHoveredRef.current ? 1 : 0, 0.16);
 
       // Update inner sharp dot
       if (dotRef.current) {
@@ -85,12 +86,14 @@ export default function LiquidCursor() {
     // Mouse interactive events
     const addHoverListeners = (el) => {
       const handleMouseEnter = () => {
+        isHoveredRef.current = true;
         setIsHovered(true);
         const cursorLabel = el.getAttribute('data-cursor-text');
         if (cursorLabel) setHoverText(cursorLabel);
       };
-      
+
       const handleMouseLeave = () => {
+        isHoveredRef.current = false;
         setIsHovered(false);
         setHoverText('');
       };
@@ -118,15 +121,16 @@ export default function LiquidCursor() {
     };
 
     selectElements();
-    const selectInterval = setInterval(selectElements, 1200);
+    const mutationObserver = new MutationObserver(() => selectElements());
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       cancelAnimationFrame(rafId);
-      clearInterval(selectInterval);
+      mutationObserver.disconnect();
       cleanups.forEach(c => c());
     };
-  }, [isHovered]);
+  }, []);
 
   return (
     <>
