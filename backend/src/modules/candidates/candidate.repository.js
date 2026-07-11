@@ -48,9 +48,7 @@ export const saveCandidateSubmission = async (body, uploadedResume, uploadedCove
       coverLetterUrl: uploadedCoverLetter ? uploadedCoverLetter.url : null,
       state: body.state || null,
       careerExperience: body.careerExperience || null,
-      careerGoals: body.careerGoals || [],
-      reasonableAdjustments: body.reasonableAdjustments || null,
-      reasonableAdjustmentsDetails: body.reasonableAdjustmentsDetails || null,
+      careerGoals: Array.isArray(body.careerGoals) ? body.careerGoals : [],
       preferredCommunication: body.preferredCommunication || null,
     },
     include: { files: true }
@@ -71,8 +69,16 @@ export const getCandidateSubmissions = async (skip = 0, take = 20) => {
 };
 
 export const getCandidateSubmissionById = async (id) => {
-  return prisma.candidateSubmission.findUnique({
+  const req = await prisma.candidateSubmission.findUnique({
     where: { id },
     include: { files: true }
+  });
+  return req;
+};
+
+export const markCandidateRead = async (id, isRead) => {
+  return prisma.candidateSubmission.update({
+    where: { id },
+    data: { isRead }
   });
 };

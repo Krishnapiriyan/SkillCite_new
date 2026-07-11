@@ -56,9 +56,7 @@ export default function HoneycombBackground() {
           hexGrid.push({
             x, y,
             c, r,
-            phase: Math.random() * Math.PI * 2,
-            pulseSpeed: 0.005 + Math.random() * 0.005,
-            baseOpacity: 0.06 + Math.random() * 0.06,
+            baseOpacity: 0.03, // Low static baseline opacity to keep it calm and elegant
           });
         }
       }
@@ -82,66 +80,77 @@ export default function HoneycombBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Light Stone / Greige Background
-      ctx.fillStyle = '#F1EFEA';
+      // Even darker Premium Stone / Greige Background
+      ctx.fillStyle = '#CCC6B7';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Slow ambient breathing swell (12-second cycle)
+      const ambientSwell = (Math.sin(time * 0.005) + 1) / 2;
 
       // Ambient mouse glow
       if (!isScrolling && mouse.x > 0) {
         const glowR = 260;
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, glowR);
-        glowGrad.addColorStop(0, 'rgba(235, 222, 202, 0.22)');
-        glowGrad.addColorStop(1, 'rgba(235, 222, 202, 0)');
+        glowGrad.addColorStop(0, 'rgba(195, 182, 162, 0.25)');
+        glowGrad.addColorStop(1, 'rgba(195, 182, 162, 0)');
         ctx.fillStyle = glowGrad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
 
       hexGrid.forEach(hex => {
-        const pulse = (Math.sin(time * hex.pulseSpeed * 80 + hex.phase) + 1) / 2;
-        
         let mouseInfluence = 0;
         if (!isScrolling && mouse.x > 0) {
           const dx = hex.x - mouse.x;
           const dy = hex.y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          mouseInfluence = Math.max(0, 1 - dist / 180);
+          mouseInfluence = Math.max(0, 1 - dist / 220); // Expanded range slightly for smoother fade-in
         }
 
-        // Crisp, distinct opacity values for a clear look
-        const fillOpacity = hex.baseOpacity + pulse * 0.12 + mouseInfluence * 0.28;
-        const strokeOpacity = 0.24 + mouseInfluence * 0.45;
+        // Calm, distinct opacity values to protect the eyes
+        const fillOpacity = hex.baseOpacity + ambientSwell * 0.015 + mouseInfluence * 0.18;
+        const strokeOpacity = 0.08 + mouseInfluence * 0.22;
 
-        // Clean, elegant warm greige fill
-        const r = 228;
-        const g = 221;
-        const b = 210;
+        // Clean, elegant warm greige fill (more darker)
+        const r = 195;
+        const g = 188;
+        const b = 173;
 
-        // Draw crisp hexagon base fill
+        // Draw hexagon base fill
         drawHexagonPath(hex.x, hex.y, hexRadius - 1.5);
         ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${fillOpacity})`;
         ctx.fill();
 
-        // Draw crisp hexagon outline boundary (1px sharp strokes for clearly visible design)
-        ctx.strokeStyle = `rgba(165, 145, 120, ${strokeOpacity})`;
+        // Draw outline boundary (more darker)
+        ctx.strokeStyle = `rgba(125, 105, 80, ${strokeOpacity})`;
         ctx.lineWidth = 0.95;
         ctx.stroke();
 
-        // High-precision interactive blueprint wireframe within active cells
-        if (mouseInfluence > 0.45) {
+        // High-precision interactive blueprint wireframe within hovered cells
+        if (mouseInfluence > 0.15) {
+          // Draw inner concentric hexagon blueprint line
           drawHexagonPath(hex.x, hex.y, hexRadius * 0.65);
-          ctx.strokeStyle = `rgba(155, 125, 80, ${mouseInfluence * 0.35})`;
+          ctx.strokeStyle = `rgba(125, 105, 80, ${mouseInfluence * 0.18})`;
           ctx.lineWidth = 0.8;
           ctx.stroke();
 
+          // Draw small center point blueprint dot
+          ctx.beginPath();
+          ctx.arc(hex.x, hex.y, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(125, 105, 80, ${mouseInfluence * 0.35})`;
+          ctx.fill();
+        }
+
+        // Add soft radial center glow directly under the cursor focus
+        if (mouseInfluence > 0.45) {
           const innerGlow = ctx.createRadialGradient(hex.x, hex.y, 0, hex.x, hex.y, hexRadius * 0.6);
-          innerGlow.addColorStop(0, `rgba(255, 250, 240, ${mouseInfluence * 0.30})`);
-          innerGlow.addColorStop(1, 'rgba(255, 250, 240, 0)');
+          innerGlow.addColorStop(0, `rgba(255, 255, 255, ${mouseInfluence * 0.30})`);
+          innerGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
           ctx.fillStyle = innerGlow;
           ctx.fill();
         }
       });
 
-      time += 0.8; // Butter-smooth organic pulse speed
+      time += 0.8; // Butter-smooth organic speed
       animationFrameId = requestAnimationFrame(animate);
     };
 

@@ -17,13 +17,14 @@ export default function Footer() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute left-[-200px] top-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#D8C8D9]/40 rounded-full blur-[120px] opacity-70" />
       </div>
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         
         {/* Column 1: Brand Info */}
         <div className="flex flex-col gap-4">
           
 
-        <Link to="/" className="group text-xl font-bold font-display tracking-tight text-accent flex items-center gap-1.5" data-cursor="expand">
+        <div className="hidden md:inline-flex w-fit self-start items-center gap-2 font-medium text-sm bg-white border border-white rounded-full px-2 py-1.5 shadow-sm shadow-primary/5">
+        <Link to="/" className="group text-xl font-bold font-display tracking-tight text-accent flex items-center gap-2" data-cursor="expand">
           {/* <motion.span
             whileHover={{ rotate: -6, scale: 1.06 }}
             whileTap={{ scale: 0.96 }}
@@ -34,20 +35,21 @@ export default function Footer() {
           </motion.span> */}
           <span className="group relative inline-flex items-center">
             {/* Soft background glow */}
-            <span className="absolute inset-0 rounded-xl bg-cyan-100 opacity-0 blur-lg transition-all duration-500 group-hover:opacity-20" />
+            <span className="absolute inset-0 rounded-xl bg-cyan-100 opacity-0 blur-lg transition-all duration-500 group-hover:opacity-100" />
 
             {/* Brand text */}
-            <span className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-purple-950 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105 ">
+            <span className="relative bg-gradient-to-r from-slate-900 via-slate-700 to-purple-600 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105">
               SkillCite
             </span>
 
             {/* Animated underline */}
-            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-purple-950 to-gray-800-500 transition-all duration-500 ease-out group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-purple-500 to-gray-800-500 transition-all duration-500 ease-out group-hover:w-full" />
 
             {/* Floating accent dot */}
             {/* <span className="absolute -right-3 top-1 h-2 w-2 rounded-full bg-purple-500 shadow-md transition-all duration-300 group-hover:scale-125 group-hover:shadow-purple-400/60" /> */}
           </span>
-        </Link> 
+        </Link>
+        </div>
 
           <p className="text-xs text-hint leading-relaxed max-w-xs mt-1">
             Professional recruitment and consultancy services delivered personally. We manually review every submission to ensure the right alignment.

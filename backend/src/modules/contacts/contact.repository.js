@@ -24,7 +24,15 @@ export const getContactMessages = async (skip = 0, take = 20) => {
 };
 
 export const getContactMessageById = async (id) => {
-  return prisma.contactMessage.findUnique({
+  const req = await prisma.contactMessage.findUnique({
     where: { id }
+  });
+  return req;
+};
+
+export const markContactRead = async (id, isRead) => {
+  return prisma.contactMessage.update({
+    where: { id },
+    data: { isRead }
   });
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getEmployersApi } from '../../services/api';
+import { getEmployersApi, markEmployerReadApi } from '../../services/api';
+import { Check, CheckCheck } from 'lucide-react';
 
 import AdminLayout from '../../components/layout/AdminLayout';
 import DataTable from '../../components/ui/DataTable';
@@ -23,6 +24,17 @@ export default function EmployersIndex() {
     };
     fetchEmployers();
   }, []);
+
+  const handleToggleRead = async (id, currentStatus) => {
+    try {
+      const newStatus = !currentStatus;
+      await markEmployerReadApi(id, newStatus);
+      // Update local state to reflect the change instantly
+      setData(prev => prev.map(item => item.id === id ? { ...item, isRead: newStatus } : item));
+    } catch (err) {
+      console.error('Failed to toggle read status:', err);
+    }
+  };
 
   const columns = [
     { 
@@ -83,7 +95,7 @@ export default function EmployersIndex() {
             columns={columns}
             data={data}
             searchField="companyName"
-            searchPlaceholder="Search by company name..."
+            searchPlaceholder="Search employers..."
             detailRoutePrefix="/employers"
             filterField="specialty"
             filterPlaceholder="All Divisions"
@@ -93,6 +105,31 @@ export default function EmployersIndex() {
               { label: 'Administrative', value: 'administrative' },
               { label: 'Other', value: 'other' }
             ]}
+            rowClassName={(row) => !row.isRead ? 'bg-amber-50/40 font-bold' : ''}
+            actionsRender={(row) => (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleRead(row.id, row.isRead);
+                }}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-colors flex items-center gap-1.5
+                  ${!row.isRead 
+                    ? 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-700'}`}
+              >
+                {!row.isRead ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Read
+                  </>
+                ) : (
+                  <>
+                    <CheckCheck className="w-3 h-3" />
+                    Read
+                  </>
+                )}
+              </button>
+            )}
           />
         )}
 

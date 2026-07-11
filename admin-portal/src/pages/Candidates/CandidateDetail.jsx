@@ -64,7 +64,7 @@ export default function CandidateDetail() {
       <AdminLayout title="Candidate Details">
         <div className="text-center py-12">
           <p className="text-sm font-semibold text-muted">Candidate profile not found.</p>
-          <button onClick={() => navigate('/candidates')} className="mt-4 text-xs font-bold text-accent">
+          <button onClick={() => navigate('/candidates')} className="mt-4 px-4 py-2 bg-slate-800 text-white rounded-full text-xs font-bold hover:bg-slate-900 transition-colors shadow-sm">
             Back to Candidates List
           </button>
         </div>
@@ -82,7 +82,7 @@ export default function CandidateDetail() {
         <div className="flex items-center justify-between border-b border-border/60 pb-4">
           <button 
             onClick={() => navigate('/candidates')}
-            className="flex items-center gap-2 text-xs font-bold text-muted hover:text-primary transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-slate-800 hover:bg-slate-900 rounded-full shadow-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Candidates
           </button>
@@ -251,11 +251,22 @@ export default function CandidateDetail() {
               <div className="flex flex-col gap-2">
                 <span className="text-muted font-bold text-[9px] uppercase">Candidate Career Goals</span>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  {candidate.careerGoals.map(goal => (
-                    <span key={goal} className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-100">
-                      {goal}
-                    </span>
-                  ))}
+                  {candidate.careerGoals.map(goal => {
+                    const goalMap = {
+                      'permanent': 'Permanent Opportunities',
+                      'contract': 'Contract Opportunities',
+                      'advice': 'Career Advice & Mentorship',
+                      'exploring': 'Exploring the Market',
+                      'chat': 'Just having a friendly Chat'
+                    };
+                    const cleanGoal = (goal || '').toLowerCase().trim();
+                    const exactName = goalMap[cleanGoal] || goal;
+                    return (
+                      <span key={goal} className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-100">
+                        {exactName}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -273,53 +284,9 @@ export default function CandidateDetail() {
                 </div>
               </div>
             )}
-
-            {/* Online Links */}
-            <div className="flex flex-col gap-2">
-              <span className="text-muted font-bold text-[9px] uppercase">Online Profiles</span>
-              <div className="flex items-center gap-4 mt-2.5">
-                {candidate.linkedIn && (
-                  <a href={candidate.linkedIn} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-[#0A66C2]">
-                    <LinkedinIcon className="w-4 h-4" /> LinkedIn
-                  </a>
-                )}
-                {candidate.portfolio && (
-                  <a href={candidate.portfolio} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-accent">
-                    <Globe className="w-4 h-4" /> Portfolio
-                  </a>
-                )}
-                {candidate.github && (
-                  <a href={candidate.github} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-primary">
-                    <GithubIcon className="w-4 h-4" /> GitHub
-                  </a>
-                )}
-                {!candidate.linkedIn && !candidate.portfolio && !candidate.github && (
-                  <span className="text-xs text-muted font-semibold">No social profile links submitted.</span>
-                )}
-              </div>
-            </div>
           </div>
 
         </div>
-
-        {/* Reasonable Adjustments Banner */}
-        {candidate.reasonableAdjustments && (
-          <div className={`p-6 rounded-2xl shadow-sm border flex flex-col gap-2 text-left
-            ${candidate.reasonableAdjustments === 'Yes' 
-              ? 'bg-amber-50 border-amber-200 text-amber-900' 
-              : 'bg-surface border-border text-primary'}`}
-        >
-          <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-wide border-b border-black/5 pb-2">
-            <AlertCircle className={`w-5 h-5 ${candidate.reasonableAdjustments === 'Yes' ? 'text-amber-600' : 'text-accent'}`} />
-            Reasonable Adjustments Request: {candidate.reasonableAdjustments}
-          </div>
-          {candidate.reasonableAdjustments === 'Yes' && (
-            <p className="text-sm font-semibold leading-relaxed mt-1">
-              {candidate.reasonableAdjustmentsDetails || 'No specific adjustment details supplied.'}
-            </p>
-          )}
-        </div>
-        )}
 
         {/* Cover Note */}
         {candidate.coverNote && (

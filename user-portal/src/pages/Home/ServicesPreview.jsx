@@ -10,15 +10,15 @@ import IsometricGridBackground from '../../components/animations/IsometricGridBa
 // Import newly added high-resolution visual assets
 import resume1 from '../../assets/resume1.webp';
 import resume2 from '../../assets/resume2.webp';
-import resume4 from '../../assets/resume4.webp';
+import resume4 from '../../assets/resume3.webp';
 
 import hiring1 from '../../assets/hiring1.webp';
 import hiring4 from '../../assets/hiring4.webp';
 import hiring3 from '../../assets/hiring3.webp';
 
 import autoCad from '../../assets/engineering_blueprints.webp';
-import estimation from '../../assets/accounting_calc.webp';
-import cadDesigner from '../../assets/cad_designer.webp';
+import estimation from '../../assets/eng_1.webp';
+import cadDesigner from '../../assets/eng_2.webp';
 
 // Premium Auto-playing 3D Parallax & Drag-to-Swipe Image Slideshow
 function ImageSlideshow({ images = [], alt = '', badgeText = '', captions = [] }) {
@@ -164,7 +164,7 @@ function ImageSlideshow({ images = [], alt = '', badgeText = '', captions = [] }
 
       {/* Custom Floating Glass status badge */}
       {badgeText && (
-        <div className="absolute top-5 left-5 px-4 py-2 rounded-xl border border-white/40 bg-white/70 backdrop-blur-md text-primary font-extrabold text-[10px] tracking-wider uppercase shadow-xl flex items-center gap-2 select-none z-20">
+        <div className="absolute top-5 left-5 px-4 py-2 rounded-xl border border-white/20 bg-white/40 backdrop-blur-md text-primary font-extrabold text-[10px] tracking-wider uppercase shadow-xl flex items-center gap-2 select-none z-20">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -267,9 +267,11 @@ export default function ServicesPreview() {
   ];
 
   return (
-    <section className="w-full py-28 overflow-hidden select-none bg-transparent border-b border-black/5 relative">
+    <section className="w-full py-28 overflow-hidden bg-transparent relative">
       {/* Platinum Isometric Grid Background */}
       <IsometricGridBackground />
+      {/* Fade from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -525,6 +527,8 @@ export default function ServicesPreview() {
 
         </div>
       </div>
+      {/* Fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
     </section>
   );
 }

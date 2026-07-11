@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getContactsApi } from '../../services/api';
-import { Mail, MessageSquare } from 'lucide-react';
+import { getContactsApi, markContactReadApi } from '../../services/api';
+import { Check, CheckCheck, MessageSquare, Mail } from 'lucide-react';
 
 import AdminLayout from '../../components/layout/AdminLayout';
 import DataTable from '../../components/ui/DataTable';
@@ -27,6 +27,20 @@ export default function ContactsIndex() {
     };
     fetchContacts();
   }, []);
+
+  const handleToggleRead = async (id, currentStatus) => {
+    try {
+      const newStatus = !currentStatus;
+      await markContactReadApi(id, newStatus);
+      setData(prev => prev.map(item => item.id === id ? { ...item, isRead: newStatus } : item));
+    } catch (err) {
+      console.error('Failed to toggle read status:', err);
+    }
+  };
+
+  const handleReadMessage = async (row) => {
+    setActiveMessage(row);
+  };
 
   const columns = [
     { 
@@ -70,7 +84,7 @@ export default function ContactsIndex() {
       render: (row) => (
         <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
           <button
-            onClick={() => setActiveMessage(row)}
+            onClick={() => handleReadMessage(row)}
             className="p-1.5 rounded-lg border border-border bg-surface hover:bg-bg-page text-primary transition-all flex items-center justify-center"
             title="Read Message"
           >
@@ -105,13 +119,47 @@ export default function ContactsIndex() {
               <div className="w-8 h-8 rounded-full border-4 border-accent border-t-transparent animate-spin" />
             </div>
           ) : (
-            <DataTable
-              columns={columns}
-              data={data}
-              searchField="fullName"
-              searchPlaceholder="Search sender name..."
-            />
-          )}
+          <DataTable
+            columns={columns}
+            data={data}
+            searchField="fullName"
+            searchPlaceholder="Search contacts..."
+            onRowClick={handleReadMessage}
+            filterField="enquiryType"
+            filterPlaceholder="All Enquiry Types"
+            filterOptions={[
+              { label: 'General', value: 'general' },
+              { label: 'Support', value: 'support' },
+              { label: 'Sales', value: 'sales' },
+              { label: 'Partnership', value: 'partnership' }
+            ]}
+            rowClassName={(row) => !row.isRead ? 'bg-amber-50/40 font-bold' : ''}
+            actionsRender={(row) => (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleRead(row.id, row.isRead);
+                }}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-colors flex items-center gap-1.5
+                  ${!row.isRead 
+                    ? 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-700'}`}
+              >
+                {!row.isRead ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Read
+                  </>
+                ) : (
+                  <>
+                    <CheckCheck className="w-3 h-3" />
+                    Read
+                  </>
+                )}
+              </button>
+            )}
+          />
+        )}
         </div>
 
         {/* Read Message Modal overlay */}

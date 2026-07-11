@@ -133,13 +133,13 @@ export default function SpecialtyDivisions() {
 
   return (
     <section
-      className="w-full py-24 select-none overflow-hidden relative bg-transparent"
+      className="w-full py-24 overflow-hidden relative bg-transparent"
     >
       {/* Light Stone Honeycomb Background */}
       <HoneycombBackground />
+      {/* Fade from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
 
-      <div className="absolute inset-x-0 top-0 h-px bg-black/5" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-black/5" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
@@ -333,7 +333,7 @@ export default function SpecialtyDivisions() {
 
                         {/* Rotated title */}
                         <span
-                          className="font-display font-semibold text-[9px] text-white/55 uppercase tracking-[0.22em] [writing-mode:vertical-lr] rotate-180"
+                          className="font-display font-semibold text-[12px] text-white/55 uppercase tracking-[0.22em] [writing-mode:vertical-lr] rotate-180"
                         >
                           {div.short}
                         </span>
@@ -475,6 +475,8 @@ export default function SpecialtyDivisions() {
         </div>
 
       </div>
+      {/* Fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
     </section>
   );
 }

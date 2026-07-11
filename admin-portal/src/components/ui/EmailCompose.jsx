@@ -104,7 +104,7 @@ export default function EmailCompose({ toEmail, defaultSubject = 'Regarding your
             <button
               type="submit"
               disabled={sending || !body.trim() || !subject.trim()}
-              className="px-6 py-2.5 rounded-full bg-accent text-white hover:bg-blue-700 active:scale-95 transition-all text-sm font-semibold flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
+              className="px-6 py-2.5 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-sm active:scale-95 transition-all text-sm font-semibold flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
             >
               <Send className="w-4 h-4" />
               {sending ? 'Sending...' : 'Send Response'}

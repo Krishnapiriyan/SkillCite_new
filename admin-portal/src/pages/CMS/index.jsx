@@ -156,7 +156,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('home.hero.title')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -181,7 +181,7 @@ export default function CmsIndex() {
                     <button
                       onClick={() => handleSave('home.hero.title1')}
                       disabled={saving}
-                      className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                      className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                     >
                       <Save className="w-3.5 h-3.5" /> Save
                     </button>
@@ -228,7 +228,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('home.hero.subtitle')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -250,7 +250,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('home.hero.videoUrl')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -275,7 +275,7 @@ export default function CmsIndex() {
                     />
                     <label
                       htmlFor="video-upload"
-                      className={`px-5 py-3 rounded-xl border border-dashed border-accent/40 bg-accent-light/50 hover:bg-accent-light text-accent text-xs font-bold tracking-wide uppercase transition-all cursor-pointer flex items-center gap-2 justify-center shrink-0
+                      className={`px-4 py-3 rounded-xl bg-blue-600 text-white text-sm font-bold flex items-center justify-center gap-2 cursor-pointer hover:bg-blue-700 shadow-sm transition-colors
                         ${uploadingVideo ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       {uploadingVideo ? (
@@ -338,7 +338,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('home.marquee.stats')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -367,7 +367,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('about.title')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -389,7 +389,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('about.description')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -418,7 +418,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('contact.phone')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -440,7 +440,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('contact.email')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -462,7 +462,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('contact.address')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>
@@ -484,7 +484,7 @@ export default function CmsIndex() {
                   <button
                     onClick={() => handleSave('footer.copyright')}
                     disabled={saving}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1 focus:outline-none"
+                    className="px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm flex items-center gap-1.5 focus:outline-none transition-colors disabled:opacity-50"
                   >
                     <Save className="w-3.5 h-3.5" /> Save
                   </button>

@@ -1,0 +1,28 @@
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+dist/
+build/
+.next/
+
+# Mock uploads (large files)
+mock-uploads/
+*.mp4
+*.zip
+*.tar.gz
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getEngineeringRequestsApi } from '../../services/api';
+import { getEngineeringRequestsApi, markEngineeringReadApi } from '../../services/api';
+import { Check, CheckCheck } from 'lucide-react';
 
 import AdminLayout from '../../components/layout/AdminLayout';
 import DataTable from '../../components/ui/DataTable';
@@ -23,6 +24,16 @@ export default function EngineeringIndex() {
     };
     fetchRequests();
   }, []);
+
+  const handleToggleRead = async (id, currentStatus) => {
+    try {
+      const newStatus = !currentStatus;
+      await markEngineeringReadApi(id, newStatus);
+      setData(prev => prev.map(item => item.id === id ? { ...item, isRead: newStatus } : item));
+    } catch (err) {
+      console.error('Failed to toggle read status:', err);
+    }
+  };
 
   const columns = [
     { 
@@ -92,16 +103,41 @@ export default function EngineeringIndex() {
             columns={columns}
             data={data}
             searchField="fullName"
-            searchPlaceholder="Search client full name..."
+            searchPlaceholder="Search engineering requests..."
             detailRoutePrefix="/engineering"
             filterField="serviceType"
             filterPlaceholder="All Service Types"
             filterOptions={[
-              { label: 'AutoCAD & Drafting', value: 'autocad' },
-              { label: 'Estimation & Take-offs', value: 'estimation' },
-              { label: 'Calculations & Stamping', value: 'calculations' },
-              { label: 'Consultation & Management', value: 'consultation' }
+              { label: 'AutoCAD Drafting', value: 'autocad' },
+              { label: 'Cost Estimation', value: 'estimation' },
+              { label: 'Calculations', value: 'calculations' },
+              { label: 'Consultation', value: 'consultation' }
             ]}
+            rowClassName={(row) => !row.isRead ? 'bg-amber-50/40 font-bold' : ''}
+            actionsRender={(row) => (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleRead(row.id, row.isRead);
+                }}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-colors flex items-center gap-1.5
+                  ${!row.isRead 
+                    ? 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-700'}`}
+              >
+                {!row.isRead ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Read
+                  </>
+                ) : (
+                  <>
+                    <CheckCheck className="w-3 h-3" />
+                    Read
+                  </>
+                )}
+              </button>
+            )}
           />
         )}
 

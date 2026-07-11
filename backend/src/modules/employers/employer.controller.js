@@ -1,4 +1,5 @@
 import { createEmployerRequest, fetchEmployerRequests, fetchEmployerRequestById } from './employer.service.js';
+import { markEmployerRead } from './employer.repository.js';
 import { successResponse, errorResponse } from '../../utils/response.util.js';
 import { z } from 'zod';
 
@@ -58,6 +59,17 @@ export const getSingleEmployerRequest = async (req, res) => {
     const { id } = req.params;
     const data = await fetchEmployerRequestById(id);
     return successResponse(res, 200, 'Employer request details retrieved successfully', data);
+  } catch (error) {
+    return errorResponse(res, error);
+  }
+};
+
+export const toggleEmployerRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isRead } = req.body;
+    const data = await markEmployerRead(id, isRead);
+    return successResponse(res, 200, 'Read status updated', data);
   } catch (error) {
     return errorResponse(res, error);
   }

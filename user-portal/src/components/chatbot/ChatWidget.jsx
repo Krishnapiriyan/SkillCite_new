@@ -7,7 +7,10 @@ import { sendChatbotMessageApi } from '../../services/api';
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: "Welcome to SkillCite. If you're an employer looking for talent, please visit our /request-talent page, or if you're a candidate, head to /submit-your-cv to get started." }
+    { 
+      role: 'assistant', 
+      content: "Welcome to SkillCite, your specialist recruitment and engineering services partner! We provide talent placement in Engineering, Accounting, and Administration, alongside drafting services like AutoCAD shop drawings, cost estimation, and structural calculations.\n\nYou can ask me about our recruitment services, specialty divisions, or how the hiring process works! To get started, you can also head directly to /request-talent if you're looking to hire, or /submit-your-cv if you're looking for opportunities." 
+    }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

@@ -81,6 +81,11 @@ export const getEmployerByIdApi = async (id) => {
   return res.data;
 };
 
+export const markEmployerReadApi = async (id, isRead) => {
+  const res = await api.patch(`/admin/employers/${id}/read`, { isRead });
+  return res.data;
+};
+
 export const getCandidatesApi = async (page = 1, limit = 20) => {
   const res = await api.get(`/admin/candidates?page=${page}&limit=${limit}`);
   return res.data;
@@ -88,6 +93,11 @@ export const getCandidatesApi = async (page = 1, limit = 20) => {
 
 export const getCandidateByIdApi = async (id) => {
   const res = await api.get(`/admin/candidates/${id}`);
+  return res.data;
+};
+
+export const markCandidateReadApi = async (id, isRead) => {
+  const res = await api.patch(`/admin/candidates/${id}/read`, { isRead });
   return res.data;
 };
 
@@ -101,6 +111,11 @@ export const getEngineeringByIdApi = async (id) => {
   return res.data;
 };
 
+export const markEngineeringReadApi = async (id, isRead) => {
+  const res = await api.patch(`/admin/engineering/${id}/read`, { isRead });
+  return res.data;
+};
+
 export const getContactsApi = async (page = 1, limit = 20) => {
   const res = await api.get(`/admin/contacts?page=${page}&limit=${limit}`);
   return res.data;
@@ -108,6 +123,11 @@ export const getContactsApi = async (page = 1, limit = 20) => {
 
 export const getContactByIdApi = async (id) => {
   const res = await api.get(`/admin/contacts/${id}`);
+  return res.data;
+};
+
+export const markContactReadApi = async (id, isRead) => {
+  const res = await api.patch(`/admin/contacts/${id}/read`, { isRead });
   return res.data;
 };
 
@@ -161,6 +181,11 @@ export const getAnalyticsTrendApi = async () => {
 
 export const getAnalyticsSpecialtyApi = async () => {
   const res = await api.get('/admin/analytics/specialty-split');
+  return res.data;
+};
+
+export const markAllReadApi = async () => {
+  const res = await api.post('/admin/analytics/notifications/mark-all-read');
   return res.data;
 };
 

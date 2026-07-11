@@ -9,7 +9,15 @@ const sendEmail = async (to, subject, htmlContent) => {
     sendSmtpEmail.to = [{ email: to }];
     sendSmtpEmail.subject = subject;
     sendSmtpEmail.htmlContent = htmlContent;
-    return apiInstance.sendTransacEmail(sendSmtpEmail);
+    try {
+      return await apiInstance.sendTransacEmail(sendSmtpEmail);
+    } catch (err) {
+      if (err.response && err.response.body) {
+        const detail = err.response.body.message || JSON.stringify(err.response.body);
+        throw new Error(detail);
+      }
+      throw err;
+    }
   } else {
     console.log('\n================== [MOCK EMAIL SENT] ==================');
     console.log(`To:      ${to}`);
@@ -41,8 +49,23 @@ export const sendAdminAlert = (type, submitterName, submitterEmail) =>
   sendEmail(env.ADMIN_ALERT_EMAIL, `[SkillCite] New ${type}: ${submitterName}`,
     adminAlertTemplate(type, submitterName, submitterEmail));
 
-export const sendManualEmail = (toEmail, subject, body) =>
-  sendEmail(toEmail, subject, `<div style="font-family:sans-serif;line-height:1.6">${body}</div>`);
+export const sendManualEmail = (toEmail, subject, body) => {
+  const formattedBody = body
+    .split('\n')
+    .map(p => p.trim() ? `<p style="font-size: 14px; margin-bottom: 16px; color: #334155; line-height: 1.6;">${p}</p>` : '')
+    .join('');
+
+  const emailContent = `
+    <h2 style="color: #0f172a; font-size: 20px; font-weight: 800; margin-top: 0; margin-bottom: 16px;">
+      Message from SkillCite Team
+    </h2>
+    <div style="font-size: 14px; margin-bottom: 24px; color: #334155;">
+      ${formattedBody}
+    </div>
+  `;
+
+  return sendEmail(toEmail, subject, emailShell(emailContent));
+};
 
 // HTML Master Template Wrapper
 const emailShell = (content) => `
@@ -55,7 +78,7 @@ const emailShell = (content) => `
           Skill<span style="color: #3b82f6;">Cite</span>
         </span>
         <div style="color: rgba(255,255,255,0.45); font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 6px;">
-          Engineering Talent & Technical Services
+          Recruitment & Engineering Services
         </div>
       </td>
     </tr>
@@ -69,15 +92,15 @@ const emailShell = (content) => `
     <tr>
       <td style="background-color: #f9fafb; padding: 28px 32px; text-align: center; border-top: 1px solid #e5e7eb;">
         <p style="color: #4b5563; font-size: 11px; font-weight: 700; margin: 0 0 6px 0; letter-spacing: 0.08em; text-transform: uppercase;">
-          SkillCite Pty Ltd
+          SkillCite &mdash; Recruitment & Engineering Services
         </p>
         <p style="color: #9ca3af; font-size: 10px; margin: 0 0 16px 0; line-height: 1.4;">
-          Engineering Talent, Delivered Personally. Connecting elite professionals with industry-leading organizations.
+          Connecting elite professionals with industry-leading organizations.
         </p>
-        <div style="font-size: 11px; color: #9ca3af;">
-          <a href="https://skillcite.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; margin: 0 8px;">Visit Portal</a> • 
-          <a href="mailto:support@skillcite.com" style="color: #2563eb; text-decoration: none; font-weight: bold; margin: 0 8px;">Contact Support</a>
-        </div>
+        <p style="font-size: 11px; color: #9ca3af; margin: 0; line-height: 1.4;">
+          <a href="https://skillcite.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; margin: 0 8px;">Visit Portal</a> &bull; 
+          <a href="mailto:admin@skillcite.com" style="color: #2563eb; text-decoration: none; font-weight: bold; margin: 0 8px;">Contact Support</a>
+        </p>
       </td>
     </tr>
   </table>

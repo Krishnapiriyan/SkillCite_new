@@ -59,8 +59,16 @@ export const getEmployerRequests = async (skip = 0, take = 20) => {
 };
 
 export const getEmployerRequestById = async (id) => {
-  return prisma.employerRequest.findUnique({
+  const req = await prisma.employerRequest.findUnique({
     where: { id },
     include: { files: true }
+  });
+  return req;
+};
+
+export const markEmployerRead = async (id, isRead) => {
+  return prisma.employerRequest.update({
+    where: { id },
+    data: { isRead }
   });
 };

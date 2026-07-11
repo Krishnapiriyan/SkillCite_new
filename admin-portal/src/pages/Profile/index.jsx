@@ -205,7 +205,7 @@ export default function Profile() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 rounded-full bg-accent hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-all active:scale-95 flex items-center gap-2 disabled:opacity-50"
+                className="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-all active:scale-95 flex items-center gap-2 disabled:opacity-50"
               >
                 {loading ? (
                   <>

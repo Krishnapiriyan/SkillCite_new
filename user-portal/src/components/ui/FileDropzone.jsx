@@ -82,7 +82,7 @@ export default function FileDropzone({
   return (
     <div className={`w-full flex flex-col gap-1.5 ${className}`}>
       {label && (
-        <label className="text-xs font-semibold text-primary/80 tracking-wide uppercase">
+        <label className="text-xs font-semibold text-primary/80 tracking-wide">
           {label}
         </label>
       )}

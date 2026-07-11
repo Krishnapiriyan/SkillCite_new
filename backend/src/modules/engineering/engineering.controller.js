@@ -1,4 +1,5 @@
 import { createEngineeringRequest, fetchEngineeringRequests, fetchEngineeringRequestById } from './engineering.service.js';
+import { markEngineeringRead } from './engineering.repository.js';
 import { successResponse, errorResponse } from '../../utils/response.util.js';
 import { z } from 'zod';
 
@@ -38,6 +39,17 @@ export const getSingleEngineeringRequest = async (req, res) => {
     const { id } = req.params;
     const data = await fetchEngineeringRequestById(id);
     return successResponse(res, 200, 'Engineering request details retrieved successfully', data);
+  } catch (error) {
+    return errorResponse(res, error);
+  }
+};
+
+export const toggleEngineeringRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isRead } = req.body;
+    const data = await markEngineeringRead(id, isRead);
+    return successResponse(res, 200, 'Read status updated', data);
   } catch (error) {
     return errorResponse(res, error);
   }

@@ -125,40 +125,42 @@ export default function EngineeringServices() {
         canonical="/engineering-services"
       />
 
-      <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
+      <div className="bg-bg-page min-h-screen text-primary pt-0">
         {/* 1. Hero Section */}
-        <section className="pt-24 pb-32 bg-transparent border-b border-border overflow-hidden relative">
+        <section className="py-24 md:py-32 bg-transparent overflow-hidden relative">
           <HoneycombBackground />
-          <div className="max-w-5xl mx-auto px-6 relative z-10">
-            
-            {/* Header Split Layout with Blueprints Image */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-              
-              {/* Title Column */}
-              <div className="lg:col-span-7 text-left flex flex-col gap-4">
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="text-left">
                 <ScrollReveal delay={0.1} direction="up">
-                  {/* <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-primary tracking-tight leading-tight">
-                    Engineering & <br className="hidden sm:inline" />
-                    <span className="text-purple-800">Services</span>
-                  </h1> */}
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary tracking-tight leading-none mb-8 font-display">
-                    <span className="text-muted">Engineering</span> <br />
+                    Professional<span className="text-muted"> Engineering</span> <br />
                     <span className="text-purple-900">Services</span>
                   </h1>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} direction="up">
-                  <p className="text-sm sm:text-base text-muted font-semibold leading-relaxed max-w-xl">
-                    Request precision 2D Drafting & 3D Visualization, quantity estimation take-offs, or structural computations. Fully stampable and executed offline by licensed engineering experts.
+                  <p className="text-[16px] text-muted mb-10 leading-relaxed max-w-[600px] font-semibold">
+                    Request precision 2D Drafting & 3D Visualization, quantity estimation take-offs, or structural computations. Fully stampable and executed by licensed engineering experts.
                   </p>
                 </ScrollReveal>
+                <ScrollReveal delay={0.3} direction="up">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button 
+                      variant="filled" 
+                      className="px-10 py-3.5 w-full sm:w-auto font-bold shadow-lg shadow-purple-700/20 hover:shadow-xl hover:shadow-purple-700/30 duration-300 transform hover:-translate-y-0.5 bg-purple-950 border-slate-300 hover:bg-purple-700 hover:text-white hover:border-cyan-600"
+                      onClick={() => document.getElementById('specification-form-container').scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      Request Services <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
+                    </Button>
+                  </div>
+                </ScrollReveal>
               </div>
-
-              {/* Blueprints Floating Image Column */}
-              <div className="lg:col-span-5 flex items-center justify-center mt-12 lg:mt-0">
+              
+              <div className="relative group w-full max-w-sm sm:max-w-md mx-auto cursor-pointer lusion-image-hover lusion-image-float mt-12 lg:mt-0">
                 <ScrollReveal delay={0.25} direction="right">
                   <Card3D className="group relative bg-transparent rounded-[2.5rem]" maxTilt={10}>
                     {/* Floating Glowing Orb (Best Premium Combination) */}
-                    <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-accent/30 to-blue-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                    <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-500/30 to-purple-400/10 blur-3xl pointer-events-none -z-10 floating-orb group-hover:scale-150 transition-transform duration-[2s] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
                     
                     {/* Clean Borderless Showcase */}
                     <div className="relative w-full h-[280px] sm:h-[360px] overflow-hidden rounded-[2.5rem] shadow-2xl">
@@ -166,23 +168,23 @@ export default function EngineeringServices() {
                         src={engineeringserviceBlueprints} 
                         alt="SkillCite CAD drawings & calculations blueprints mockup"
                         className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] rounded-[2.5rem] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]"
-                        // className="w-full h-full object-cover filter brightness-[0.93] contrast-[1.02] transform group-hover:scale-108 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)]" 
                       />
-                      {/* <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none rounded-[2.5rem]"></div> */}
                       <div className="absolute inset-0 bg-gradient-to-t from-bg-page/40 to-transparent pointer-events-none rounded-[2.5rem]"></div>
                     </div>
                   </Card3D>
                 </ScrollReveal>
               </div>
-
             </div>
-
           </div>
+          {/* Fade to next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 2. Process & Showcases Section */}
-        <section className="py-24 bg-transparent border-y border-border relative overflow-hidden">
+        <section className="py-24 bg-transparent relative overflow-hidden">
           <IsometricGridBackground />
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
           <div className="max-w-5xl mx-auto px-6 relative z-10">
             {/* Detailed Service Showcases */}
             <div className="flex flex-col gap-24">
@@ -225,7 +227,7 @@ export default function EngineeringServices() {
                     <Button variant="outlined" onClick={() => scrollToForm('autocad')} 
                             className="px-10 py-3.5 w-full sm:w-auto font-bold tracking-wide shadow-lg shadow-purple-800/20 hover:shadow-xl hover:shadow-purple-800/30 transition-all duration-300 transform hover:-translate-y-0.5 text-black bg-purple-950 border-purple-950 hover:bg-purple-900 hover:text-white hover:border-cyan-600"
                             >
-                      Request Design <ArrowRight className="ml-2 w-4 h-4" />
+                      Request Drafting <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </ScrollReveal>
                 </div>
@@ -367,11 +369,15 @@ export default function EngineeringServices() {
 
             </div>
           </div>
+          {/* Fade to form section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 3. Form Section */}
-        <section id="specification-form-container" className="py-24 bg-[#F7F5F0] border-t border-border">
-          <div className="max-w-3xl mx-auto px-6">
+        <section id="specification-form-container" className="py-24 bg-[#F7F5F0] relative overflow-hidden">
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <ScrollReveal delay={0.1} direction="up">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">
@@ -445,7 +451,7 @@ export default function EngineeringServices() {
                   </div>
 
                   <div className="w-full flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-primary/80 uppercase tracking-wide">
+                    <label className="text-xs font-semibold text-primary/80 tracking-wide">
                       Project Description & Specifications *
                     </label>
                     <textarea

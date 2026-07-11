@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 // Initializing Lenis smooth scroll with GSAP ticker bindings
 const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, duration: 1.2 })
+window.lenis = lenis; // Expose globally for route resets
 lenis.on('scroll', ScrollTrigger.update)
 gsap.ticker.add((time) => lenis.raf(time * 1000))
 gsap.ticker.lagSmoothing(0)

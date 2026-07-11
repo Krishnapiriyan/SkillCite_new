@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import useCms from '../../hooks/useCms';
 import ScrollReveal from '../../components/animations/ScrollReveal';
-import TopographicBackground from '../../components/animations/TopographicBackground';
+import HoneycombBackground from '../../components/animations/HoneycombBackground';
 
 export default function ProcessFlow() {
   const { getCms } = useCms();
@@ -16,9 +16,11 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <section className="w-full py-20 select-none overflow-hidden relative border-y border-black/5 bg-transparent">
-      {/* Soft Sand Topographic Background */}
-      <TopographicBackground />
+    <section className="w-full py-20 overflow-hidden relative bg-transparent">
+      {/* Light Stone Honeycomb Background */}
+      <HoneycombBackground />
+      {/* Fade from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -67,7 +69,7 @@ export default function ProcessFlow() {
                 key={idx} 
                 delay={idx * 0.1}
                 direction={isEven ? 'left' : 'right'}
-                className={`flex flex-col items-center md:items-start text-center md:text-left relative z-10 max-w-[280px] md:max-w-none mx-auto transform transition-transform duration-300 ${
+                className={`flex flex-col items-center text-center relative z-10 max-w-[280px] md:max-w-none mx-auto transform transition-transform duration-300 ${
                   isEven ? '-translate-x-6 md:translate-x-0' : 'translate-x-6 md:translate-x-0'
                 }`}
               >
@@ -95,6 +97,8 @@ export default function ProcessFlow() {
         </div>
 
       </div>
+      {/* Fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
     </section>
   );
 }

@@ -49,10 +49,6 @@ const schema = z.object({
   }),
   careerExperience: z.string().min(1, 'Please select your career experience'),
   careerGoals: z.array(z.string()).min(1, 'Please select at least one career goal'),
-  reasonableAdjustments: z.enum(['No', 'Yes'], {
-    errorMap: () => ({ message: 'Please specify if adjustments are needed' })
-  }),
-  reasonableAdjustmentsDetails: z.string().optional().or(z.literal('')),
   preferredCommunication: z.string().min(1, 'Please select preferred communication method'),
   resume: z.any().refine((val) => val && val.length > 0, {
     message: 'Please upload your resume / CV'
@@ -83,8 +79,6 @@ export default function SubmitCV() {
       specialty: 'engineering',
       careerExperience: '',
       careerGoals: [],
-      reasonableAdjustments: 'No',
-      reasonableAdjustmentsDetails: '',
       preferredCommunication: '',
       resume: [],
       coverLetter: []
@@ -189,9 +183,9 @@ export default function SubmitCV() {
         canonical="/submit-your-cv"
       />
 
-      <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
+      <div className="bg-bg-page min-h-screen text-primary pt-0">
         {/* 1. Hero Section */}
-        <section className="py-24 md:py-32 bg-transparent border-b border-border overflow-hidden relative">
+        <section className="py-24 md:py-32 bg-transparent overflow-hidden relative">
           <HoneycombBackground />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -199,7 +193,7 @@ export default function SubmitCV() {
                 <ScrollReveal delay={0.1} direction="up">
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary tracking-tight leading-none mb-8 font-display">
                     Professional<span className="text-muted"> Career</span> <br />
-                    <span className="text-purple-900">Opportunities.</span>
+                    <span className="text-purple-900">Opportunities</span>
                   </h1>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2} direction="up">
@@ -240,12 +234,16 @@ export default function SubmitCV() {
               </div>
             </div>
           </div>
+          {/* Fade to next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 3. How It Works Section */}
-        <section className="py-24 bg-transparent border-y border-border relative overflow-hidden">
+        <section className="py-24 bg-transparent relative overflow-hidden">
           <IsometricGridBackground />
-          <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-28">
@@ -266,7 +264,7 @@ export default function SubmitCV() {
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-52 bottom-64 w-[2px] bg-gradient-to-b from-purple-700/0 via-purple-700/15 to-purple-700/0 pointer-events-none" />
 
             {/* Alternating Steps with Images */}
-            <div className="flex flex-col gap-25 relative">
+            <div className="flex flex-col gap-20 md:gap-28 relative">
               
               {/* Step 1 */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
@@ -458,7 +456,7 @@ export default function SubmitCV() {
                   
                   <ScrollReveal delay={0.2} direction="up">
                     <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
-                      Shortlisted candidate profiles are personally recommended and introduced to top-tier employers, coordinating direct corporate interviews.
+                      Shortlisted candidate profiles are shared with top‑tier employers along with detailed, role‑specific insights. Each introduction is based solely on verified skills, experience, and organisational fit.
                     </p>
                   </ScrollReveal>
 
@@ -575,11 +573,15 @@ export default function SubmitCV() {
             </ScrollReveal>
 
           </div>
+          {/* Fade to form section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 4. Form Section */}
-        <section id="submit-cv-form" className="py-24 bg-[#F7F5F0] scroll-mt-20 border-t border-border">
-          <div className="max-w-3xl mx-auto px-6">
+        <section id="submit-cv-form" className="py-24 bg-[#F7F5F0] scroll-mt-20 relative overflow-hidden">
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <ScrollReveal delay={0.1} direction="up">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Join Our <span className="text-purple-700">Talent</span> Network</h2>
@@ -591,7 +593,15 @@ export default function SubmitCV() {
             
             {/* Form container */}
             <ScrollReveal delay={0.2} direction="up">
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 bg-surface rounded-3xl border border-border p-6 sm:p-10 shadow-xl text-left">
+              <form 
+                onSubmit={handleSubmit(onSubmit)} 
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                  }
+                }}
+                className="flex flex-col gap-8 bg-surface rounded-3xl border border-border p-6 sm:p-10 shadow-xl text-left"
+              >
             
               {/* Section A: Contact Details */}
               <div className="flex flex-col gap-6">
@@ -694,7 +704,7 @@ export default function SubmitCV() {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <span className="text-xs font-semibold text-primary/80 uppercase tracking-wide">
+                  <span className="text-xs font-semibold text-primary/80 tracking-wide">
                     What are your career goals? * (Select all that apply)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-1">
@@ -726,62 +736,10 @@ export default function SubmitCV() {
                 </div>
               </div>
 
-              {/* Section D: Reasonable Adjustments */}
+              {/* Section D: Document Uploads */}
               <div className="flex flex-col gap-6 mt-4">
                 <h2 className="text-lg font-bold text-primary border-b border-border/60 pb-2">
-                  Section D: Reasonable Adjustments
-                </h2>
-                <div className="flex flex-col gap-3">
-                  <span className="text-xs font-semibold text-primary/80 leading-relaxed">
-                    Do you require reasonable adjustments during the recruitment and selection process? *
-                  </span>
-                  <div className="flex gap-4">
-                    {['No', 'Yes'].map((val) => {
-                      const isSelected = watch('reasonableAdjustments') === val;
-                      return (
-                        <button
-                          key={val}
-                          type="button"
-                          onClick={() => setValue('reasonableAdjustments', val, { shouldValidate: true })}
-                          className={`px-6 py-2.5 rounded-xl text-sm font-bold border transition-all duration-200
-                            ${isSelected 
-                              ? 'bg-purple-700 text-white border-purple-700 shadow-md shadow-purple-700/10' 
-                              : 'bg-surface text-muted border-border hover:bg-bg-page'}`}
-                        >
-                          {val}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {errors.reasonableAdjustments && (
-                    <span className="text-xs text-red-500 mt-1">{errors.reasonableAdjustments.message}</span>
-                  )}
-                </div>
-
-                {watch('reasonableAdjustments') === 'Yes' && (
-                  <div className="flex flex-col gap-2 animate-fadeIn duration-200">
-                    <span className="text-xs font-semibold text-primary/80">
-                      Please describe any reasonable adjustments required: *
-                    </span>
-                    <textarea
-                      placeholder="Specify requirements, e.g. wheelchair access, sign-language interpreter, screen reader compatibility..."
-                      rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-border text-sm text-primary bg-surface outline-none transition-all focus:ring-4 focus:ring-accent-light focus:border-purple-700 resize-none"
-                      {...register('reasonableAdjustmentsDetails', {
-                        required: watch('reasonableAdjustments') === 'Yes' ? 'Details are required when adjustments are requested' : false
-                      })}
-                    />
-                    {errors.reasonableAdjustmentsDetails && (
-                      <span className="text-xs text-red-500 mt-0.5">{errors.reasonableAdjustmentsDetails.message}</span>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Section E: Document Uploads */}
-              <div className="flex flex-col gap-6 mt-4">
-                <h2 className="text-lg font-bold text-primary border-b border-border/60 pb-2">
-                  Section E: Document Uploads
+                  Section D: Document Uploads
                 </h2>
                 
                 <div className="flex flex-col gap-4">

@@ -1,4 +1,5 @@
 import { createContactMessage, fetchContactMessages, fetchContactMessageById } from './contact.service.js';
+import { markContactRead } from './contact.repository.js';
 import { successResponse, errorResponse } from '../../utils/response.util.js';
 import { z } from 'zod';
 
@@ -34,6 +35,17 @@ export const getSingleContactMessage = async (req, res) => {
     const { id } = req.params;
     const data = await fetchContactMessageById(id);
     return successResponse(res, 200, 'Contact message details retrieved successfully', data);
+  } catch (error) {
+    return errorResponse(res, error);
+  }
+};
+
+export const toggleContactRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isRead } = req.body;
+    const data = await markContactRead(id, isRead);
+    return successResponse(res, 200, 'Read status updated', data);
   } catch (error) {
     return errorResponse(res, error);
   }

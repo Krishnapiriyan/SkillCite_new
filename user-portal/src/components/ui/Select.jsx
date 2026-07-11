@@ -36,7 +36,7 @@ const Select = React.forwardRef(({
         </select>
         
         {label && (
-          <label className={`absolute transition-all duration-300 pointer-events-none select-none text-[10px] font-extrabold text-muted uppercase tracking-wider top-2
+          <label className={`absolute transition-all duration-300 pointer-events-none select-none text-[10px] font-extrabold text-muted tracking-wider top-2
             peer-focus:text-accent peer-focus:font-extrabold
             ${icon ? 'left-10' : 'left-4'}`}
           >

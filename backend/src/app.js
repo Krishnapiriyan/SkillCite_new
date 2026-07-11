@@ -18,10 +18,10 @@ import adminEmailRouter from './modules/admin/email/adminEmail.routes.js';
 import adminAnalyticsRouter from './modules/admin/analytics/analytics.routes.js';
 
 // Import Specific Controllers for Admin routes direct mounting
-import { listEmployerRequests, getSingleEmployerRequest } from './modules/employers/employer.controller.js';
-import { listCandidateSubmissions, getSingleCandidateSubmission } from './modules/candidates/candidate.controller.js';
-import { listEngineeringRequests, getSingleEngineeringRequest } from './modules/engineering/engineering.controller.js';
-import { listContactMessages, getSingleContactMessage } from './modules/contacts/contact.controller.js';
+import { listEmployerRequests, getSingleEmployerRequest, toggleEmployerRead } from './modules/employers/employer.controller.js';
+import { listCandidateSubmissions, getSingleCandidateSubmission, toggleCandidateRead } from './modules/candidates/candidate.controller.js';
+import { listEngineeringRequests, getSingleEngineeringRequest, toggleEngineeringRead } from './modules/engineering/engineering.controller.js';
+import { listContactMessages, getSingleContactMessage, toggleContactRead } from './modules/contacts/contact.controller.js';
 import { getCmsContent, updateCmsContent, uploadCmsFile } from './modules/cms/cms.controller.js';
 import { verifyAdminToken } from './middlewares/auth.middleware.js';
 import { upload } from './middlewares/upload.middleware.js';
@@ -107,15 +107,19 @@ app.use('/api/admin/analytics', adminAnalyticsRouter);
 // Admin Resource Mappings (Matching Section 7)
 app.get('/api/admin/employers', verifyAdminToken, listEmployerRequests);
 app.get('/api/admin/employers/:id', verifyAdminToken, getSingleEmployerRequest);
+app.patch('/api/admin/employers/:id/read', verifyAdminToken, toggleEmployerRead);
 
 app.get('/api/admin/candidates', verifyAdminToken, listCandidateSubmissions);
 app.get('/api/admin/candidates/:id', verifyAdminToken, getSingleCandidateSubmission);
+app.patch('/api/admin/candidates/:id/read', verifyAdminToken, toggleCandidateRead);
 
 app.get('/api/admin/engineering', verifyAdminToken, listEngineeringRequests);
 app.get('/api/admin/engineering/:id', verifyAdminToken, getSingleEngineeringRequest);
+app.patch('/api/admin/engineering/:id/read', verifyAdminToken, toggleEngineeringRead);
 
 app.get('/api/admin/contacts', verifyAdminToken, listContactMessages);
 app.get('/api/admin/contacts/:id', verifyAdminToken, getSingleContactMessage);
+app.patch('/api/admin/contacts/:id/read', verifyAdminToken, toggleContactRead);
 
 app.get('/api/admin/cms', verifyAdminToken, getCmsContent);
 app.put('/api/admin/cms/:key', verifyAdminToken, updateCmsContent);

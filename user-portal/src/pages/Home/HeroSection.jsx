@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useCms from '../../hooks/useCms';
 import { resolveMediaUrl } from '../../utils/apiBase.js';
-import TextReveal from '../../components/animations/TextReveal';
-import ScrollReveal from '../../components/animations/ScrollReveal';
+// Removed TextReveal and ScrollReveal imports to prevent entry animations
 import ParticleCanvas from '../../components/animations/ParticleCanvas';
 import GravitationalWarpGrid from '../../components/animations/GravitationalWarpGrid';
 import FloatingBlueOrbs from '../../components/animations/FloatingBlueOrbs';
@@ -13,7 +12,7 @@ import Button from '../../components/ui/Button';
 
 import adminImg from '../../assets/admin_1.webp';
 import accountingImg from '../../assets/accounting_1.webp';
-import recruitmentImg from '../../assets/hiring2.webp';
+import recruitmentImg from '../../assets/hero_composition.webp';
 
 // Premium responsive spring-loaded skate and tumble Framer Motion card variants
 const cardRecruitmentVariants = (isMobile) => ({
@@ -21,7 +20,7 @@ const cardRecruitmentVariants = (isMobile) => ({
   hover: { 
     rotate: -15, 
     x: isMobile ? -50 : -140, 
-    y: isMobile ? -15 : -35, 
+    y: isMobile ? -15 : -30, 
     scale: 1.05,
     transition: { type: "spring", stiffness: 180, damping: 18 }
   }
@@ -32,7 +31,7 @@ const cardAccountingVariants = (isMobile) => ({
   hover: { 
     rotate: 18, 
     x: isMobile ? 50 : 140, 
-    y: isMobile ? 25 : 50, 
+    y: isMobile ? 20 : 40, 
     scale: 1.06,
     transition: { type: "spring", stiffness: 180, damping: 18 }
   }
@@ -43,7 +42,7 @@ const cardAdminVariants = (isMobile) => ({
   hover: { 
     rotate: -4, 
     x: 0, 
-    y: isMobile ? -50 : -125, 
+    y: isMobile ? -35 : -65, 
     scale: 1.08,
     transition: { type: "spring", stiffness: 180, damping: 18 }
   }
@@ -70,7 +69,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] sm:min-h-screen w-full flex items-center bg-bg-page overflow-hidden pt-24 pb-12 select-none">
+    <section className="relative min-h-[90vh] sm:min-h-screen w-full flex items-center bg-bg-page overflow-hidden pt-24 pb-12">
       
       {/* Dynamic Background Video */}
       {heroVideoUrl && (
@@ -126,13 +125,13 @@ export default function HeroSection() {
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary leading-[1.08] mb-6 flex flex-col font-display">
             {getCms('home.hero.title1') ? (
               <>
-                <TextReveal text={getCms('home.hero.title1')} />
-                <TextReveal text={getCms('home.hero.title2', 'Recruitment')} className="text-accent" />
+                <span>{getCms('home.hero.title1')}</span>
+                <span className="text-accent">{getCms('home.hero.title2', 'Recruitment')}</span>
               </>
             ) : (
               <>
-                <TextReveal text={getCms('home.hero.title', 'Engineering Talent.')} className="text-gray-600" />
-                <TextReveal text={getCms('home.hero.title2', 'Recruitment')} className="text-purple-950" />
+                <span className="text-gray-600">{getCms('home.hero.title', 'Engineering Talent.')}</span>
+                <span className="text-purple-950">{getCms('home.hero.title2', 'Recruitment')}</span>
               </>
             )}
           </h1>
@@ -145,16 +144,16 @@ export default function HeroSection() {
             {/* <span className="hidden sm:block h-px bg-border-emphasis w-4 md:w-8"></span> */}
           </div>
 
-          <ScrollReveal delay={0.4} className="max-w-xl">
+          <div className="max-w-xl">
             <p className="text-sm sm:text-lg text-slate-700 font-bold mb-8 leading-relaxed">
               {getCms(
                 'home.hero.subtitle',
                 'SkillCite connects premium talent with leading companies. Our specialist recruitment team handles everything personally.'
               )}
             </p>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={0.6} className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <div className="flex flex-wrap gap-4 w-full sm:w-auto">
             <MagneticElement strength={0.25} range={50} className="w-full sm:w-auto">
               <Link to="/request-talent" className="w-full sm:w-auto">
                 <Button variant="filled" 
@@ -177,13 +176,13 @@ export default function HeroSection() {
                 </Button>
               </Link>
             </MagneticElement>
-          </ScrollReveal>
+          </div>
 
         </div>
 
         {/* Right side illustration - Stacked Skate & Tumble Cards */}
         <div className="flex lg:col-span-5 items-center justify-center min-h-[460px] sm:min-h-[520px] w-full mt-10 lg:mt-0 relative">
-          <ScrollReveal delay={0.4} className="relative w-full max-w-md h-[460px] sm:h-[520px] flex items-center justify-center select-none pointer-events-auto">
+          <div className="relative w-full max-w-md h-[460px] sm:h-[520px] flex items-center justify-center select-none pointer-events-auto">
             <motion.div
               initial="initial"
               whileHover="hover"
@@ -199,7 +198,7 @@ export default function HeroSection() {
               <motion.div
                 custom={isMobile}
                 variants={cardRecruitmentVariants(isMobile)}
-                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/50 backdrop-blur-md rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/75 shadow-xl hover:shadow-2xl transition-shadow select-none origin-center"
+                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/20 backdrop-blur-md rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/25 shadow-xl hover:shadow-2xl transition-shadow select-none origin-center"
                 style={{ zIndex: 10 }}
               >
                 <div className="relative w-full h-full rounded-[1.3rem] sm:rounded-[1.8rem] overflow-hidden bg-slate-100 shadow-inner">
@@ -218,7 +217,7 @@ export default function HeroSection() {
               <motion.div
                 custom={isMobile}
                 variants={cardAccountingVariants(isMobile)}
-                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/50 backdrop-blur-md rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/75 shadow-xl hover:shadow-2xl transition-shadow select-none origin-center"
+                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/20 backdrop-blur-md rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/25 shadow-xl hover:shadow-2xl transition-shadow select-none origin-center"
                 style={{ zIndex: 20 }}
               >
                 <div className="relative w-full h-full rounded-[1.3rem] sm:rounded-[1.8rem] overflow-hidden bg-slate-100 shadow-inner">
@@ -237,7 +236,7 @@ export default function HeroSection() {
               <motion.div
                 custom={isMobile}
                 variants={cardAdminVariants(isMobile)}
-                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/60 backdrop-blur-lg rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/90 shadow-2xl hover:shadow-[0_25px_50px_rgba(59,130,246,0.25)] transition-shadow select-none origin-center"
+                className="absolute w-[240px] sm:w-[340px] h-[300px] sm:h-[420px] p-2 sm:p-3 bg-white/25 backdrop-blur-lg rounded-[1.6rem] sm:rounded-[2.2rem] border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(59,130,246,0.25)] transition-shadow select-none origin-center"
                 style={{ zIndex: 30 }}
               >
                 <div className="relative w-full h-full rounded-[1.3rem] sm:rounded-[1.8rem] overflow-hidden bg-slate-100 shadow-inner">
@@ -247,16 +246,18 @@ export default function HeroSection() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-500/90 text-[8px] sm:text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-sm animate-pulse shadow-sm">
-                    Intake
+                    Enroll
                   </div>
                 </div>
               </motion.div>
 
             </motion.div>
-          </ScrollReveal>
+          </div>
         </div>
 
       </div>
+      {/* Fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
     </section>
   );
 }

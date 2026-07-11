@@ -12,7 +12,7 @@ import Select from '../../components/ui/Select';
 import SuccessScreen from '../../components/ui/SuccessScreen';
 import Button from '../../components/ui/Button';
 import ScrollReveal from '../../components/animations/ScrollReveal';
-import FocusRingsBackground from '../../components/animations/FocusRingsBackground';
+import HoneycombBackground from '../../components/animations/HoneycombBackground';
 
 
 // Validation Schema
@@ -82,9 +82,9 @@ export default function Contact() {
         canonical="/contact"
       />
 
-      <div className="bg-bg-page min-h-screen text-primary select-none pt-0 relative overflow-hidden">
-        <FocusRingsBackground />
-        <div className="max-w-5xl mx-auto px-6 relative z-10 pt-32 pb-24">
+      <div className="bg-bg-page min-h-screen text-primary pt-0 relative overflow-hidden">
+        <HoneycombBackground />
+        <div className="max-w-6xl mx-auto px-6 relative z-10 pt-32 pb-24">
           
           {/* Header */}
           <div className="text-center mb-16">
@@ -98,7 +98,7 @@ export default function Contact() {
             </ScrollReveal>
             {/* <p className="text-sm text-muted max-w-md mx-auto"> */}
             <p className="text-sm sm:text-base text-primary/60 leading-relaxed space-y-6 text-center font-semibold">
-              Connect with us directly to explore opportunities, hire talent, and request a Engineering service. We believe in clear, open communication, ensuring you receive the support and guidance you need without delays or barriers. Reach out today and take the first step toward building meaningful connections and achieving your goals.
+              Connect with us directly to explore opportunities, hire talent, and request an Engineering service. We believe in clear, open communication, ensuring you receive the support and guidance you need without delays or barriers. Reach out today and take the first step toward building meaningful connections and achieving your goals.
             </p>
           </div>
 
@@ -181,7 +181,7 @@ export default function Contact() {
                   />
 
                   <div className="w-full flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-primary/80 uppercase tracking-wide">
+                    <label className="text-xs font-semibold text-primary/80 tracking-wide">
                       Your Message *
                     </label>
                     <textarea

@@ -102,7 +102,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl bg-accent hover:bg-blue-700 active:scale-[0.98] transition-all text-white text-sm font-semibold flex items-center justify-center gap-2 mt-2 disabled:opacity-50 disabled:pointer-events-none"
+            className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-sm active:scale-[0.98] transition-all text-white text-sm font-semibold flex items-center justify-center gap-2 mt-2 disabled:opacity-50 disabled:pointer-events-none"
           >
             <LogIn className="w-4 h-4" />
             {loading ? 'Logging in...' : 'Sign In to Cite'}

@@ -39,8 +39,16 @@ export const getEngineeringRequests = async (skip = 0, take = 20) => {
 };
 
 export const getEngineeringRequestById = async (id) => {
-  return prisma.engineeringRequest.findUnique({
+  const req = await prisma.engineeringRequest.findUnique({
     where: { id },
     include: { files: true }
+  });
+  return req;
+};
+
+export const markEngineeringRead = async (id, isRead) => {
+  return prisma.engineeringRequest.update({
+    where: { id },
+    data: { isRead }
   });
 };

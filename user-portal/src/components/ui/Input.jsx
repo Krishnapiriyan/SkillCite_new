@@ -30,7 +30,7 @@ const Input = React.forwardRef(({
           {...props}
         />
         {label && (
-          <label className={`absolute transition-all duration-300 pointer-events-none select-none text-[10px] font-extrabold text-muted uppercase tracking-wider top-2
+          <label className={`absolute transition-all duration-300 pointer-events-none select-none text-[10px] font-extrabold text-muted tracking-wider top-2
             peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:font-medium peer-placeholder-shown:text-hint
             peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[10px] peer-focus:text-accent peer-focus:font-extrabold
             ${icon ? 'left-10' : 'left-4'}`}

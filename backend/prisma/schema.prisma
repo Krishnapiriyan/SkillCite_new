@@ -36,6 +36,7 @@ model EmployerRequest {
   budgetRange     String?
   files           File[]   @relation("EmployerFiles")
   submittedAt     DateTime @default(now())
+  isRead          Boolean  @default(false)
 
   // New u&u fields
   engagementNeed  String?
@@ -71,6 +72,7 @@ model CandidateSubmission {
   coverNote        String?
   files            File[]   @relation("CandidateFiles")
   submittedAt      DateTime @default(now())
+  isRead           Boolean  @default(false)
 
   // New u&u fields
   coverLetterUrl   String?
@@ -94,6 +96,7 @@ model EngineeringRequest {
   budget      String?
   files       File[]   @relation("EngineeringFiles")
   submittedAt DateTime @default(now())
+  isRead      Boolean  @default(false)
 }
 
 model ContactMessage {
@@ -103,6 +106,7 @@ model ContactMessage {
   enquiryType String
   message     String
   submittedAt DateTime @default(now())
+  isRead      Boolean  @default(false)
 }
 
 model SiteContent {

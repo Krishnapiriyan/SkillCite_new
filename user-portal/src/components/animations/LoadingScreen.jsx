@@ -83,7 +83,7 @@ export default function LoadingScreen({ onComplete, onReveal }) {
             />
           </div>
 
-          {/* Overlay Digital Loading Counter (Stage 1) */}
+          {/* Overlay Brand & Tagline Loading Content (Stage 1) */}
           <AnimatePresence>
             {stage === 'loading' && (
               <motion.div
@@ -91,83 +91,31 @@ export default function LoadingScreen({ onComplete, onReveal }) {
                 initial={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95, filter: "blur(12px)" }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="relative z-40 flex flex-col items-center gap-8 select-none pointer-events-none w-full h-full justify-center"
+                className="relative z-40 flex flex-col items-center gap-6 select-none pointer-events-none w-full h-full justify-center"
               >
-                {/* Floating Skill Particles */}
-                {floatingSkills.map((skill, idx) => {
-                  const isVisible = progress >= skill.threshold;
-                  return (
-                    <AnimatePresence key={idx}>
-                      {isVisible && (
-                        <motion.div
-                          initial={{ scale: 0, opacity: 0, y: 15 }}
-                          animate={{ 
-                            scale: 1, 
-                            opacity: 0.85, 
-                            y: 0,
-                            transition: { 
-                              type: "spring", 
-                              stiffness: 120, 
-                              damping: 10,
-                              delay: skill.delay 
-                            }
-                          }}
-                          exit={{ 
-                            scale: 0.8, 
-                            opacity: 0, 
-                            y: -10,
-                            transition: { duration: 0.3 }
-                          }}
-                          className="absolute z-20 hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#090E1A]/40 backdrop-blur-md border border-white/10 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
-                          style={{ left: skill.x, top: skill.y }}
-                        >
-                          <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${skill.color} animate-pulse`} />
-                          <span className="text-[10px] font-bold tracking-wider uppercase text-white/70 font-mono">
-                            {skill.name}
-                          </span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  );
-                })}
-
                 {/* Glowing Bouncing Brand Letters & Tagline */}
                 <div className="flex flex-col items-center gap-1">
-                  <div className="relative flex items-center justify-center gap-1 sm:gap-1.5 px-4 py-2">
+                  <div className="relative flex items-center justify-center gap-4 sm:gap-6 px-4 py-2">
                     {brandName.map((char, index) => (
                       <motion.span
                         key={index}
-                        className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600   bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
+                        className="inline-block text-4xl sm:text-5xl font-extrabold font-display bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent select-none filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.25)]"
                         style={{ transformOrigin: 'center center' }}
-                        initial={{ scale: 0, opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 16, scale: 0.2 }}
                         animate={isCompleted ? {
                           y: 0,
-                          scale: 1.35,
+                          scale: 1.85,
                           opacity: 0,
                           filter: "blur(8px)",
                           transition: { duration: 0.4, ease: "easeOut" }
                         } : {
-                          scale: 1,
                           opacity: 1,
-                          y: [0, -16, 0],
+                          y: 0,
+                          scale: 1.6,
                           transition: {
-                            y: {
-                              repeat: Infinity,
-                              repeatType: "loop",
-                              duration: 1.2,
-                              delay: index * 0.08,
-                              ease: [0.25, 0.46, 0.45, 0.94]
-                            },
-                            scale: {
-                              type: "spring",
-                              stiffness: 150,
-                              damping: 10,
-                              delay: index * 0.05
-                            },
-                            opacity: {
-                              duration: 0.4,
-                              delay: index * 0.05
-                            }
+                            duration: 0.9,
+                            ease: "easeOut",
+                            delay: index * 0.05
                           }
                         }}
                       >
@@ -217,21 +165,14 @@ export default function LoadingScreen({ onComplete, onReveal }) {
                   </motion.div>
                 </div>
 
-                {/* Digital Percentage Counter */}
-                <div className="flex flex-col items-center gap-2 mt-4">
-                  <div className="flex items-baseline font-mono text-3xl font-extrabold text-purple-500/90 tracking-tighter">
-                    {String(progress).padStart(3, '0')}
-                    <span className="text-[10px] text-purple-400/60 font-semibold uppercase tracking-wider ml-1">%</span>
-                  </div>
-                  
-                  {/* Liquid progress line */}
-                  <div className="w-36 h-[2px] bg-purple-950/40 rounded-full overflow-hidden relative border border-white/5">
-                    <motion.div 
-                      className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-400 to-purple-600 shadow-md shadow-purple-500/30"
-                      style={{ width: `${progress}%` }}
-                      transition={{ ease: 'easeOut', duration: 0.1 }}
-                    />
-                  </div>
+                {/* Minimalist Loading Indicator */}
+                <div className="flex items-center gap-1.5 mt-2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/35 font-bold">
+                  <span>Loading</span>
+                  <span className="flex gap-0.5">
+                    <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1.2, delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-purple-500/80" />
+                    <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1.2, delay: 0.2 }} className="w-1.5 h-1.5 rounded-full bg-purple-500/80" />
+                    <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1.2, delay: 0.4 }} className="w-1.5 h-1.5 rounded-full bg-purple-500/80" />
+                  </span>
                 </div>
               </motion.div>
             )}

@@ -181,9 +181,9 @@ export default function RequestTalent() {
         canonical="/request-talent"
       />
       
-      <div className="bg-bg-page min-h-screen text-primary select-none pt-0">
+      <div className="bg-bg-page min-h-screen text-primary pt-0">
         {/* 1. Hero Section */}
-        <section className="py-24 md:py-32 bg-transparent border-b border-border overflow-hidden relative">
+        <section className="py-24 md:py-32 bg-transparent overflow-hidden relative">
           <HoneycombBackground />
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -232,12 +232,16 @@ export default function RequestTalent() {
               </div>
             </div>
           </div>
+          {/* Fade to next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 2. Our Recruitment Process */}
-        <section className="py-24 bg-transparent border-y border-border relative overflow-hidden">
+        <section className="py-24 bg-transparent relative overflow-hidden">
           <IsometricGridBackground />
-          <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-28">
@@ -258,7 +262,7 @@ export default function RequestTalent() {
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-52 bottom-64 w-[2px] bg-gradient-to-b from-purple-700/0 via-purple-700/15 to-purple-700/0 pointer-events-none" />
 
             {/* Alternating Steps with Images */}
-            <div className="flex flex-col gap-25 relative">
+            <div className="flex flex-col gap-20 md:gap-28 relative">
               
               {/* Step 1 */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center relative">
@@ -312,7 +316,7 @@ export default function RequestTalent() {
                   
                   <ScrollReveal delay={0.2} direction="up">
                     <p className="text-sm sm:text-base text-muted leading-relaxed font-semibold mb-6">
-                      Employers submit detailed job parameters, specifications, experience criteria, and project boundaries through our secure B2B client portal.
+                      Employers submit detailed job parameters, specifications, experience criteria, and project boundaries through our secure platform.
                     </p>
                   </ScrollReveal>
 
@@ -562,11 +566,15 @@ export default function RequestTalent() {
             </ScrollReveal>
 
           </div>
+          {/* Fade to form section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#E5E7EB] pointer-events-none z-0" />
         </section>
 
         {/* 4. Form Section */}
-        <section id="request-talent-form" className="py-24 bg-[#F7F5F0] scroll-mt-20 border-t border-border">
-          <div className="max-w-2xl mx-auto px-6">
+        <section id="request-talent-form" className="py-24 bg-[#F7F5F0] scroll-mt-20 relative overflow-hidden">
+          {/* Fade from previous section */}
+          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#E5E7EB] to-transparent pointer-events-none z-0" />
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <ScrollReveal delay={0.1} direction="up">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-extrabold text-primary tracking-tight font-display mb-3">Request <span className="text-purple-700">Talent.</span></h2>
@@ -587,7 +595,15 @@ export default function RequestTalent() {
               stepNames={['Contact Details', 'Hiring Scope', 'Specifications']}
             />
 
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+            <form 
+              onSubmit={handleSubmit(onSubmit)} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                  e.preventDefault();
+                }
+              }}
+              className="mt-8"
+            >
               <AnimatePresence mode="wait">
                 
                 {/* STEP 1: Contact Details */}
@@ -671,7 +687,7 @@ export default function RequestTalent() {
                   >
                     {/* Engagement Need Selector */}
                     <div className="flex flex-col gap-2.5">
-                      <span className="text-xs font-bold text-primary/80 uppercase tracking-wide">
+                      <span className="text-xs font-bold text-primary/80 tracking-wide">
                         What is your engagement need? *
                       </span>
                       <div className="grid grid-cols-2 gap-3.5">
@@ -682,7 +698,7 @@ export default function RequestTalent() {
                               key={need}
                               type="button"
                               onClick={() => setValue('engagementNeed', need, { shouldValidate: true })}
-                              className={`py-3.5 px-4.5 rounded-xl border text-sm font-bold text-center transition-all duration-200
+                              className={`py-3.5 px-5 rounded-xl border text-sm font-bold text-center transition-all duration-200
                                 ${isSelected 
                                   ? 'bg-purple-700 text-white border-purple-700 shadow-md shadow-purple-700/15' 
                                   : 'bg-surface text-muted border-border hover:bg-bg-page'}`}
@@ -699,7 +715,7 @@ export default function RequestTalent() {
 
                     {/* Recruitment Specialty division */}
                     <div className="flex flex-col gap-2 mt-2">
-                      <span className="text-xs font-bold text-primary/80 uppercase tracking-wide">
+                      <span className="text-xs font-bold text-primary/80 tracking-wide">
                         Recruitment Specialty Division *
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -751,7 +767,7 @@ export default function RequestTalent() {
                       />
                       {/* Experience selection radio pills */}
                       <div className="flex flex-col gap-2">
-                        <span className="text-xs font-bold text-primary/80 uppercase tracking-wide">
+                        <span className="text-xs font-bold text-primary/80 tracking-wide">
                           Experience Level Needed *
                         </span>
                         <div className="flex flex-wrap gap-2.5 mt-0.5">
@@ -762,7 +778,7 @@ export default function RequestTalent() {
                                 key={level}
                                 type="button"
                                 onClick={() => setValue('experienceLevel', level, { shouldValidate: true })}
-                                className={`px-4.5 py-2 rounded-full text-xs font-bold capitalize select-none transition-all
+                                className={`px-5 py-2 rounded-full text-xs font-bold capitalize select-none transition-all min-w-[5.5rem] text-center
                                   ${isSelected 
                                     ? 'bg-purple-700 text-white shadow-sm' 
                                     : 'bg-bg-page text-muted border border-border hover:bg-border/30'}`}
@@ -791,7 +807,7 @@ export default function RequestTalent() {
                   >
                     <div className="w-full flex flex-col gap-1.5">
                       <div className="flex items-center justify-between">
-                        <label className="text-xs font-bold text-primary/80 uppercase tracking-wide">
+                        <label className="text-xs font-bold text-primary/80 tracking-wide">
                           Role & Specifications Description (Optional)
                         </label>
                         <span className="text-[10px] text-muted font-bold">
@@ -845,6 +861,7 @@ export default function RequestTalent() {
 
                 {step < 3 ? (
                   <Button 
+                    key="next-btn"
                     type="button" 
                     variant="filled" 
                     onClick={handleNext}
@@ -855,6 +872,7 @@ export default function RequestTalent() {
                   </Button>
                 ) : (
                   <Button 
+                    key="submit-btn"
                     type="submit" 
                     variant="filled" 
                     disabled={loading}

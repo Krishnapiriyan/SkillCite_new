@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getCandidatesApi } from '../../services/api';
+import { getCandidatesApi, markCandidateReadApi } from '../../services/api';
+import { Check, CheckCheck } from 'lucide-react';
 
 import AdminLayout from '../../components/layout/AdminLayout';
 import DataTable from '../../components/ui/DataTable';
@@ -24,6 +25,16 @@ export default function CandidatesIndex() {
     fetchCandidates();
   }, []);
 
+  const handleToggleRead = async (id, currentStatus) => {
+    try {
+      const newStatus = !currentStatus;
+      await markCandidateReadApi(id, newStatus);
+      setData(prev => prev.map(item => item.id === id ? { ...item, isRead: newStatus } : item));
+    } catch (err) {
+      console.error('Failed to toggle read status:', err);
+    }
+  };
+
   const columns = [
     { 
       label: 'Candidate Name', 
@@ -31,7 +42,6 @@ export default function CandidatesIndex() {
       sortable: true,
       render: (row) => <span className="font-bold text-primary">{row.firstName} {row.lastName}</span>
     },
-    { label: 'Preferred Role', field: 'preferredRole', sortable: true },
     { 
       label: 'Division', 
       field: 'specialty', 
@@ -39,25 +49,6 @@ export default function CandidatesIndex() {
       render: (row) => (
         <span className="px-3 py-1 rounded-full text-[11px] font-extrabold capitalize bg-blue-50 text-blue-600 border border-blue-100/70 shadow-sm">
           {row.specialty}
-        </span>
-      )
-    },
-    { 
-      label: 'Exp', 
-      field: 'yearsExperience', 
-      sortable: true,
-      render: (row) => `${row.yearsExperience} yrs`
-    },
-    { 
-      label: 'Right to Work', 
-      field: 'rightToWork', 
-      sortable: true,
-      render: (row) => (
-        <span className={`px-3 py-1 rounded-full text-[11px] font-extrabold border shadow-sm
-          ${row.rightToWork === 'Citizen/PR' 
-            ? 'bg-emerald-50 text-emerald-600 border-emerald-100/70' 
-            : 'bg-amber-50 text-amber-600 border-amber-100/70'}`}>
-          {row.rightToWork}
         </span>
       )
     },
@@ -101,7 +92,7 @@ export default function CandidatesIndex() {
             columns={columns}
             data={data}
             searchField="firstName"
-            searchPlaceholder="Search candidate first name..."
+            searchPlaceholder="Search candidates..."
             detailRoutePrefix="/candidates"
             filterField="specialty"
             filterPlaceholder="All Divisions"
@@ -111,6 +102,31 @@ export default function CandidatesIndex() {
               { label: 'Administrative', value: 'administrative' },
               { label: 'Other', value: 'other' }
             ]}
+            rowClassName={(row) => !row.isRead ? 'bg-amber-50/40 font-bold' : ''}
+            actionsRender={(row) => (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleRead(row.id, row.isRead);
+                }}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-colors flex items-center gap-1.5
+                  ${!row.isRead 
+                    ? 'border-blue-600 bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-700'}`}
+              >
+                {!row.isRead ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Read
+                  </>
+                ) : (
+                  <>
+                    <CheckCheck className="w-3 h-3" />
+                    Read
+                  </>
+                )}
+              </button>
+            )}
           />
         )}
 

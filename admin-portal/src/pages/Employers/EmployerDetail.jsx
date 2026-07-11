@@ -52,7 +52,7 @@ export default function EmployerDetail() {
       <AdminLayout title="Employer Details">
         <div className="text-center py-12">
           <p className="text-sm font-semibold text-muted">Employer request not found.</p>
-          <button onClick={() => navigate('/employers')} className="mt-4 text-xs font-bold text-accent">
+          <button onClick={() => navigate('/employers')} className="mt-4 px-4 py-2 bg-slate-800 text-white rounded-full text-xs font-bold hover:bg-slate-900 transition-colors shadow-sm">
             Back to Employers List
           </button>
         </div>
@@ -72,7 +72,7 @@ export default function EmployerDetail() {
         <div className="flex items-center justify-between border-b border-border/60 pb-4">
           <button 
             onClick={() => navigate('/employers')}
-            className="flex items-center gap-2 text-xs font-bold text-muted hover:text-primary transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-slate-800 hover:bg-slate-900 rounded-full shadow-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Employers
           </button>

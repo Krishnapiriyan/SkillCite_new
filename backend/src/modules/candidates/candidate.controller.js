@@ -1,4 +1,5 @@
 import { createCandidateSubmission, fetchCandidateSubmissions, fetchCandidateSubmissionById } from './candidate.service.js';
+import { markCandidateRead } from './candidate.repository.js';
 import { successResponse, errorResponse } from '../../utils/response.util.js';
 import { z } from 'zod';
 
@@ -25,8 +26,6 @@ export const candidateSchema = z.object({
   state: z.string().min(1, 'State is required'),
   careerExperience: z.string().min(1, 'Career experience is required'),
   careerGoals: z.array(z.string()).default([]),
-  reasonableAdjustments: z.string().min(1, 'Please specify if adjustments are needed'),
-  reasonableAdjustmentsDetails: z.string().optional().or(z.literal('')).or(z.null()),
   preferredCommunication: z.string().min(1, 'Preferred communication is required'),
 });
 
@@ -55,6 +54,17 @@ export const getSingleCandidateSubmission = async (req, res) => {
     const { id } = req.params;
     const data = await fetchCandidateSubmissionById(id);
     return successResponse(res, 200, 'Candidate details retrieved successfully', data);
+  } catch (error) {
+    return errorResponse(res, error);
+  }
+};
+
+export const toggleCandidateRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isRead } = req.body;
+    const data = await markCandidateRead(id, isRead);
+    return successResponse(res, 200, 'Read status updated', data);
   } catch (error) {
     return errorResponse(res, error);
   }
